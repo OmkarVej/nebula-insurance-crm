@@ -58,7 +58,6 @@ See `docker-compose.yml` and per-layer READMEs for the authoritative local-dev c
 
 - Active work and sequencing: `planning-mds/features/ROADMAP.md`
 - Full registry: `planning-mds/features/REGISTRY.md`
-- Release plan: `planning-mds/features/COMMERCIAL-PC-CRM-RELEASE-PLAN.md`
 
 ## Current work state
 

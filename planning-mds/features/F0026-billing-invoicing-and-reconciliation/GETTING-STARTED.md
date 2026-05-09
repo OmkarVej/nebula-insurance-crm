@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-- [ ] Read the current release framing in [COMMERCIAL-PC-CRM-RELEASE-PLAN.md](../COMMERCIAL-PC-CRM-RELEASE-PLAN.md)
+- [ ] Read the current release framing in [ROADMAP.md](../ROADMAP.md)
 - [ ] Review policy and commission dependencies first
 - [ ] Refine this feature into stories and an implementation contract before coding
 
