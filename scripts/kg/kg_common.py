@@ -158,11 +158,13 @@ def build_bundle(
     canonical: Mapping[str, Any],
     mappings: Mapping[str, Any],
     code_index: Mapping[str, Any],
+    symbols: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     canonical_nodes = flatten_canonical_nodes(canonical)
     mapping_nodes = flatten_mapping_nodes(mappings)
     all_nodes = {**canonical_nodes, **mapping_nodes}
     bindings = build_binding_index(code_index)
+    symbol_indexes = build_symbol_indexes(symbols or {})
 
     return {
         "ontology": dict(ontology),
@@ -173,6 +175,11 @@ def build_bundle(
         "mapping_nodes": mapping_nodes,
         "all_nodes": all_nodes,
         "bindings": bindings,
+        "symbols": dict(symbols or {}),
+        "symbols_by_id": symbol_indexes["by_id"],
+        "symbols_by_node": symbol_indexes["by_node"],
+        "symbols_by_name": symbol_indexes["by_name"],
+        "symbols_by_file": symbol_indexes["by_file"],
     }
 
 
@@ -181,7 +188,74 @@ def load_bundle() -> dict[str, Any]:
     canonical = load_yaml(KG_DIR / "canonical-nodes.yaml")
     mappings = load_yaml(KG_DIR / "feature-mappings.yaml")
     code_index = load_yaml(KG_DIR / "code-index.yaml")
-    return build_bundle(ontology, canonical, mappings, code_index)
+    symbols_path = KG_DIR / "symbol-index.yaml"
+    symbols = load_yaml(symbols_path) if symbols_path.exists() else {}
+    return build_bundle(ontology, canonical, mappings, code_index, symbols)
+
+
+def build_symbol_indexes(symbols: Mapping[str, Any]) -> dict[str, dict[str, Any]]:
+    """Build flat lookup indexes over the symbol layer.
+
+    The returned dict has four indexes:
+    - by_id: {symbol_id -> symbol dict}
+    - by_node: {canonical_node_id -> [symbol dicts]}
+    - by_name: {symbol_name -> [symbol dicts]}
+    - by_file: {repo_relative_path -> [symbol dicts]}
+    """
+    by_id: dict[str, dict[str, Any]] = {}
+    by_node: dict[str, list[dict[str, Any]]] = {}
+    by_name: dict[str, list[dict[str, Any]]] = {}
+    by_file: dict[str, list[dict[str, Any]]] = {}
+
+    for entry in symbols.get("symbols", []) or []:
+        sid = entry.get("id")
+        if not sid:
+            continue
+        by_id[sid] = entry
+        node = entry.get("node")
+        if node:
+            by_node.setdefault(node, []).append(entry)
+        name = entry.get("name")
+        if name:
+            by_name.setdefault(name, []).append(entry)
+        file_rel = entry.get("file")
+        if file_rel:
+            by_file.setdefault(file_rel, []).append(entry)
+
+    return {
+        "by_id": by_id,
+        "by_node": by_node,
+        "by_name": by_name,
+        "by_file": by_file,
+    }
+
+
+def match_symbols_for_node(
+    node_id: str, bundle: Mapping[str, Any]
+) -> list[dict[str, Any]]:
+    return list(bundle.get("symbols_by_node", {}).get(node_id, []))
+
+
+def match_symbols_for_path(
+    path: str, bundle: Mapping[str, Any]
+) -> list[dict[str, Any]]:
+    normalized = normalize_repo_path(path)
+    return list(bundle.get("symbols_by_file", {}).get(normalized, []))
+
+
+def match_symbol_by_name(
+    name: str, bundle: Mapping[str, Any], node_id: str | None = None
+) -> list[dict[str, Any]]:
+    matches = list(bundle.get("symbols_by_name", {}).get(name, []))
+    if node_id:
+        matches = [m for m in matches if m.get("node") == node_id]
+    return matches
+
+
+def get_symbol_by_id(
+    symbol_id: str, bundle: Mapping[str, Any]
+) -> dict[str, Any] | None:
+    return bundle.get("symbols_by_id", {}).get(symbol_id)
 
 
 def flatten_canonical_nodes(canonical: Mapping[str, Any]) -> dict[str, dict[str, Any]]:

@@ -16,8 +16,11 @@ from kg_common import (
     emit_telemetry,
     estimate_tokens,
     feature_or_story_by_id,
+    get_symbol_by_id,
     load_bundle,
     match_bindings_for_path,
+    match_symbol_by_name,
+    match_symbols_for_node,
     normalize_target_id,
     planning_scope_for_path,
     related_mapping_entries,
@@ -198,7 +201,30 @@ def emit_lookup_telemetry(
     tier_requested: int | None,
     tier_returned: int | None,
     file_path: str | None = None,
+    symbol_name: str | None = None,
 ) -> None:
+    if symbol_name:
+        matches = payload.get("matches", []) or []
+        symbol_ids = [m["symbol"]["id"] for m in matches if m.get("symbol")]
+        nodes_returned = sorted({m["symbol"]["node"] for m in matches if m.get("symbol")})
+        empty_scope = not symbol_ids
+        event: dict[str, Any] = {
+            "tier_requested": None,
+            "tier_returned": None,
+            "nodes_returned": nodes_returned,
+            "nodes_count": len(nodes_returned),
+            "symbols_returned": symbol_ids,
+            "symbols_count": len(symbol_ids),
+            "ambiguous_count": 0,
+            "empty_scope": empty_scope,
+            "hint_emitted": bool(payload.get("hints")),
+            "confidence_band": "low" if empty_scope else "high",
+            "tokens_estimated": estimate_tokens(payload),
+            "query_symbol": symbol_name,
+        }
+        emit_telemetry(telemetry_file, run_id, "lookup", event)
+        return
+
     nodes_returned = (
         payload.get("matched_node_ids", [])
         if file_path
@@ -206,7 +232,7 @@ def emit_lookup_telemetry(
     )
     ambiguous_count = len(find_low_confidence_refs(payload))
     hint_emitted = bool(payload.get("hints"))
-    event: dict[str, Any] = {
+    event = {
         "tier_requested": tier_requested,
         "tier_returned": tier_returned,
         "nodes_returned": nodes_returned,
@@ -302,6 +328,73 @@ def lookup_by_target(
     return append_lookup_hints(payload, tier)
 
 
+def _summarize_symbol_brief(symbol: dict[str, Any]) -> dict[str, Any]:
+    """Compact symbol view for sibling/edge lists in lookup output."""
+    return {
+        "id": symbol["id"],
+        "name": symbol.get("name"),
+        "kind": symbol.get("kind"),
+        "container": symbol.get("container"),
+        "file": symbol.get("file"),
+        "line": symbol.get("line"),
+        "language": symbol.get("language"),
+    }
+
+
+def lookup_by_symbol(
+    name: str, bundle: dict[str, Any], *, node_id: str | None = None
+) -> dict[str, Any]:
+    """Resolve a symbol by source name, optionally scoped to one canonical node.
+
+    Returns the full record(s), brief callers/callees, and sibling symbols on
+    the same canonical node. The raw source file at file:line remains
+    authoritative; this payload is a routing aid only.
+    """
+    matches = match_symbol_by_name(name, bundle, node_id=node_id)
+    payload: dict[str, Any] = {
+        "query": {"symbol_name": name, "node": node_id},
+        "matched_count": len(matches),
+        "matches": [],
+        "source_precedence": bundle["ontology"]["authority"]["precedence"],
+    }
+    if not matches:
+        payload["hints"] = [
+            "No symbols with this name in symbol-index.yaml; raw source files "
+            "remain authoritative — try `hint.py` or `grep`."
+        ]
+        return payload
+
+    for symbol in matches:
+        callers = [
+            _summarize_symbol_brief(s)
+            for cid in symbol.get("callers", [])
+            for s in [get_symbol_by_id(cid, bundle)]
+            if s is not None
+        ]
+        callees = [
+            _summarize_symbol_brief(s)
+            for cid in symbol.get("callees", [])
+            for s in [get_symbol_by_id(cid, bundle)]
+            if s is not None
+        ]
+        siblings = [
+            _summarize_symbol_brief(s)
+            for s in match_symbols_for_node(symbol["node"], bundle)
+            if s["id"] != symbol["id"]
+            and s.get("file") == symbol.get("file")
+        ]
+        payload["matches"].append(
+            {
+                "symbol": symbol,
+                "callers": callers,
+                "callees": callees,
+                "siblings_in_file": siblings[:25],
+                "siblings_truncated": max(0, len(siblings) - 25),
+            }
+        )
+    return payload
+
+
 def lookup_by_file(path: str, bundle: dict[str, Any]) -> dict[str, Any]:
     binding_matches = match_bindings_for_path(path, bundle)
     node_ids = [match["id"] for match in binding_matches]
@@ -338,6 +431,16 @@ def main() -> int:
         help="Reverse lookup for a repo file path such as engine/src/.../Submission.cs",
     )
     parser.add_argument(
+        "--symbol",
+        dest="symbol_name",
+        help="Look up a symbol by source name (e.g. TransitionAsync). Uses symbol-index.yaml.",
+    )
+    parser.add_argument(
+        "--node",
+        dest="symbol_node",
+        help="Scope --symbol lookups to a canonical node id (e.g. entity:submission).",
+    )
+    parser.add_argument(
         "--tier",
         type=int,
         choices=[1, 2, 3, 4],
@@ -364,31 +467,37 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    if not args.target and not args.file_path:
-        parser.error("Provide a target ID or --file.")
-
-    if args.target and args.file_path:
-        parser.error("Use either a target ID or --file, not both.")
+    modes = sum(bool(x) for x in (args.target, args.file_path, args.symbol_name))
+    if modes == 0:
+        parser.error("Provide a target ID, --file, or --symbol.")
+    if modes > 1:
+        parser.error("Use only one of: target ID, --file, --symbol.")
 
     bundle = load_bundle()
-    payload = (
-        summarize_file_payload(lookup_by_file(args.file_path, bundle), args.fields)
-        if args.file_path
-        else lookup_by_target(
+    if args.symbol_name:
+        payload = lookup_by_symbol(
+            args.symbol_name, bundle, node_id=args.symbol_node
+        )
+    elif args.file_path:
+        payload = summarize_file_payload(
+            lookup_by_file(args.file_path, bundle), args.fields
+        )
+    else:
+        payload = lookup_by_target(
             args.target,
             bundle,
             tier=args.tier,
             fields=args.fields,
             allow_missing=args.allow_missing,
         )
-    )
     emit_lookup_telemetry(
         args.telemetry_file,
         args.run_id,
         payload,
-        tier_requested=args.tier if not args.file_path else None,
-        tier_returned=args.tier if not args.file_path else None,
+        tier_requested=args.tier if not (args.file_path or args.symbol_name) else None,
+        tier_returned=args.tier if not (args.file_path or args.symbol_name) else None,
         file_path=args.file_path,
+        symbol_name=args.symbol_name,
     )
     json.dump(payload, sys.stdout, indent=2)
     sys.stdout.write("\n")
