@@ -101,3 +101,6 @@ security-reports/
 experience/.lighthouseci/
 experience/pacts/
 planning-mds/operations/evidence/f0033/artifacts/
+
+# private plans
+_private-plans/**

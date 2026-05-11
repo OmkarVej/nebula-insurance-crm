@@ -26,9 +26,14 @@ from kg_common import (
     estimate_tokens,
     load_bundle,
     match_bindings_for_path,
+    match_symbol_by_name,
+    match_symbols_for_path,
     normalize_repo_path,
     related_mapping_entries,
 )
+
+
+SYMBOL_PREVIEW_LIMIT = 10
 
 
 def find_policy_rules_for_nodes(
@@ -73,6 +78,7 @@ def format_text(
     features: list[dict[str, Any]],
     stories: list[dict[str, Any]],
     policy_rules: list[str],
+    symbols: list[dict[str, Any]],
 ) -> str:
     """Format KG hints as compact human-readable text."""
     lines = [f"[KG] {path} -> {', '.join(node_ids)}"]
@@ -89,10 +95,48 @@ def format_text(
     if policy_rules:
         lines.append(f"  Casbin: {', '.join(policy_rules[:6])}")
 
+    if symbols:
+        preview = symbols[:SYMBOL_PREVIEW_LIMIT]
+        more = len(symbols) - len(preview)
+        labels = [_format_symbol_label(s) for s in preview]
+        suffix = f" (+{more} more)" if more > 0 else ""
+        lines.append(f"  Symbols: {', '.join(labels)}{suffix}")
+
     lines.append(
         "  Tip: `python3 scripts/kg/blast.py --file <path>` for full blast radius"
     )
     return "\n".join(lines)
+
+
+def _format_symbol_label(symbol: dict[str, Any]) -> str:
+    container = symbol.get("container")
+    name = symbol.get("name") or "?"
+    line = symbol.get("line")
+    base = f"{container}.{name}" if container else name
+    return f"{base}:L{line}" if line else base
+
+
+def hint_symbol(name: str, bundle: dict[str, Any]) -> tuple[str, list[dict[str, Any]]]:
+    """Compact text for a symbol-name hint plus the matched records.
+
+    Empty-match output stays terse; the caller is expected to consult
+    `lookup.py --symbol` for richer detail.
+    """
+    matches = match_symbol_by_name(name, bundle)
+    if not matches:
+        return f"[KG] symbol '{name}' -> no matches in symbol-index.yaml", []
+    lines = [f"[KG] symbol '{name}' -> {len(matches)} match(es)"]
+    for symbol in matches[:SYMBOL_PREVIEW_LIMIT]:
+        node = symbol.get("node", "?")
+        file_rel = symbol.get("file", "?")
+        line = symbol.get("line", 0)
+        container = symbol.get("container")
+        label = f"{container}.{name}" if container else name
+        lines.append(f"  {node} :: {label}  {file_rel}:{line}")
+    if len(matches) > SYMBOL_PREVIEW_LIMIT:
+        lines.append(f"  (+{len(matches) - SYMBOL_PREVIEW_LIMIT} more — see lookup.py --symbol)")
+    lines.append("  Tip: `python3 scripts/kg/lookup.py --symbol <name>` for callers/callees")
+    return "\n".join(lines), matches
 
 
 def main() -> int:
@@ -101,7 +145,13 @@ def main() -> int:
     )
     parser.add_argument(
         "path",
+        nargs="?",
         help="Repo-relative file or directory path",
+    )
+    parser.add_argument(
+        "--symbol",
+        dest="symbol_name",
+        help="Look up a symbol by source name and emit a compact hint.",
     )
     parser.add_argument(
         "--json",
@@ -118,14 +168,60 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    normalized = normalize_repo_path(args.path)
-
-    if normalized.count("/") < 2:
-        return 0
+    if not args.path and not args.symbol_name:
+        parser.error("Provide a path or --symbol.")
+    if args.path and args.symbol_name:
+        parser.error("Use either a path or --symbol, not both.")
 
     try:
         bundle = load_bundle()
     except SystemExit:
+        return 0
+
+    if args.symbol_name:
+        text, symbol_matches = hint_symbol(args.symbol_name, bundle)
+        if args.as_json:
+            payload = {
+                "symbol": args.symbol_name,
+                "matches": [
+                    {
+                        "id": s["id"],
+                        "name": s.get("name"),
+                        "node": s.get("node"),
+                        "file": s.get("file"),
+                        "line": s.get("line"),
+                        "container": s.get("container"),
+                        "kind": s.get("kind"),
+                    }
+                    for s in symbol_matches
+                ],
+            }
+            json.dump(payload, sys.stdout, indent=2)
+            sys.stdout.write("\n")
+        else:
+            print(text)
+        emit_telemetry(
+            args.telemetry_file,
+            args.run_id,
+            "hint",
+            {
+                "query_symbol": args.symbol_name,
+                "symbols_returned": [s["id"] for s in symbol_matches],
+                "symbols_count": len(symbol_matches),
+                "nodes_returned": sorted({s["node"] for s in symbol_matches if s.get("node")}),
+                "nodes_count": len({s.get("node") for s in symbol_matches if s.get("node")}),
+                "empty_scope": not symbol_matches,
+                "ambiguous_count": 0,
+                "hint_emitted": True,
+                "confidence_band": "high" if symbol_matches else "low",
+                "tokens_estimated": estimate_tokens(symbol_matches or {}),
+            },
+        )
+        return 0
+
+    normalized = normalize_repo_path(args.path)
+
+    if normalized.count("/") < 2:
         return 0
 
     matches = match_path(normalized, bundle)
@@ -150,6 +246,7 @@ def main() -> int:
     node_ids = [m["id"] for m in matches]
     features, stories = related_mapping_entries(node_ids, bundle["mappings"])
     policy_rules = find_policy_rules_for_nodes(node_ids, bundle)
+    symbols = match_symbols_for_path(normalized, bundle)
 
     if args.as_json:
         payload = {
@@ -158,11 +255,21 @@ def main() -> int:
             "features": [f["id"] for f in features],
             "stories": [s["id"] for s in stories],
             "policy_rules": policy_rules,
+            "symbols": [
+                {
+                    "id": s["id"],
+                    "name": s.get("name"),
+                    "kind": s.get("kind"),
+                    "container": s.get("container"),
+                    "line": s.get("line"),
+                }
+                for s in symbols
+            ],
         }
         json.dump(payload, sys.stdout, indent=2)
         sys.stdout.write("\n")
     else:
-        print(format_text(normalized, node_ids, features, stories, policy_rules))
+        print(format_text(normalized, node_ids, features, stories, policy_rules, symbols))
 
     emit_telemetry(
         args.telemetry_file,
@@ -175,6 +282,8 @@ def main() -> int:
             "feature_ids": [f["id"] for f in features],
             "story_ids": [s["id"] for s in stories],
             "policy_rule_ids": policy_rules,
+            "symbols_returned": [s["id"] for s in symbols],
+            "symbols_count": len(symbols),
             "empty_scope": False,
             "ambiguous_count": 0,
             "hint_emitted": False,
@@ -186,6 +295,7 @@ def main() -> int:
                     "features": [f["id"] for f in features],
                     "stories": [s["id"] for s in stories],
                     "policy_rules": policy_rules,
+                    "symbols": [s["id"] for s in symbols],
                 }
             ),
         },

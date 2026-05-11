@@ -4,6 +4,8 @@ from __future__ import annotations
 import argparse
 import hashlib
 import re
+import subprocess
+import sys
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any, Iterable
@@ -41,6 +43,7 @@ class ValidationReport:
 
 
 COVERAGE_REPORT_PATH = KG_DIR / "coverage-report.yaml"
+SYMBOL_INDEX_PATH = KG_DIR / "symbol-index.yaml"
 
 
 def validate_id(report: ValidationReport, node_id: str, node_type: str, patterns: dict[str, Any]) -> None:
@@ -189,6 +192,7 @@ def build_coverage_report(
     mapped_feature_paths: set[str],
     excluded_paths: set[str],
     uncovered: list[str],
+    symbol_summary: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     canonical = bundle["canonical"]
     mappings = bundle["mappings"]
@@ -215,16 +219,21 @@ def build_coverage_report(
             resolved.extend(expand_declared_pattern(entry["pattern"]))
         binding_freshness[binding["id"]] = build_freshness_entry(resolved)
 
-    return {
+    summary: dict[str, Any] = {
+        "canonical_nodes": len(bundle["canonical_nodes"]),
+        "features_mapped": len(mappings.get("features", [])),
+        "stories_mapped": len(mappings.get("stories", [])),
+        "features_excluded": len(excluded_paths),
+        "features_uncovered": len(uncovered),
+        "code_bindings": len(code_index.get("node_bindings", [])),
+    }
+    if symbol_summary and symbol_summary.get("exists"):
+        summary["symbol_count"] = symbol_summary.get("symbol_count", 0)
+        summary["bound_symbol_count"] = symbol_summary.get("bound_symbol_count", 0)
+
+    report_payload: dict[str, Any] = {
         "version": 0,
-        "summary": {
-            "canonical_nodes": len(bundle["canonical_nodes"]),
-            "features_mapped": len(mappings.get("features", [])),
-            "stories_mapped": len(mappings.get("stories", [])),
-            "features_excluded": len(excluded_paths),
-            "features_uncovered": len(uncovered),
-            "code_bindings": len(code_index.get("node_bindings", [])),
-        },
+        "summary": summary,
         "coverage": {
             "mapped_feature_ids": [item["id"] for item in mappings.get("features", [])],
             "excluded_features": mappings.get("coverage", {}).get("excluded_features", []),
@@ -237,6 +246,13 @@ def build_coverage_report(
             "code_bindings": binding_freshness,
         },
     }
+    if symbol_summary and symbol_summary.get("exists"):
+        report_payload["symbols"] = {
+            "symbol_count": symbol_summary.get("symbol_count", 0),
+            "bound_symbol_count": symbol_summary.get("bound_symbol_count", 0),
+            "by_language": symbol_summary.get("by_language", {}),
+        }
+    return report_payload
 
 
 def write_coverage_report(report_payload: dict[str, Any]) -> None:
@@ -411,6 +427,99 @@ def validate_casbin_drift(
             )
 
 
+def validate_symbol_index(
+    report: ValidationReport, bundle: dict[str, Any], *, required: bool = False
+) -> dict[str, Any]:
+    """Validate symbol-index.yaml: each entry resolves to a canonical node and
+    a real file. Returns a small summary used by the coverage report.
+
+    If `required` is True (set when --check-symbols is passed), a missing
+    symbol-index.yaml is an error. Otherwise it is silent (the symbol layer
+    is optional during framework-bootstrap).
+    """
+    summary: dict[str, Any] = {
+        "exists": False,
+        "symbol_count": 0,
+        "bound_symbol_count": 0,
+        "by_language": {},
+    }
+    if not SYMBOL_INDEX_PATH.exists():
+        if required:
+            report.error(
+                "symbol-index.yaml not found "
+                "(run python3 scripts/kg/symbols.py to generate)"
+            )
+        return summary
+
+    symbols_doc = yaml.safe_load(SYMBOL_INDEX_PATH.read_text(encoding="utf-8")) or {}
+    symbols = symbols_doc.get("symbols", []) or []
+    summary["exists"] = True
+    summary["symbol_count"] = len(symbols)
+
+    all_nodes = bundle["all_nodes"]
+    bindings = bundle["bindings"]
+    by_id: dict[str, dict[str, Any]] = {}
+    by_language: dict[str, int] = {}
+    bound_count = 0
+
+    for entry in symbols:
+        sid = entry.get("id")
+        if not sid or not isinstance(sid, str):
+            report.error(f"symbol-index entry missing id: {entry!r}")
+            continue
+        if sid in by_id:
+            report.error(f"duplicate symbol id in symbol-index.yaml: {sid}")
+            continue
+        by_id[sid] = entry
+
+        node_id = entry.get("node")
+        if not node_id or node_id not in all_nodes:
+            report.error(f"symbol {sid} references unknown canonical node: {node_id}")
+            continue
+        if node_id in bindings:
+            bound_count += 1
+
+        file_rel = entry.get("file")
+        if not file_rel:
+            report.error(f"symbol {sid} missing file")
+        else:
+            abs_path = REPO_ROOT / normalize_repo_path(file_rel)
+            if not abs_path.is_file():
+                report.error(f"symbol {sid} file does not exist: {file_rel}")
+
+        line = entry.get("line")
+        if not isinstance(line, int) or line < 1:
+            report.error(f"symbol {sid} has invalid line: {line!r}")
+
+        lang = entry.get("language") or "unknown"
+        by_language[lang] = by_language.get(lang, 0) + 1
+
+    # Dangling caller/callee references are warnings (over-linking is OK).
+    for sid, entry in by_id.items():
+        for kind, refs in (("callers", entry.get("callers", [])), ("callees", entry.get("callees", []))):
+            for ref in refs:
+                if ref not in by_id:
+                    report.warn(f"symbol {sid}.{kind} references unknown symbol: {ref}")
+
+    summary["bound_symbol_count"] = bound_count
+    summary["by_language"] = by_language
+    return summary
+
+
+def regenerate_symbols() -> int:
+    """Delegate to scripts/kg/symbols.py to regenerate symbol-index.yaml."""
+    symbols_script = Path(__file__).resolve().parent / "symbols.py"
+    if not symbols_script.exists():
+        print(f"symbols.py not found at {symbols_script}", file=sys.stderr)
+        return 1
+    print(f"[validate] regenerating symbol-index via {symbols_script}")
+    result = subprocess.run(
+        [sys.executable, str(symbols_script)],
+        cwd=str(REPO_ROOT),
+    )
+    return result.returncode
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Validate knowledge-graph integrity.")
     parser.add_argument(
@@ -429,7 +538,22 @@ def main() -> int:
         default=None,
         help="Path to an external agent memory directory to scan for stale repo-path references. Agent-agnostic — works with any tool that stores .md memory files.",
     )
+    parser.add_argument(
+        "--check-symbols",
+        action="store_true",
+        help="Validate symbol-index.yaml: each entry must resolve to a canonical node and a real file.",
+    )
+    parser.add_argument(
+        "--regenerate-symbols",
+        action="store_true",
+        help="Regenerate symbol-index.yaml by running scripts/kg/symbols.py before validating.",
+    )
     args = parser.parse_args()
+
+    if args.regenerate_symbols:
+        rc = regenerate_symbols()
+        if rc != 0:
+            return rc
 
     bundle = load_bundle()
     report = ValidationReport()
@@ -562,7 +686,11 @@ def main() -> int:
         if args.memory_dir:
             validate_external_memory_drift(report, args.memory_dir)
 
-    coverage_report = build_coverage_report(bundle, mapped_feature_paths, excluded_paths, uncovered)
+    symbol_summary = validate_symbol_index(report, bundle, required=args.check_symbols)
+
+    coverage_report = build_coverage_report(
+        bundle, mapped_feature_paths, excluded_paths, uncovered, symbol_summary
+    )
     if args.write_coverage_report:
         write_coverage_report(coverage_report)
     else:
@@ -601,6 +729,14 @@ def main() -> int:
         f"{len(mapped_feature_paths)} mapped, {len(excluded_paths)} excluded, {len(uncovered)} uncovered"
     )
     print(f"Code bindings:     {len(code_index.get('node_bindings', []))}")
+    if symbol_summary["exists"]:
+        by_lang = symbol_summary["by_language"]
+        lang_summary = ", ".join(f"{lang}: {n}" for lang, n in sorted(by_lang.items()))
+        print(
+            f"Symbol index:      {symbol_summary['symbol_count']} symbols, "
+            f"{symbol_summary['bound_symbol_count']} on bound nodes "
+            f"({lang_summary})"
+        )
 
     if report.warnings:
         print("\nWarnings:")

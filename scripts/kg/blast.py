@@ -27,8 +27,10 @@ from kg_common import (
     emit_telemetry,
     estimate_tokens,
     expand_declared_pattern,
+    get_symbol_by_id,
     load_bundle,
     match_bindings_for_path,
+    match_symbol_by_name,
     normalize_target_id,
     related_mapping_entries,
     repo_relative,
@@ -238,19 +240,99 @@ def build_blast_report(
     }
 
 
+def build_symbol_blast(
+    starting_symbols: list[dict[str, Any]],
+    bundle: dict[str, Any],
+    query: dict[str, Any],
+) -> dict[str, Any]:
+    """Blast radius for a symbol entry. Walks one hop of caller/callee edges
+    and reports the reached symbols, canonical nodes, and files."""
+    visited: dict[str, dict[str, Any]] = {}
+    direct_ids: list[str] = []
+    for sym in starting_symbols:
+        sid = sym["id"]
+        if sid in visited:
+            continue
+        visited[sid] = sym
+        direct_ids.append(sid)
+
+    reached_ids: list[str] = []
+    for sym in starting_symbols:
+        for edge_id in sym.get("callers", []) + sym.get("callees", []):
+            target = get_symbol_by_id(edge_id, bundle)
+            if target is None:
+                continue
+            if edge_id in visited:
+                continue
+            visited[edge_id] = target
+            reached_ids.append(edge_id)
+
+    nodes_touched = sorted({s["node"] for s in visited.values() if s.get("node")})
+    files_touched = sorted({s["file"] for s in visited.values() if s.get("file")})
+
+    def brief(s: dict[str, Any]) -> dict[str, Any]:
+        return {
+            "id": s["id"],
+            "name": s.get("name"),
+            "kind": s.get("kind"),
+            "container": s.get("container"),
+            "node": s.get("node"),
+            "file": s.get("file"),
+            "line": s.get("line"),
+        }
+
+    return {
+        "query": query,
+        "direct_symbols": [brief(s) for s in starting_symbols],
+        "callers": [
+            brief(get_symbol_by_id(cid, bundle))
+            for s in starting_symbols
+            for cid in s.get("callers", [])
+            if get_symbol_by_id(cid, bundle) is not None
+        ],
+        "callees": [
+            brief(get_symbol_by_id(cid, bundle))
+            for s in starting_symbols
+            for cid in s.get("callees", [])
+            if get_symbol_by_id(cid, bundle) is not None
+        ],
+        "nodes_touched": nodes_touched,
+        "files_touched": files_touched,
+        "summary": {
+            "direct_symbol_count": len(direct_ids),
+            "reached_symbol_count": len(reached_ids),
+            "node_count": len(nodes_touched),
+            "file_count": len(files_touched),
+        },
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Compute blast radius for a file or canonical node ID."
+        description="Compute blast radius for a file, canonical node ID, or symbol."
     )
     parser.add_argument(
         "target",
         nargs="?",
-        help="Node ID (entity:submission), feature (F0007), or story (F0007-S0003)",
+        help=(
+            "Node ID (entity:submission), feature (F0007), story (F0007-S0003), "
+            "or symbol ID (symbol:entity-submission:submission-service.transition-async)"
+        ),
     )
     parser.add_argument(
         "--file",
         dest="file_path",
         help="Repo file path (e.g. engine/src/Nebula.Domain/Entities/Submission.cs)",
+    )
+    parser.add_argument(
+        "--symbol",
+        dest="symbol_name",
+        help="Symbol name (e.g. TransitionAsync). Walks symbol-level call edges.",
+    )
+    parser.add_argument(
+        "--node",
+        dest="symbol_node",
+        help="Scope --symbol blast to one canonical node id.",
     )
     parser.add_argument(
         "--compact",
@@ -266,22 +348,91 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    if not args.target and not args.file_path:
-        parser.error("Provide a node ID or --file.")
-    if args.target and args.file_path:
-        parser.error("Use either a node ID or --file, not both.")
+    modes = sum(bool(x) for x in (args.target, args.file_path, args.symbol_name))
+    if modes == 0:
+        parser.error("Provide a node ID, --file, or --symbol.")
+    if modes > 1:
+        parser.error("Use only one of: node ID, --file, --symbol.")
 
     bundle = load_bundle()
 
     confidence_band = "high"
     ambiguous_count = 0
 
+    # --symbol mode: name-based symbol blast
+    if args.symbol_name:
+        matches = match_symbol_by_name(args.symbol_name, bundle, node_id=args.symbol_node)
+        if not matches:
+            print(f"No symbols named: {args.symbol_name}", file=sys.stderr)
+            return 1
+        query = {"symbol_name": args.symbol_name, "node": args.symbol_node}
+        report = build_symbol_blast(matches, bundle, query)
+        if args.compact:
+            json.dump(report["summary"], sys.stdout, indent=2)
+        else:
+            json.dump(report, sys.stdout, indent=2)
+        sys.stdout.write("\n")
+        emit_telemetry(
+            args.telemetry_file,
+            args.run_id,
+            "blast",
+            {
+                "query": query,
+                "nodes_returned": report["nodes_touched"],
+                "nodes_count": report["summary"]["node_count"],
+                "symbols_returned": [s["id"] for s in report["direct_symbols"]],
+                "symbol_count": report["summary"]["direct_symbol_count"],
+                "reached_symbol_count": report["summary"]["reached_symbol_count"],
+                "file_count": report["summary"]["file_count"],
+                "empty_scope": not report["direct_symbols"],
+                "ambiguous_count": 0,
+                "hint_emitted": False,
+                "confidence_band": "high",
+                "tokens_estimated": estimate_tokens(report if not args.compact else report["summary"]),
+            },
+        )
+        return 0
+
+    # symbol id passed as positional target
+    if args.target and args.target.startswith("symbol:"):
+        sym = get_symbol_by_id(args.target, bundle)
+        if sym is None:
+            print(f"Unknown symbol id: {args.target}", file=sys.stderr)
+            return 1
+        query = {"symbol_id": args.target}
+        report = build_symbol_blast([sym], bundle, query)
+        if args.compact:
+            json.dump(report["summary"], sys.stdout, indent=2)
+        else:
+            json.dump(report, sys.stdout, indent=2)
+        sys.stdout.write("\n")
+        emit_telemetry(
+            args.telemetry_file,
+            args.run_id,
+            "blast",
+            {
+                "query": query,
+                "nodes_returned": report["nodes_touched"],
+                "nodes_count": report["summary"]["node_count"],
+                "symbols_returned": [s["id"] for s in report["direct_symbols"]],
+                "symbol_count": report["summary"]["direct_symbol_count"],
+                "reached_symbol_count": report["summary"]["reached_symbol_count"],
+                "file_count": report["summary"]["file_count"],
+                "empty_scope": False,
+                "ambiguous_count": 0,
+                "hint_emitted": False,
+                "confidence_band": "high",
+                "tokens_estimated": estimate_tokens(report if not args.compact else report["summary"]),
+            },
+        )
+        return 0
+
     if args.file_path:
         starting_ids = node_ids_for_file(args.file_path, bundle)
         if not starting_ids:
             print(f"No KG bindings found for: {args.file_path}", file=sys.stderr)
             return 1
-        query: dict[str, Any] = {"file": repo_relative(args.file_path)}
+        query = {"file": repo_relative(args.file_path)}
     else:
         normalized = normalize_target_id(args.target)
         node = bundle["all_nodes"].get(normalized)
@@ -290,7 +441,6 @@ def main() -> int:
             return 1
 
         if node.get("_kind") in ("feature", "story"):
-            # For features/stories, blast from the canonical nodes they reference
             starting_ids = canonical_refs_from_mapping(node)
             if not starting_ids:
                 starting_ids = {normalized}

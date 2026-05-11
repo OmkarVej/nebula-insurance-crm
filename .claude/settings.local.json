@@ -4,7 +4,8 @@
       "Bash(docker version *)",
       "Bash(curl -s -o /tmp/health.txt -w \"HTTP %{http_code}\\\\n\" http://localhost:5113/healthz)",
       "Read(//tmp/**)",
-      "Bash(git check-ignore *)"
+      "Bash(git check-ignore *)",
+      "WebFetch(domain:github.com)"
     ]
   }
 }
