@@ -28,6 +28,7 @@ from kg_common import (
     normalize_repo_path,
     type_regex_map,
 )
+from hotspots import compute_hotspots
 
 
 class ValidationReport:
@@ -200,6 +201,7 @@ def build_coverage_report(
     uncovered: list[str],
     symbol_summary: dict[str, Any] | None = None,
     decisions_summary: dict[str, Any] | None = None,
+    hotspot_signals: dict[str, dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     canonical = bundle["canonical"]
     mappings = bundle["mappings"]
@@ -211,7 +213,27 @@ def build_coverage_report(
             source_paths = list(item.get("source_docs", []))
             if item.get("path"):
                 source_paths.append(item["path"])
-            canonical_freshness[item["id"]] = build_freshness_entry(source_paths)
+            entry = build_freshness_entry(source_paths)
+            if hotspot_signals and item["id"] in hotspot_signals:
+                # Phase 3 fields are additive: merge over the existing
+                # source-doc last_modified with the git-derived value when
+                # available, so the field reflects the freshest signal.
+                signals = hotspot_signals[item["id"]]
+                git_last_modified = signals.get("last_modified")
+                if git_last_modified:
+                    existing = entry.get("last_modified")
+                    if not existing or git_last_modified > existing:
+                        entry["last_modified"] = git_last_modified
+                entry.update(
+                    {
+                        "hotspot_rank": signals["hotspot_rank"],
+                        "hotspot_score": signals["hotspot_score"],
+                        "primary_owner": signals["primary_owner"],
+                        "primary_owner_pct": signals["primary_owner_pct"],
+                        "bus_factor_flag": signals["bus_factor_flag"],
+                    }
+                )
+            canonical_freshness[item["id"]] = entry
 
     mapping_freshness: dict[str, Any] = {}
     for section_name in ("features", "stories"):
@@ -881,6 +903,16 @@ def main() -> int:
         report, bundle, required=args.check_decisions
     )
 
+    hotspot_signals: dict[str, dict[str, Any]] | None = None
+    if args.write_coverage_report:
+        try:
+            hotspot_signals = compute_hotspots(bundle)
+        except SystemExit as exc:
+            # Git unavailable, shallow clone, or empty history. Fall through
+            # without Phase 3 fields rather than blocking coverage-report write.
+            print(f"[validate] hotspots skipped: {exc}", file=sys.stderr)
+            hotspot_signals = None
+
     coverage_report = build_coverage_report(
         bundle,
         mapped_feature_paths,
@@ -888,6 +920,7 @@ def main() -> int:
         uncovered,
         symbol_summary,
         decisions_summary,
+        hotspot_signals,
     )
     if args.write_coverage_report:
         write_coverage_report(coverage_report)
