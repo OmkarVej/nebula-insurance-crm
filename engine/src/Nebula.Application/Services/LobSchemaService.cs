@@ -61,19 +61,6 @@ public class LobSchemaService(
         return await ActivateBundleAsync(bundle, request, user, ct);
     }
 
-    public async Task<(LobBundleActivationResultDto? Result, string? ErrorCode)> ActivateAsync(
-        Guid bundleId,
-        LobBundleActivationRequestDto request,
-        ICurrentUserService user,
-        CancellationToken ct = default)
-    {
-        var bundle = await schemaRepository.GetBundleByIdAsync(bundleId, track: true, ct);
-        if (bundle is null)
-            return (null, "not_found");
-
-        return await ActivateBundleAsync(bundle, request, user, ct);
-    }
-
     private async Task<(LobBundleActivationResultDto? Result, string? ErrorCode)> ActivateBundleAsync(
         LobSchemaBundle bundle,
         LobBundleActivationRequestDto request,

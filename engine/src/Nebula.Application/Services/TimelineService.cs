@@ -10,14 +10,6 @@ public class TimelineService(ITimelineRepository timelineRepo, BrokerScopeResolv
 {
     private readonly ILogger<TimelineService> _logger = logger;
 
-    public async Task<IReadOnlyList<TimelineEventDto>> ListEventsAsync(
-        string entityType, Guid? entityId, int limit, ICurrentUserService user, CancellationToken ct = default)
-    {
-        var events = await timelineRepo.ListEventsAsync(entityType, entityId, limit, ct);
-        AuditBrokerUserRead(user, "broker.timeline", entityId);
-        return events.Select(MapToDto).ToList();
-    }
-
     public async Task<PaginatedResult<TimelineEventDto>> ListEventsPagedAsync(
         string entityType, Guid? entityId, int page, int pageSize, ICurrentUserService user, CancellationToken ct = default)
     {

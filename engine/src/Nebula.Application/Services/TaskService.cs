@@ -28,14 +28,6 @@ public class TaskService(
         ("Done", "InProgress"),
     ];
 
-    public async Task<TaskDto?> GetByIdAsync(Guid id, CancellationToken ct = default)
-    {
-        var task = await taskRepo.GetByIdAsync(id, ct);
-        if (task is null)
-            return null;
-        return await MapToDtoAsync(task, ct);
-    }
-
     /// <summary>
     /// Fetch task by ID and verify the caller is authorized (Casbin + ownership).
     /// Returns (dto, null) on success, or (null, errorCode) on failure.

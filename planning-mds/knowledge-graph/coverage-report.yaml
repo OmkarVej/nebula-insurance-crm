@@ -5,9 +5,9 @@ summary:
   stories_mapped: 109
   features_excluded: 11
   features_uncovered: 0
-  code_bindings: 140
-  symbol_count: 2290
-  bound_symbol_count: 2290
+  code_bindings: 141
+  symbol_count: 2332
+  bound_symbol_count: 2332
   decision_count: 0
   why_count: 0
 coverage:
@@ -200,6 +200,11 @@ freshness:
       source_count: 2
       last_modified: '2026-05-09'
       source_hash: 6731bbb1b473cdd3
+      hotspot_rank: 115
+      hotspot_score: 0.0
+      primary_owner: gajapathi.kannan@live.com
+      primary_owner_pct: 100
+      bus_factor_flag: true
     entity:program:
       source_paths:
       - planning-mds/architecture/data-model.md
@@ -1108,7 +1113,7 @@ freshness:
       source_count: 3
       last_modified: '2026-05-09'
       source_hash: d8ee51ba606f6006
-      hotspot_rank: 111
+      hotspot_rank: 112
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1157,7 +1162,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-09'
       source_hash: 7eb8292a6d82724c
-      hotspot_rank: 117
+      hotspot_rank: 119
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1193,7 +1198,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-09'
       source_hash: 7eb8292a6d82724c
-      hotspot_rank: 116
+      hotspot_rank: 118
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1491,7 +1496,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-06'
       source_hash: bcd7cdb0f825efee
-      hotspot_rank: 121
+      hotspot_rank: 123
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1503,7 +1508,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-06'
       source_hash: 6b9afe5fb0d21ef0
-      hotspot_rank: 112
+      hotspot_rank: 113
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1515,7 +1520,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-06'
       source_hash: 0df1268ab97d11a1
-      hotspot_rank: 119
+      hotspot_rank: 121
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1527,7 +1532,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-06'
       source_hash: 1cff9555994aad74
-      hotspot_rank: 120
+      hotspot_rank: 122
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1575,7 +1580,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-06'
       source_hash: 837f9643416b3f8c
-      hotspot_rank: 122
+      hotspot_rank: 124
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1587,7 +1592,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-09'
       source_hash: 685f71ec15a676e5
-      hotspot_rank: 115
+      hotspot_rank: 117
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1599,7 +1604,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-09'
       source_hash: 658e0a8b6f4064c4
-      hotspot_rank: 113
+      hotspot_rank: 114
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1611,7 +1616,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-06'
       source_hash: 8c068df9eecca56f
-      hotspot_rank: 131
+      hotspot_rank: 132
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1659,7 +1664,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-09'
       source_hash: cebd008ef89b9866
-      hotspot_rank: 125
+      hotspot_rank: 111
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1695,7 +1700,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-09'
       source_hash: 9134be5fc3b015ec
-      hotspot_rank: 126
+      hotspot_rank: 127
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1707,7 +1712,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-09'
       source_hash: 1a56a6ce97da014a
-      hotspot_rank: 127
+      hotspot_rank: 128
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1743,7 +1748,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-08'
       source_hash: fac680ce39e1b345
-      hotspot_rank: 114
+      hotspot_rank: 116
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1847,7 +1852,7 @@ freshness:
       source_count: 1
       last_modified: '2026-04-21'
       source_hash: 127dee36ab27854d
-      hotspot_rank: 135
+      hotspot_rank: 136
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1858,7 +1863,7 @@ freshness:
       source_count: 1
       last_modified: '2026-04-21'
       source_hash: 7fd86607354980ce
-      hotspot_rank: 133
+      hotspot_rank: 134
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1869,7 +1874,7 @@ freshness:
       source_count: 1
       last_modified: '2026-04-21'
       source_hash: 042906a4ce385235
-      hotspot_rank: 132
+      hotspot_rank: 133
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1880,7 +1885,7 @@ freshness:
       source_count: 1
       last_modified: '2026-04-21'
       source_hash: c1d6259e878e8a55
-      hotspot_rank: 129
+      hotspot_rank: 130
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1891,7 +1896,7 @@ freshness:
       source_count: 1
       last_modified: '2026-05-08'
       source_hash: b1d26abf9c7fb691
-      hotspot_rank: 123
+      hotspot_rank: 125
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1902,7 +1907,7 @@ freshness:
       source_count: 1
       last_modified: '2026-04-21'
       source_hash: 1b1875066fb10af1
-      hotspot_rank: 128
+      hotspot_rank: 129
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1913,7 +1918,7 @@ freshness:
       source_count: 1
       last_modified: '2026-05-08'
       source_hash: f5d5b28e423a667b
-      hotspot_rank: 124
+      hotspot_rank: 126
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1924,7 +1929,7 @@ freshness:
       source_count: 1
       last_modified: '2026-04-21'
       source_hash: bc6e8852aa475b29
-      hotspot_rank: 134
+      hotspot_rank: 135
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1935,7 +1940,7 @@ freshness:
       source_count: 1
       last_modified: '2026-04-21'
       source_hash: e6f01f1d3ea687f5
-      hotspot_rank: 130
+      hotspot_rank: 131
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1946,7 +1951,7 @@ freshness:
       source_count: 1
       last_modified: '2026-05-08'
       source_hash: feabbd2e770f21ae
-      hotspot_rank: 118
+      hotspot_rank: 120
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -2625,7 +2630,7 @@ freshness:
       source_count: 1
       last_modified: '2026-04-21'
       source_hash: e1daf0a534574f57
-      hotspot_rank: 140
+      hotspot_rank: 141
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -2636,7 +2641,7 @@ freshness:
       source_count: 1
       last_modified: '2026-05-09'
       source_hash: 5b3e37f6c6aeb15a
-      hotspot_rank: 136
+      hotspot_rank: 137
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -2647,7 +2652,7 @@ freshness:
       source_count: 1
       last_modified: '2026-04-21'
       source_hash: 473f665cfabe11b3
-      hotspot_rank: 138
+      hotspot_rank: 139
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -2658,7 +2663,7 @@ freshness:
       source_count: 1
       last_modified: '2026-04-21'
       source_hash: c31f15d4b874fd1f
-      hotspot_rank: 137
+      hotspot_rank: 138
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -2669,7 +2674,7 @@ freshness:
       source_count: 1
       last_modified: '2026-04-21'
       source_hash: b0ca0f9a95e73bb5
-      hotspot_rank: 139
+      hotspot_rank: 140
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -4732,8 +4737,8 @@ freshness:
       - experience/src/features/tasks/types.ts
       - experience/src/pages/TaskCenterPage.tsx
       source_count: 36
-      last_modified: '2026-04-20'
-      source_hash: a8ee5c8415259657
+      last_modified: '2026-05-16'
+      source_hash: b00d5b5b03ea3f20
     entity:user-profile:
       source_paths:
       - engine/src/Nebula.Domain/Entities/UserProfile.cs
@@ -4795,6 +4800,15 @@ freshness:
       source_count: 12
       last_modified: '2026-05-16'
       source_hash: d1419e591bad226d
+    entity:mga:
+      source_paths:
+      - engine/src/Nebula.Application/Services/ReferenceDataService.cs
+      - engine/src/Nebula.Application/Interfaces/IReferenceDataRepository.cs
+      - engine/src/Nebula.Infrastructure/Repositories/ReferenceDataRepository.cs
+      - engine/src/Nebula.Api/Endpoints/ReferenceDataEndpoints.cs
+      source_count: 4
+      last_modified: '2026-04-22'
+      source_hash: 4722989130b3d2e8
     workflow:submission:
       source_paths:
       - engine/src/Nebula.Application/Services/WorkflowStateMachine.cs
@@ -4876,8 +4890,8 @@ freshness:
       - planning-mds/security/authorization-matrix.md
       - planning-mds/security/policies/policy.csv
       source_count: 24
-      last_modified: '2026-05-09'
-      source_hash: 81e5723232d56878
+      last_modified: '2026-05-16'
+      source_hash: 560711437fc8cf4d
     capability:dynamic-lob-attributes:
       source_paths:
       - engine/src/Nebula.Application/DTOs/LobAttributeDtos.cs
@@ -5064,8 +5078,8 @@ freshness:
       - experience/src/features/tasks/index.ts
       - experience/src/features/tasks/types.ts
       source_count: 27
-      last_modified: '2026-04-20'
-      source_hash: 4e341420a95aded1
+      last_modified: '2026-05-16'
+      source_hash: 23447517334a447e
     capability:broker-relationship-management:
       source_paths:
       - engine/src/Nebula.Application/DTOs/BrokerBrokerUserDto.cs
@@ -5385,8 +5399,8 @@ freshness:
       - engine/tests/Nebula.Tests/Integration/TaskEndpointTests.cs
       - engine/tests/Nebula.Tests/Integration/BrokerUserAccessTests.cs
       source_count: 13
-      last_modified: '2026-05-09'
-      source_hash: 1147e5209547d20b
+      last_modified: '2026-05-16'
+      source_hash: 9ed47ed95d036019
     policy_rule:task-create:
       source_paths:
       - planning-mds/security/policies/model.conf
@@ -5401,8 +5415,8 @@ freshness:
       - engine/tests/Nebula.Tests/Integration/TaskEndpointTests.cs
       - engine/tests/Nebula.Tests/Unit/TaskServiceTests.cs
       source_count: 11
-      last_modified: '2026-05-09'
-      source_hash: f84a6d257a217d52
+      last_modified: '2026-05-16'
+      source_hash: 8e24fc48dc28b84a
     policy_rule:task-update:
       source_paths:
       - planning-mds/security/policies/model.conf
@@ -5417,8 +5431,8 @@ freshness:
       - engine/tests/Nebula.Tests/Integration/TaskEndpointTests.cs
       - engine/tests/Nebula.Tests/Unit/TaskServiceTests.cs
       source_count: 11
-      last_modified: '2026-05-09'
-      source_hash: 596ec4de94226889
+      last_modified: '2026-05-16'
+      source_hash: 30ac1b54fc793bfe
     policy_rule:task-delete:
       source_paths:
       - planning-mds/security/policies/model.conf
@@ -5432,8 +5446,8 @@ freshness:
       - engine/tests/Nebula.Tests/Integration/TaskEndpointTests.cs
       - engine/tests/Nebula.Tests/Unit/TaskServiceTests.cs
       source_count: 10
-      last_modified: '2026-05-09'
-      source_hash: 995a179198df3705
+      last_modified: '2026-05-16'
+      source_hash: 23c7b465bd7564f4
     policy_rule:user-search:
       source_paths:
       - planning-mds/security/policies/model.conf
@@ -5466,8 +5480,8 @@ freshness:
       - engine/src/Nebula.Api/Endpoints/TimelineEndpoints.cs
       - engine/src/Nebula.Infrastructure/Repositories/TimelineRepository.cs
       source_count: 13
-      last_modified: '2026-05-09'
-      source_hash: 17b2ab2afc8fb16a
+      last_modified: '2026-05-16'
+      source_hash: 7853a19d221cd199
     endpoint:dashboard-kpis:
       source_paths:
       - engine/src/Nebula.Api/Endpoints/DashboardEndpoints.cs
@@ -5669,8 +5683,8 @@ freshness:
       - experience/src/features/timeline/hooks/useTimelineEvents.ts
       - experience/src/features/timeline/index.ts
       source_count: 10
-      last_modified: '2026-05-09'
-      source_hash: a8e6ce04da91eb32
+      last_modified: '2026-05-16'
+      source_hash: 29396bcd78872ec8
     endpoint:renewal-list:
       source_paths:
       - engine/src/Nebula.Api/Endpoints/RenewalEndpoints.cs
@@ -5763,8 +5777,8 @@ freshness:
       - engine/tests/Nebula.Tests/Integration/TaskEndpointTests.cs
       - experience/src/pages/TaskCenterPage.tsx
       source_count: 4
-      last_modified: '2026-04-20'
-      source_hash: 9d8d9750d7ca8fa7
+      last_modified: '2026-05-16'
+      source_hash: cc61b9753d6a8909
     endpoint:task-list:
       source_paths:
       - engine/src/Nebula.Api/Endpoints/TaskEndpoints.cs
@@ -5775,8 +5789,8 @@ freshness:
       - engine/tests/Nebula.Tests/Integration/TaskEndpointTests.cs
       - experience/src/pages/TaskCenterPage.tsx
       source_count: 7
-      last_modified: '2026-04-20'
-      source_hash: 35f9a1a2f397675a
+      last_modified: '2026-05-16'
+      source_hash: 484121be136bac27
     endpoint:task-detail:
       source_paths:
       - engine/src/Nebula.Api/Endpoints/TaskEndpoints.cs
@@ -5785,8 +5799,8 @@ freshness:
       - engine/tests/Nebula.Tests/Integration/TaskEndpointTests.cs
       - experience/src/pages/TaskCenterPage.tsx
       source_count: 5
-      last_modified: '2026-04-20'
-      source_hash: 60f3220969aaae0c
+      last_modified: '2026-05-16'
+      source_hash: 28febfb05c273794
     endpoint:task-create:
       source_paths:
       - engine/src/Nebula.Api/Endpoints/TaskEndpoints.cs
@@ -5794,8 +5808,8 @@ freshness:
       - engine/src/Nebula.Application/Validators/TaskCreateRequestValidator.cs
       - engine/tests/Nebula.Tests/Integration/TaskEndpointTests.cs
       source_count: 4
-      last_modified: '2026-04-20'
-      source_hash: 83c44c4ff01ae0cc
+      last_modified: '2026-05-16'
+      source_hash: 609e1747ab5c852e
     endpoint:timeline-events:
       source_paths:
       - engine/src/Nebula.Api/Endpoints/TimelineEndpoints.cs
@@ -5810,8 +5824,8 @@ freshness:
       - experience/src/features/timeline/index.ts
       - experience/src/contracts/timeline.ts
       source_count: 11
-      last_modified: '2026-04-20'
-      source_hash: 0af6df7d62feb77a
+      last_modified: '2026-05-16'
+      source_hash: e03986dcfb372190
     ui_route:dashboard-home:
       source_paths:
       - experience/src/App.tsx
@@ -5923,9 +5937,11 @@ freshness:
       - engine/src/Nebula.Application/Services/ContactService.cs
       - engine/src/Nebula.Domain/Entities/ActivityTimelineEvent.cs
       - engine/src/Nebula.Infrastructure/Repositories/TimelineRepository.cs
-      source_count: 3
+      - engine/src/Nebula.Api/Endpoints/ContactEndpoints.cs
+      - engine/tests/Nebula.Tests/Integration/ContactEndpointTests.cs
+      source_count: 5
       last_modified: '2026-04-20'
-      source_hash: e8857eeb56ac7c6e
+      source_hash: 6346429541d7e424
     event:submission-created:
       source_paths:
       - engine/src/Nebula.Application/Services/SubmissionService.cs
@@ -5952,16 +5968,16 @@ freshness:
       - engine/src/Nebula.Domain/Entities/ActivityTimelineEvent.cs
       - engine/tests/Nebula.Tests/Integration/TaskEndpointTests.cs
       source_count: 3
-      last_modified: '2026-04-20'
-      source_hash: 3e6688db9218c2c3
+      last_modified: '2026-05-16'
+      source_hash: f9b09ba8a165a2d5
     event:task-updated:
       source_paths:
       - engine/src/Nebula.Application/Services/TaskService.cs
       - engine/src/Nebula.Domain/Entities/ActivityTimelineEvent.cs
       - engine/tests/Nebula.Tests/Integration/TaskEndpointTests.cs
       source_count: 3
-      last_modified: '2026-04-20'
-      source_hash: 3e6688db9218c2c3
+      last_modified: '2026-05-16'
+      source_hash: f9b09ba8a165a2d5
     event:renewal-transitioned:
       source_paths:
       - engine/src/Nebula.Application/Services/RenewalService.cs
@@ -6585,7 +6601,7 @@ freshness:
       - experience/src/features/accounts/types.ts
       source_count: 10
       last_modified: '2026-05-16'
-      source_hash: 60e97fe2e939d5ef
+      source_hash: 42692e49fb588330
     ui_route:accounts-list:
       source_paths:
       - experience/src/App.tsx
@@ -6643,10 +6659,10 @@ freshness:
       last_modified: '2026-05-09'
       source_hash: 2cf4072bea595516
 symbols:
-  symbol_count: 2290
-  bound_symbol_count: 2290
+  symbol_count: 2332
+  bound_symbol_count: 2332
   by_language:
-    csharp: 2032
+    csharp: 2074
     typescript: 258
 decisions:
   decision_count: 0

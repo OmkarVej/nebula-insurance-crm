@@ -392,6 +392,17 @@ node_bindings:
           - engine/tests/Nebula.Tests/Unit/WorkflowServiceTests.cs
           - engine/tests/Nebula.Tests/Integration/WorkflowEndpointTests.cs
 
+  - id: entity:mga
+    paths:
+      backend:
+        application:
+          - engine/src/Nebula.Application/Services/ReferenceDataService.cs
+          - engine/src/Nebula.Application/Interfaces/IReferenceDataRepository.cs
+        infrastructure:
+          - engine/src/Nebula.Infrastructure/Repositories/ReferenceDataRepository.cs
+        api:
+          - engine/src/Nebula.Api/Endpoints/ReferenceDataEndpoints.cs
+
   - id: workflow:submission
     paths:
       backend:
@@ -1555,6 +1566,10 @@ node_bindings:
           - engine/src/Nebula.Domain/Entities/ActivityTimelineEvent.cs
         infrastructure:
           - engine/src/Nebula.Infrastructure/Repositories/TimelineRepository.cs
+        api:
+          - engine/src/Nebula.Api/Endpoints/ContactEndpoints.cs
+        tests:
+          - engine/tests/Nebula.Tests/Integration/ContactEndpointTests.cs
 
   - id: event:submission-created
     paths:

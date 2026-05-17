@@ -1,15 +1,15 @@
 version: 0
-generated_at: '2026-05-16T22:03:46+00:00'
+generated_at: '2026-05-17T15:03:21+00:00'
 summary:
-  total_symbols: 2290
+  total_symbols: 2332
   by_language:
     typescript:
       files: 54
       parsed: 54
       cached: 0
     csharp:
-      files: 260
-      parsed: 260
+      files: 266
+      parsed: 266
       cached: 0
   disambiguated_ids: 10
 symbols:
@@ -386,6 +386,7 @@ symbols:
   - symbol:entity-task-item:task-service.authorize-task-async
   - symbol:entity-task-item:task-service.get-task-list-async
   - symbol:entity-user-profile:user-service.search-async
+  - symbol:event-contact-created:contact-endpoints.has-access-async
   callees:
   - symbol:capability-authorization-enforcement:casbin-authorization-service.authorize-async
   - symbol:capability-authorization-enforcement:policy-authorization-service.authorize-async
@@ -3746,7 +3747,6 @@ symbols:
   language: csharp
   container: ILobSchemaRepository
   callers:
-  - symbol:capability-product-schema-registry:lob-schema-service.activate-async
   - symbol:capability-product-schema-registry:lob-schema-service.get-bundle-async
   callees:
   - symbol:capability-product-schema-registry:fake-lob-schema-repository.get-bundle-by-id-async
@@ -4799,34 +4799,18 @@ symbols:
   language: csharp
   callers: []
   callees: []
-- id: symbol:capability-product-schema-registry:lob-schema-service.activate-async
-  node: capability:product-schema-registry
-  kind: method
-  name: ActivateAsync
-  file: engine/src/Nebula.Application/Services/LobSchemaService.cs
-  line: 64
-  signature: public async Task<(LobBundleActivationResultDto? Result, string? ErrorCode)>
-    ActivateAsync(
-  visibility: public
-  language: csharp
-  container: LobSchemaService
-  callers: []
-  callees:
-  - symbol:capability-product-schema-registry:i-lob-schema-repository.get-bundle-by-id-async
-  - symbol:capability-product-schema-registry:lob-schema-service.activate-bundle-async
 - id: symbol:capability-product-schema-registry:lob-schema-service.activate-bundle-async
   node: capability:product-schema-registry
   kind: method
   name: ActivateBundleAsync
   file: engine/src/Nebula.Application/Services/LobSchemaService.cs
-  line: 77
+  line: 64
   signature: private async Task<(LobBundleActivationResultDto? Result, string? ErrorCode)>
     ActivateBundleAsync(
   visibility: private
   language: csharp
   container: LobSchemaService
   callers:
-  - symbol:capability-product-schema-registry:lob-schema-service.activate-async
   - symbol:capability-product-schema-registry:lob-schema-service.activate-product-version-async
   callees:
   - symbol:capability-product-schema-registry:i-lob-schema-repository.add-activation-event-async
@@ -4853,7 +4837,7 @@ symbols:
   kind: method
   name: Deserialize
   file: engine/src/Nebula.Application/Services/LobSchemaService.cs
-  line: 129
+  line: 116
   signature: private static object? Deserialize(string json)
   visibility: private
   language: csharp
@@ -4923,7 +4907,7 @@ symbols:
   kind: method
   name: MapBundle
   file: engine/src/Nebula.Application/Services/LobSchemaService.cs
-  line: 113
+  line: 100
   signature: public static LobSchemaBundleDto MapBundle(LobSchemaBundle bundle)
   visibility: public
   language: csharp
@@ -9059,8 +9043,7 @@ symbols:
   visibility: internal
   language: csharp
   container: ITimelineRepository
-  callers:
-  - symbol:policy_rule-timeline-event-read:timeline-service.list-events-async
+  callers: []
   callees:
   - symbol:entity-activity-timeline-event:timeline-repository.list-events-async
   - symbol:entity-document:fake-timeline-repository.list-events-async
@@ -16476,6 +16459,331 @@ symbols:
   language: csharp
   callers: []
   callees: []
+- id: symbol:entity-mga:i-reference-data-repository.get-account-by-id-async
+  node: entity:mga
+  kind: method
+  name: GetAccountByIdAsync
+  file: engine/src/Nebula.Application/Interfaces/IReferenceDataRepository.cs
+  line: 12
+  signature: Task<Account?> GetAccountByIdAsync(Guid id, CancellationToken ct = default)
+  visibility: internal
+  language: csharp
+  container: IReferenceDataRepository
+  callers:
+  - symbol:entity-submission:submission-service.create-async
+  callees:
+  - symbol:entity-mga:reference-data-repository.get-account-by-id-async
+  - symbol:entity-renewal:stub-reference-data-repository.get-account-by-id-async
+- id: symbol:entity-mga:i-reference-data-repository.get-accounts-async
+  node: entity:mga
+  kind: method
+  name: GetAccountsAsync
+  file: engine/src/Nebula.Application/Interfaces/IReferenceDataRepository.cs
+  line: 7
+  signature: Task<IReadOnlyList<Account>> GetAccountsAsync(CancellationToken ct =
+    default)
+  visibility: internal
+  language: csharp
+  container: IReferenceDataRepository
+  callers: []
+  callees:
+  - symbol:entity-mga:reference-data-repository.get-accounts-async
+  - symbol:entity-renewal:stub-reference-data-repository.get-accounts-async
+- id: symbol:entity-mga:i-reference-data-repository.get-mgas-async
+  node: entity:mga
+  kind: method
+  name: GetMgasAsync
+  file: engine/src/Nebula.Application/Interfaces/IReferenceDataRepository.cs
+  line: 8
+  signature: Task<IReadOnlyList<MGA>> GetMgasAsync(CancellationToken ct = default)
+  visibility: internal
+  language: csharp
+  container: IReferenceDataRepository
+  callers:
+  - symbol:entity-mga:reference-data-service.get-mgas-async
+  callees:
+  - symbol:entity-mga:reference-data-repository.get-mgas-async
+  - symbol:entity-renewal:stub-reference-data-repository.get-mgas-async
+- id: symbol:entity-mga:i-reference-data-repository.get-policy-by-id-async
+  node: entity:mga
+  kind: method
+  name: GetPolicyByIdAsync
+  file: engine/src/Nebula.Application/Interfaces/IReferenceDataRepository.cs
+  line: 13
+  signature: Task<Policy?> GetPolicyByIdAsync(Guid id, CancellationToken ct = default)
+  visibility: internal
+  language: csharp
+  container: IReferenceDataRepository
+  callers:
+  - symbol:entity-renewal:renewal-service.create-async
+  callees:
+  - symbol:entity-mga:reference-data-repository.get-policy-by-id-async
+  - symbol:entity-renewal:stub-reference-data-repository.get-policy-by-id-async
+- id: symbol:entity-mga:i-reference-data-repository.get-program-by-id-async
+  node: entity:mga
+  kind: method
+  name: GetProgramByIdAsync
+  file: engine/src/Nebula.Application/Interfaces/IReferenceDataRepository.cs
+  line: 14
+  signature: Task<Nebula.Domain.Entities.Program?> GetProgramByIdAsync(Guid id, CancellationToken
+    ct = default)
+  visibility: internal
+  language: csharp
+  container: IReferenceDataRepository
+  callers:
+  - symbol:entity-submission:submission-service.create-async
+  - symbol:entity-submission:submission-service.update-async
+  callees:
+  - symbol:entity-mga:reference-data-repository.get-program-by-id-async
+  - symbol:entity-renewal:stub-reference-data-repository.get-program-by-id-async
+- id: symbol:entity-mga:i-reference-data-repository.get-programs-async
+  node: entity:mga
+  kind: method
+  name: GetProgramsAsync
+  file: engine/src/Nebula.Application/Interfaces/IReferenceDataRepository.cs
+  line: 9
+  signature: Task<IReadOnlyList<Nebula.Domain.Entities.Program>> GetProgramsAsync(CancellationToken
+    ct = default)
+  visibility: internal
+  language: csharp
+  container: IReferenceDataRepository
+  callers:
+  - symbol:entity-mga:reference-data-service.get-programs-async
+  callees:
+  - symbol:entity-mga:reference-data-repository.get-programs-async
+  - symbol:entity-renewal:stub-reference-data-repository.get-programs-async
+- id: symbol:entity-mga:i-reference-data-repository.get-renewal-statuses-async
+  node: entity:mga
+  kind: method
+  name: GetRenewalStatusesAsync
+  file: engine/src/Nebula.Application/Interfaces/IReferenceDataRepository.cs
+  line: 11
+  signature: Task<IReadOnlyList<ReferenceRenewalStatus>> GetRenewalStatusesAsync(CancellationToken
+    ct = default)
+  visibility: internal
+  language: csharp
+  container: IReferenceDataRepository
+  callers: []
+  callees:
+  - symbol:entity-mga:reference-data-repository.get-renewal-statuses-async
+  - symbol:entity-renewal:stub-reference-data-repository.get-renewal-statuses-async
+- id: symbol:entity-mga:i-reference-data-repository.get-submission-statuses-async
+  node: entity:mga
+  kind: method
+  name: GetSubmissionStatusesAsync
+  file: engine/src/Nebula.Application/Interfaces/IReferenceDataRepository.cs
+  line: 10
+  signature: Task<IReadOnlyList<ReferenceSubmissionStatus>> GetSubmissionStatusesAsync(CancellationToken
+    ct = default)
+  visibility: internal
+  language: csharp
+  container: IReferenceDataRepository
+  callers: []
+  callees:
+  - symbol:entity-mga:reference-data-repository.get-submission-statuses-async
+  - symbol:entity-renewal:stub-reference-data-repository.get-submission-statuses-async
+- id: symbol:entity-mga:i-reference-data-repository.i-reference-data-repository
+  node: entity:mga
+  kind: interface
+  name: IReferenceDataRepository
+  file: engine/src/Nebula.Application/Interfaces/IReferenceDataRepository.cs
+  line: 5
+  signature: public interface IReferenceDataRepository
+  visibility: public
+  language: csharp
+  callers: []
+  callees: []
+- id: symbol:entity-mga:reference-data-endpoints.map-reference-data-endpoints
+  node: entity:mga
+  kind: method
+  name: MapReferenceDataEndpoints
+  file: engine/src/Nebula.Api/Endpoints/ReferenceDataEndpoints.cs
+  line: 7
+  signature: public static IEndpointRouteBuilder MapReferenceDataEndpoints(this IEndpointRouteBuilder
+    app)
+  visibility: public
+  language: csharp
+  container: ReferenceDataEndpoints
+  callers: []
+  callees:
+  - symbol:entity-mga:reference-data-service.get-mgas-async
+  - symbol:entity-mga:reference-data-service.get-programs-async
+- id: symbol:entity-mga:reference-data-endpoints.reference-data-endpoints
+  node: entity:mga
+  kind: class
+  name: ReferenceDataEndpoints
+  file: engine/src/Nebula.Api/Endpoints/ReferenceDataEndpoints.cs
+  line: 5
+  signature: public static class ReferenceDataEndpoints
+  visibility: public
+  language: csharp
+  callers: []
+  callees: []
+- id: symbol:entity-mga:reference-data-repository.get-account-by-id-async
+  node: entity:mga
+  kind: method
+  name: GetAccountByIdAsync
+  file: engine/src/Nebula.Infrastructure/Repositories/ReferenceDataRepository.cs
+  line: 50
+  signature: public async Task<Account?> GetAccountByIdAsync(Guid id, CancellationToken
+    ct = default)
+  visibility: public
+  language: csharp
+  container: ReferenceDataRepository
+  callers:
+  - symbol:entity-mga:i-reference-data-repository.get-account-by-id-async
+  callees: []
+- id: symbol:entity-mga:reference-data-repository.get-accounts-async
+  node: entity:mga
+  kind: method
+  name: GetAccountsAsync
+  file: engine/src/Nebula.Infrastructure/Repositories/ReferenceDataRepository.cs
+  line: 13
+  signature: public async Task<IReadOnlyList<Account>> GetAccountsAsync(CancellationToken
+    ct = default)
+  visibility: public
+  language: csharp
+  container: ReferenceDataRepository
+  callers:
+  - symbol:entity-mga:i-reference-data-repository.get-accounts-async
+  callees: []
+- id: symbol:entity-mga:reference-data-repository.get-mgas-async
+  node: entity:mga
+  kind: method
+  name: GetMgasAsync
+  file: engine/src/Nebula.Infrastructure/Repositories/ReferenceDataRepository.cs
+  line: 20
+  signature: public async Task<IReadOnlyList<MGA>> GetMgasAsync(CancellationToken
+    ct = default)
+  visibility: public
+  language: csharp
+  container: ReferenceDataRepository
+  callers:
+  - symbol:entity-mga:i-reference-data-repository.get-mgas-async
+  callees: []
+- id: symbol:entity-mga:reference-data-repository.get-policy-by-id-async
+  node: entity:mga
+  kind: method
+  name: GetPolicyByIdAsync
+  file: engine/src/Nebula.Infrastructure/Repositories/ReferenceDataRepository.cs
+  line: 53
+  signature: public async Task<Policy?> GetPolicyByIdAsync(Guid id, CancellationToken
+    ct = default)
+  visibility: public
+  language: csharp
+  container: ReferenceDataRepository
+  callers:
+  - symbol:entity-mga:i-reference-data-repository.get-policy-by-id-async
+  callees: []
+- id: symbol:entity-mga:reference-data-repository.get-program-by-id-async
+  node: entity:mga
+  kind: method
+  name: GetProgramByIdAsync
+  file: engine/src/Nebula.Infrastructure/Repositories/ReferenceDataRepository.cs
+  line: 60
+  signature: public async Task<Nebula.Domain.Entities.Program?> GetProgramByIdAsync(Guid
+    id, CancellationToken ct = default)
+  visibility: public
+  language: csharp
+  container: ReferenceDataRepository
+  callers:
+  - symbol:entity-mga:i-reference-data-repository.get-program-by-id-async
+  callees: []
+- id: symbol:entity-mga:reference-data-repository.get-programs-async
+  node: entity:mga
+  kind: method
+  name: GetProgramsAsync
+  file: engine/src/Nebula.Infrastructure/Repositories/ReferenceDataRepository.cs
+  line: 27
+  signature: public async Task<IReadOnlyList<Nebula.Domain.Entities.Program>> GetProgramsAsync(CancellationToken
+    ct = default)
+  visibility: public
+  language: csharp
+  container: ReferenceDataRepository
+  callers:
+  - symbol:entity-mga:i-reference-data-repository.get-programs-async
+  callees: []
+- id: symbol:entity-mga:reference-data-repository.get-renewal-statuses-async
+  node: entity:mga
+  kind: method
+  name: GetRenewalStatusesAsync
+  file: engine/src/Nebula.Infrastructure/Repositories/ReferenceDataRepository.cs
+  line: 42
+  signature: public async Task<IReadOnlyList<ReferenceRenewalStatus>> GetRenewalStatusesAsync(CancellationToken
+    ct = default)
+  visibility: public
+  language: csharp
+  container: ReferenceDataRepository
+  callers:
+  - symbol:entity-mga:i-reference-data-repository.get-renewal-statuses-async
+  callees: []
+- id: symbol:entity-mga:reference-data-repository.get-submission-statuses-async
+  node: entity:mga
+  kind: method
+  name: GetSubmissionStatusesAsync
+  file: engine/src/Nebula.Infrastructure/Repositories/ReferenceDataRepository.cs
+  line: 34
+  signature: public async Task<IReadOnlyList<ReferenceSubmissionStatus>> GetSubmissionStatusesAsync(CancellationToken
+    ct = default)
+  visibility: public
+  language: csharp
+  container: ReferenceDataRepository
+  callers:
+  - symbol:entity-mga:i-reference-data-repository.get-submission-statuses-async
+  callees: []
+- id: symbol:entity-mga:reference-data-repository.reference-data-repository
+  node: entity:mga
+  kind: class
+  name: ReferenceDataRepository
+  file: engine/src/Nebula.Infrastructure/Repositories/ReferenceDataRepository.cs
+  line: 9
+  signature: 'public class ReferenceDataRepository(AppDbContext db, IMemoryCache cache)
+    : IReferenceDataRepository'
+  visibility: public
+  language: csharp
+  callers: []
+  callees: []
+- id: symbol:entity-mga:reference-data-service.get-mgas-async
+  node: entity:mga
+  kind: method
+  name: GetMgasAsync
+  file: engine/src/Nebula.Application/Services/ReferenceDataService.cs
+  line: 8
+  signature: public async Task<IReadOnlyList<MgaDto>> GetMgasAsync(CancellationToken
+    ct = default)
+  visibility: public
+  language: csharp
+  container: ReferenceDataService
+  callers:
+  - symbol:entity-mga:reference-data-endpoints.map-reference-data-endpoints
+  callees:
+  - symbol:entity-mga:i-reference-data-repository.get-mgas-async
+- id: symbol:entity-mga:reference-data-service.get-programs-async
+  node: entity:mga
+  kind: method
+  name: GetProgramsAsync
+  file: engine/src/Nebula.Application/Services/ReferenceDataService.cs
+  line: 14
+  signature: public async Task<IReadOnlyList<ProgramDto>> GetProgramsAsync(CancellationToken
+    ct = default)
+  visibility: public
+  language: csharp
+  container: ReferenceDataService
+  callers:
+  - symbol:entity-mga:reference-data-endpoints.map-reference-data-endpoints
+  callees:
+  - symbol:entity-mga:i-reference-data-repository.get-programs-async
+- id: symbol:entity-mga:reference-data-service.reference-data-service
+  node: entity:mga
+  kind: class
+  name: ReferenceDataService
+  file: engine/src/Nebula.Application/Services/ReferenceDataService.cs
+  line: 6
+  signature: public class ReferenceDataService(IReferenceDataRepository refRepo)
+  visibility: public
+  language: csharp
+  callers: []
+  callees: []
 - id: symbol:entity-policy:20260422021000-f0018-policy-lifecycle-aggregate.f0018-policy-lifecycle-aggregate
   node: entity:policy
   kind: class
@@ -22404,6 +22712,7 @@ symbols:
   - symbol:capability-dynamic-lob-attributes:lob-attribute-service.validate-and-serialize-async
   - symbol:capability-product-schema-registry:lob-schema-defaults.resolve-default-product-version-id
   - symbol:entity-activity-timeline-event:i-timeline-repository.add-event-async
+  - symbol:entity-mga:i-reference-data-repository.get-policy-by-id-async
   - symbol:entity-policy:i-policy-repository.get-current-version-async
   - symbol:entity-renewal:i-renewal-repository.add-async
   - symbol:entity-renewal:i-renewal-repository.get-by-id-with-relations-async
@@ -22413,7 +22722,6 @@ symbols:
   - symbol:entity-renewal:renewal-service.is-terminal-account-state
   - symbol:entity-renewal:renewal-service.map-detail-async
   - symbol:entity-renewal:renewal-service.resolve-assignee-async
-  - symbol:entity-renewal:stub-reference-data-repository.get-policy-by-id-async
   - symbol:entity-renewal:stub-workflow-sla-threshold-repository.get-threshold-async
   - symbol:entity-workflow-transition:i-workflow-transition-repository.add-async
 - id: symbol:entity-renewal:renewal-service.exists-async
@@ -23522,7 +23830,8 @@ symbols:
   visibility: public
   language: csharp
   container: StubReferenceDataRepository
-  callers: []
+  callers:
+  - symbol:entity-mga:i-reference-data-repository.get-account-by-id-async
   callees: []
 - id: symbol:entity-renewal:stub-reference-data-repository.get-accounts-async
   node: entity:renewal
@@ -23535,7 +23844,8 @@ symbols:
   visibility: public
   language: csharp
   container: StubReferenceDataRepository
-  callers: []
+  callers:
+  - symbol:entity-mga:i-reference-data-repository.get-accounts-async
   callees: []
 - id: symbol:entity-renewal:stub-reference-data-repository.get-mgas-async
   node: entity:renewal
@@ -23547,7 +23857,8 @@ symbols:
   visibility: public
   language: csharp
   container: StubReferenceDataRepository
-  callers: []
+  callers:
+  - symbol:entity-mga:i-reference-data-repository.get-mgas-async
   callees: []
 - id: symbol:entity-renewal:stub-reference-data-repository.get-policy-by-id-async
   node: entity:renewal
@@ -23561,7 +23872,7 @@ symbols:
   language: csharp
   container: StubReferenceDataRepository
   callers:
-  - symbol:entity-renewal:renewal-service.create-async
+  - symbol:entity-mga:i-reference-data-repository.get-policy-by-id-async
   callees: []
 - id: symbol:entity-renewal:stub-reference-data-repository.get-program-by-id-async
   node: entity:renewal
@@ -23574,7 +23885,8 @@ symbols:
   visibility: public
   language: csharp
   container: StubReferenceDataRepository
-  callers: []
+  callers:
+  - symbol:entity-mga:i-reference-data-repository.get-program-by-id-async
   callees: []
 - id: symbol:entity-renewal:stub-reference-data-repository.get-programs-async
   node: entity:renewal
@@ -23587,7 +23899,8 @@ symbols:
   visibility: public
   language: csharp
   container: StubReferenceDataRepository
-  callers: []
+  callers:
+  - symbol:entity-mga:i-reference-data-repository.get-programs-async
   callees: []
 - id: symbol:entity-renewal:stub-reference-data-repository.get-renewal-statuses-async
   node: entity:renewal
@@ -23600,7 +23913,8 @@ symbols:
   visibility: public
   language: csharp
   container: StubReferenceDataRepository
-  callers: []
+  callers:
+  - symbol:entity-mga:i-reference-data-repository.get-renewal-statuses-async
   callees: []
 - id: symbol:entity-renewal:stub-reference-data-repository.get-submission-statuses-async
   node: entity:renewal
@@ -23613,7 +23927,8 @@ symbols:
   visibility: public
   language: csharp
   container: StubReferenceDataRepository
-  callers: []
+  callers:
+  - symbol:entity-mga:i-reference-data-repository.get-submission-statuses-async
   callees: []
 - id: symbol:entity-renewal:stub-reference-data-repository.seed
   node: entity:renewal
@@ -25637,6 +25952,8 @@ symbols:
   - symbol:capability-dynamic-lob-attributes:lob-attribute-service.validate-and-serialize-async
   - symbol:entity-activity-timeline-event:i-timeline-repository.add-event-async
   - symbol:entity-broker:i-broker-repository.get-by-id-async
+  - symbol:entity-mga:i-reference-data-repository.get-account-by-id-async
+  - symbol:entity-mga:i-reference-data-repository.get-program-by-id-async
   - symbol:entity-submission:i-submission-repository.add-async
   - symbol:entity-submission:i-submission-repository.get-by-id-with-includes-async
   - symbol:entity-submission:submission-service.is-broker-region-aligned
@@ -25918,6 +26235,7 @@ symbols:
   - symbol:capability-dynamic-lob-attributes:lob-attribute-service.validate-and-serialize-async
   - symbol:capability-product-schema-registry:lob-schema-defaults.resolve-default-product-version-id
   - symbol:entity-activity-timeline-event:i-timeline-repository.add-event-async
+  - symbol:entity-mga:i-reference-data-repository.get-program-by-id-async
   - symbol:entity-submission:i-submission-repository.get-by-id-with-includes-async
   - symbol:entity-submission:i-submission-repository.update-async
   - symbol:entity-submission:submission-service.can-update-submission
@@ -26902,7 +27220,6 @@ symbols:
   container: ITaskRepository
   callers:
   - symbol:entity-task-item:task-service.delete-async
-  - symbol:entity-task-item:task-service.get-by-id-async
   - symbol:entity-task-item:task-service.get-by-id-authorized-async
   - symbol:entity-task-item:task-service.update-async
   callees:
@@ -29733,7 +30050,7 @@ symbols:
   kind: method
   name: AuditBrokerUserRead
   file: engine/src/Nebula.Application/Services/TaskService.cs
-  line: 488
+  line: 480
   signature: private void AuditBrokerUserRead(ICurrentUserService user, string resource,
     Guid? entityId, Guid? resolvedBrokerId = null)
   visibility: private
@@ -29748,7 +30065,7 @@ symbols:
   kind: method
   name: AuthorizeTaskAsync
   file: engine/src/Nebula.Application/Services/TaskService.cs
-  line: 456
+  line: 448
   signature: private async Task<bool> AuthorizeTaskAsync(ICurrentUserService user,
     string action, TaskItem task)
   visibility: private
@@ -29765,7 +30082,7 @@ symbols:
   kind: method
   name: CreateAsync
   file: engine/src/Nebula.Application/Services/TaskService.cs
-  line: 171
+  line: 163
   signature: public async Task<(TaskDto? Dto, string? ErrorCode)> CreateAsync(
   visibility: public
   language: csharp
@@ -29795,7 +30112,7 @@ symbols:
   kind: method
   name: DeleteAsync
   file: engine/src/Nebula.Application/Services/TaskService.cs
-  line: 415
+  line: 407
   signature: public async Task<string?> DeleteAsync(
   visibility: public
   language: csharp
@@ -29829,7 +30146,7 @@ symbols:
   kind: method
   name: GetBrokerScopedTasksAsync
   file: engine/src/Nebula.Application/Services/TaskService.cs
-  line: 78
+  line: 70
   signature: public async Task<MyTasksResponseDto> GetBrokerScopedTasksAsync(
   visibility: public
   language: csharp
@@ -29840,27 +30157,12 @@ symbols:
   - symbol:entity-broker:broker-scope-resolver.resolve-async
   - symbol:entity-task-item:i-task-repository.get-broker-scoped-tasks-async
   - symbol:entity-task-item:task-service.audit-broker-user-read
-- id: symbol:entity-task-item:task-service.get-by-id-async
-  node: entity:task-item
-  kind: method
-  name: GetByIdAsync
-  file: engine/src/Nebula.Application/Services/TaskService.cs
-  line: 31
-  signature: public async Task<TaskDto?> GetByIdAsync(Guid id, CancellationToken ct
-    = default)
-  visibility: public
-  language: csharp
-  container: TaskService
-  callers: []
-  callees:
-  - symbol:entity-task-item:i-task-repository.get-by-id-async
-  - symbol:entity-task-item:task-service.map-to-dto-async
 - id: symbol:entity-task-item:task-service.get-by-id-authorized-async
   node: entity:task-item
   kind: method
   name: GetByIdAuthorizedAsync
   file: engine/src/Nebula.Application/Services/TaskService.cs
-  line: 44
+  line: 36
   signature: public async Task<(TaskDto? Dto, string? ErrorCode)> GetByIdAuthorizedAsync(
   visibility: public
   language: csharp
@@ -29876,7 +30178,7 @@ symbols:
   kind: method
   name: GetMyTasksAsync
   file: engine/src/Nebula.Application/Services/TaskService.cs
-  line: 57
+  line: 49
   signature: public async Task<MyTasksResponseDto> GetMyTasksAsync(
   visibility: public
   language: csharp
@@ -29893,7 +30195,7 @@ symbols:
   kind: method
   name: GetTaskListAsync
   file: engine/src/Nebula.Application/Services/TaskService.cs
-  line: 96
+  line: 88
   signature: public async Task<(TaskListResponseDto? Dto, string? ErrorCode)> GetTaskListAsync(
   visibility: public
   language: csharp
@@ -29910,7 +30212,7 @@ symbols:
   kind: method
   name: MapToDtoAsync
   file: engine/src/Nebula.Application/Services/TaskService.cs
-  line: 472
+  line: 464
   signature: private async Task<TaskDto> MapToDtoAsync(TaskItem t, CancellationToken
     ct)
   visibility: private
@@ -29918,7 +30220,6 @@ symbols:
   container: TaskService
   callers:
   - symbol:entity-task-item:task-service.create-async
-  - symbol:entity-task-item:task-service.get-by-id-async
   - symbol:entity-task-item:task-service.get-by-id-authorized-async
   - symbol:entity-task-item:task-service.update-async
   callees:
@@ -29940,7 +30241,7 @@ symbols:
   kind: method
   name: UpdateAsync
   file: engine/src/Nebula.Application/Services/TaskService.cs
-  line: 255
+  line: 247
   signature: public async Task<(TaskDto? Dto, string? ErrorCode, string? TransitionFrom,
     string? TransitionTo)> UpdateAsync(
   visibility: public
@@ -30859,6 +31160,310 @@ symbols:
   container: WorkflowTransition
   callers: []
   callees: []
+- id: symbol:event-contact-created:contact-endpoint-tests.contact-endpoint-tests
+  node: event:contact-created
+  kind: class
+  name: ContactEndpointTests
+  file: engine/tests/Nebula.Tests/Integration/ContactEndpointTests.cs
+  line: 8
+  signature: 'public class ContactEndpointTests(CustomWebApplicationFactory factory)
+    : IClassFixture<CustomWebApplicationFactory>'
+  visibility: public
+  language: csharp
+  callers: []
+  callees: []
+- id: symbol:event-contact-created:contact-endpoint-tests.create-broker-async
+  node: event:contact-created
+  kind: method
+  name: CreateBrokerAsync
+  file: engine/tests/Nebula.Tests/Integration/ContactEndpointTests.cs
+  line: 13
+  signature: private async Task<BrokerDto> CreateBrokerAsync(string licensePrefix)
+  visibility: private
+  language: csharp
+  container: ContactEndpointTests
+  callers:
+  - symbol:event-contact-created:contact-endpoint-tests.create-contact-async
+  - symbol:event-contact-created:contact-endpoint-tests.create-contact-response-includes-row-version
+  - symbol:event-contact-created:contact-endpoint-tests.create-contact-with-valid-data-returns201
+  - symbol:event-contact-created:contact-endpoint-tests.list-contacts-filter-by-broker-id-returns-filtered
+  - symbol:event-contact-created:contact-endpoint-tests.list-contacts-returns-paginated-envelope
+  callees: []
+- id: symbol:event-contact-created:contact-endpoint-tests.create-contact-async
+  node: event:contact-created
+  kind: method
+  name: CreateContactAsync
+  file: engine/tests/Nebula.Tests/Integration/ContactEndpointTests.cs
+  line: 156
+  signature: private async Task<ContactDto> CreateContactAsync(string key)
+  visibility: private
+  language: csharp
+  container: ContactEndpointTests
+  callers:
+  - symbol:event-contact-created:contact-endpoint-tests.delete-contact-existing-returns204
+  - symbol:event-contact-created:contact-endpoint-tests.delete-contact-then-get-returns404
+  - symbol:event-contact-created:contact-endpoint-tests.get-contact-existing-returns200
+  - symbol:event-contact-created:contact-endpoint-tests.update-contact-missing-if-match-returns428
+  - symbol:event-contact-created:contact-endpoint-tests.update-contact-with-if-match-returns200
+  callees:
+  - symbol:event-contact-created:contact-endpoint-tests.create-broker-async
+- id: symbol:event-contact-created:contact-endpoint-tests.create-contact-response-includes-row-version
+  node: event:contact-created
+  kind: method
+  name: CreateContact_ResponseIncludesRowVersion
+  file: engine/tests/Nebula.Tests/Integration/ContactEndpointTests.cs
+  line: 138
+  signature: public async Task CreateContact_ResponseIncludesRowVersion()
+  visibility: public
+  language: csharp
+  container: ContactEndpointTests
+  callers: []
+  callees:
+  - symbol:event-contact-created:contact-endpoint-tests.create-broker-async
+- id: symbol:event-contact-created:contact-endpoint-tests.create-contact-with-valid-data-returns201
+  node: event:contact-created
+  kind: method
+  name: CreateContact_WithValidData_Returns201
+  file: engine/tests/Nebula.Tests/Integration/ContactEndpointTests.cs
+  line: 22
+  signature: public async Task CreateContact_WithValidData_Returns201()
+  visibility: public
+  language: csharp
+  container: ContactEndpointTests
+  callers: []
+  callees:
+  - symbol:event-contact-created:contact-endpoint-tests.create-broker-async
+- id: symbol:event-contact-created:contact-endpoint-tests.delete-contact-existing-returns204
+  node: event:contact-created
+  kind: method
+  name: DeleteContact_Existing_Returns204
+  file: engine/tests/Nebula.Tests/Integration/ContactEndpointTests.cs
+  line: 98
+  signature: public async Task DeleteContact_Existing_Returns204()
+  visibility: public
+  language: csharp
+  container: ContactEndpointTests
+  callers: []
+  callees:
+  - symbol:event-contact-created:contact-endpoint-tests.create-contact-async
+  - symbol:event-contact-created:contact-service.delete-async
+- id: symbol:event-contact-created:contact-endpoint-tests.delete-contact-then-get-returns404
+  node: event:contact-created
+  kind: method
+  name: DeleteContact_ThenGetReturns404
+  file: engine/tests/Nebula.Tests/Integration/ContactEndpointTests.cs
+  line: 108
+  signature: public async Task DeleteContact_ThenGetReturns404()
+  visibility: public
+  language: csharp
+  container: ContactEndpointTests
+  callers: []
+  callees:
+  - symbol:event-contact-created:contact-endpoint-tests.create-contact-async
+  - symbol:event-contact-created:contact-service.delete-async
+- id: symbol:event-contact-created:contact-endpoint-tests.get-contact-existing-returns200
+  node: event:contact-created
+  kind: method
+  name: GetContact_Existing_Returns200
+  file: engine/tests/Nebula.Tests/Integration/ContactEndpointTests.cs
+  line: 54
+  signature: public async Task GetContact_Existing_Returns200()
+  visibility: public
+  language: csharp
+  container: ContactEndpointTests
+  callers: []
+  callees:
+  - symbol:event-contact-created:contact-endpoint-tests.create-contact-async
+- id: symbol:event-contact-created:contact-endpoint-tests.get-contact-non-existent-returns404
+  node: event:contact-created
+  kind: method
+  name: GetContact_NonExistent_Returns404
+  file: engine/tests/Nebula.Tests/Integration/ContactEndpointTests.cs
+  line: 47
+  signature: public async Task GetContact_NonExistent_Returns404()
+  visibility: public
+  language: csharp
+  container: ContactEndpointTests
+  callers: []
+  callees: []
+- id: symbol:event-contact-created:contact-endpoint-tests.json-paginated-contact-list
+  node: event:contact-created
+  kind: record
+  name: JsonPaginatedContactList
+  file: engine/tests/Nebula.Tests/Integration/ContactEndpointTests.cs
+  line: 153
+  signature: private record JsonPaginatedContactList(
+  visibility: private
+  language: csharp
+  container: ContactEndpointTests
+  callers: []
+  callees: []
+- id: symbol:event-contact-created:contact-endpoint-tests.list-contacts-filter-by-broker-id-returns-filtered
+  node: event:contact-created
+  kind: method
+  name: ListContacts_FilterByBrokerId_ReturnsFiltered
+  file: engine/tests/Nebula.Tests/Integration/ContactEndpointTests.cs
+  line: 36
+  signature: public async Task ListContacts_FilterByBrokerId_ReturnsFiltered()
+  visibility: public
+  language: csharp
+  container: ContactEndpointTests
+  callers: []
+  callees:
+  - symbol:event-contact-created:contact-endpoint-tests.create-broker-async
+- id: symbol:event-contact-created:contact-endpoint-tests.list-contacts-returns-paginated-envelope
+  node: event:contact-created
+  kind: method
+  name: ListContacts_ReturnsPaginatedEnvelope
+  file: engine/tests/Nebula.Tests/Integration/ContactEndpointTests.cs
+  line: 120
+  signature: public async Task ListContacts_ReturnsPaginatedEnvelope()
+  visibility: public
+  language: csharp
+  container: ContactEndpointTests
+  callers: []
+  callees:
+  - symbol:event-contact-created:contact-endpoint-tests.create-broker-async
+- id: symbol:event-contact-created:contact-endpoint-tests.update-contact-missing-if-match-returns428
+  node: event:contact-created
+  kind: method
+  name: UpdateContact_MissingIfMatch_Returns428
+  file: engine/tests/Nebula.Tests/Integration/ContactEndpointTests.cs
+  line: 86
+  signature: public async Task UpdateContact_MissingIfMatch_Returns428()
+  visibility: public
+  language: csharp
+  container: ContactEndpointTests
+  callers: []
+  callees:
+  - symbol:event-contact-created:contact-endpoint-tests.create-contact-async
+- id: symbol:event-contact-created:contact-endpoint-tests.update-contact-with-if-match-returns200
+  node: event:contact-created
+  kind: method
+  name: UpdateContact_WithIfMatch_Returns200
+  file: engine/tests/Nebula.Tests/Integration/ContactEndpointTests.cs
+  line: 67
+  signature: public async Task UpdateContact_WithIfMatch_Returns200()
+  visibility: public
+  language: csharp
+  container: ContactEndpointTests
+  callers: []
+  callees:
+  - symbol:event-contact-created:contact-endpoint-tests.create-contact-async
+- id: symbol:event-contact-created:contact-endpoints.contact-endpoints
+  node: event:contact-created
+  kind: class
+  name: ContactEndpoints
+  file: engine/src/Nebula.Api/Endpoints/ContactEndpoints.cs
+  line: 11
+  signature: public static class ContactEndpoints
+  visibility: public
+  language: csharp
+  callers: []
+  callees: []
+- id: symbol:event-contact-created:contact-endpoints.create-contact
+  node: event:contact-created
+  kind: method
+  name: CreateContact
+  file: engine/src/Nebula.Api/Endpoints/ContactEndpoints.cs
+  line: 45
+  signature: private static async Task<IResult> CreateContact(
+  visibility: private
+  language: csharp
+  container: ContactEndpoints
+  callers: []
+  callees:
+  - symbol:event-contact-created:contact-endpoints.has-access-async
+  - symbol:event-contact-created:contact-service.create-async
+- id: symbol:event-contact-created:contact-endpoints.delete-contact
+  node: event:contact-created
+  kind: method
+  name: DeleteContact
+  file: engine/src/Nebula.Api/Endpoints/ContactEndpoints.cs
+  line: 124
+  signature: private static async Task<IResult> DeleteContact(
+  visibility: private
+  language: csharp
+  container: ContactEndpoints
+  callers: []
+  callees:
+  - symbol:event-contact-created:contact-endpoints.has-access-async
+  - symbol:event-contact-created:contact-service.delete-async
+- id: symbol:event-contact-created:contact-endpoints.get-contact
+  node: event:contact-created
+  kind: method
+  name: GetContact
+  file: engine/src/Nebula.Api/Endpoints/ContactEndpoints.cs
+  line: 70
+  signature: private static async Task<IResult> GetContact(
+  visibility: private
+  language: csharp
+  container: ContactEndpoints
+  callers: []
+  callees:
+  - symbol:event-contact-created:contact-endpoints.has-access-async
+  - symbol:event-contact-created:contact-service.get-by-id-async
+  - symbol:event-contact-created:contact-service.get-by-id-for-broker-user-async
+- id: symbol:event-contact-created:contact-endpoints.has-access-async
+  node: event:contact-created
+  kind: method
+  name: HasAccessAsync
+  file: engine/src/Nebula.Api/Endpoints/ContactEndpoints.cs
+  line: 138
+  signature: private static async Task<bool> HasAccessAsync(
+  visibility: private
+  language: csharp
+  container: ContactEndpoints
+  callers:
+  - symbol:event-contact-created:contact-endpoints.create-contact
+  - symbol:event-contact-created:contact-endpoints.delete-contact
+  - symbol:event-contact-created:contact-endpoints.get-contact
+  - symbol:event-contact-created:contact-endpoints.list-contacts
+  - symbol:event-contact-created:contact-endpoints.update-contact
+  callees:
+  - symbol:capability-authorization-enforcement:i-authorization-service.authorize-async
+- id: symbol:event-contact-created:contact-endpoints.list-contacts
+  node: event:contact-created
+  kind: method
+  name: ListContacts
+  file: engine/src/Nebula.Api/Endpoints/ContactEndpoints.cs
+  line: 28
+  signature: private static async Task<IResult> ListContacts(
+  visibility: private
+  language: csharp
+  container: ContactEndpoints
+  callers: []
+  callees:
+  - symbol:event-contact-created:contact-endpoints.has-access-async
+  - symbol:event-contact-created:contact-service.list-async
+  - symbol:event-contact-created:contact-service.list-for-broker-user-async
+- id: symbol:event-contact-created:contact-endpoints.map-contact-endpoints
+  node: event:contact-created
+  kind: method
+  name: MapContactEndpoints
+  file: engine/src/Nebula.Api/Endpoints/ContactEndpoints.cs
+  line: 13
+  signature: public static RouteGroupBuilder MapContactEndpoints(this IEndpointRouteBuilder
+    app)
+  visibility: public
+  language: csharp
+  container: ContactEndpoints
+  callers: []
+  callees: []
+- id: symbol:event-contact-created:contact-endpoints.update-contact
+  node: event:contact-created
+  kind: method
+  name: UpdateContact
+  file: engine/src/Nebula.Api/Endpoints/ContactEndpoints.cs
+  line: 86
+  signature: private static async Task<IResult> UpdateContact(
+  visibility: private
+  language: csharp
+  container: ContactEndpoints
+  callers: []
+  callees:
+  - symbol:event-contact-created:contact-endpoints.has-access-async
+  - symbol:event-contact-created:contact-service.update-async
 - id: symbol:event-contact-created:contact-service.audit-broker-user-read
   node: event:contact-created
   kind: method
@@ -30896,7 +31501,8 @@ symbols:
   visibility: public
   language: csharp
   container: ContactService
-  callers: []
+  callers:
+  - symbol:event-contact-created:contact-endpoints.create-contact
   callees:
   - symbol:entity-activity-timeline-event:i-timeline-repository.add-event-async
   - symbol:entity-broker:i-broker-repository.get-by-id-async
@@ -30913,7 +31519,10 @@ symbols:
   visibility: public
   language: csharp
   container: ContactService
-  callers: []
+  callers:
+  - symbol:event-contact-created:contact-endpoint-tests.delete-contact-existing-returns204
+  - symbol:event-contact-created:contact-endpoint-tests.delete-contact-then-get-returns404
+  - symbol:event-contact-created:contact-endpoints.delete-contact
   callees:
   - symbol:entity-activity-timeline-event:i-timeline-repository.add-event-async
   - symbol:event-contact-created:contact-service.get-by-id-async
@@ -30930,6 +31539,7 @@ symbols:
   language: csharp
   container: ContactService
   callers:
+  - symbol:event-contact-created:contact-endpoints.get-contact
   - symbol:event-contact-created:contact-service.delete-async
   - symbol:event-contact-created:contact-service.get-by-id-for-broker-user-async
   - symbol:event-contact-created:contact-service.update-async
@@ -30947,7 +31557,8 @@ symbols:
   visibility: public
   language: csharp
   container: ContactService
-  callers: []
+  callers:
+  - symbol:event-contact-created:contact-endpoints.get-contact
   callees:
   - symbol:entity-broker:broker-scope-resolver.resolve-async
   - symbol:event-contact-created:contact-service.audit-broker-user-read
@@ -30964,6 +31575,7 @@ symbols:
   language: csharp
   container: ContactService
   callers:
+  - symbol:event-contact-created:contact-endpoints.list-contacts
   - symbol:event-contact-created:contact-service.list-for-broker-user-async
   callees:
   - symbol:event-contact-created:contact-service.audit-broker-user-read
@@ -30979,7 +31591,8 @@ symbols:
   visibility: public
   language: csharp
   container: ContactService
-  callers: []
+  callers:
+  - symbol:event-contact-created:contact-endpoints.list-contacts
   callees:
   - symbol:entity-broker:broker-scope-resolver.resolve-async
   - symbol:event-contact-created:contact-service.audit-broker-user-read
@@ -31040,6 +31653,7 @@ symbols:
   language: csharp
   container: ContactService
   callers:
+  - symbol:event-contact-created:contact-endpoints.update-contact
   - symbol:event-contact-created:contact-service.delete-async
   callees:
   - symbol:entity-activity-timeline-event:i-timeline-repository.add-event-async
@@ -31294,37 +31908,22 @@ symbols:
   kind: method
   name: AuditBrokerUserRead
   file: engine/src/Nebula.Application/Services/TimelineService.cs
-  line: 51
+  line: 43
   signature: private void AuditBrokerUserRead(ICurrentUserService user, string resource,
     Guid? entityId, Guid? resolvedBrokerId = null)
   visibility: private
   language: csharp
   container: TimelineService
   callers:
-  - symbol:policy_rule-timeline-event-read:timeline-service.list-events-async
   - symbol:policy_rule-timeline-event-read:timeline-service.list-events-for-broker-user-async
   - symbol:policy_rule-timeline-event-read:timeline-service.list-events-paged-async
   callees: []
-- id: symbol:policy_rule-timeline-event-read:timeline-service.list-events-async
-  node: policy_rule:timeline-event-read
-  kind: method
-  name: ListEventsAsync
-  file: engine/src/Nebula.Application/Services/TimelineService.cs
-  line: 13
-  signature: public async Task<IReadOnlyList<TimelineEventDto>> ListEventsAsync(
-  visibility: public
-  language: csharp
-  container: TimelineService
-  callers: []
-  callees:
-  - symbol:entity-activity-timeline-event:i-timeline-repository.list-events-async
-  - symbol:policy_rule-timeline-event-read:timeline-service.audit-broker-user-read
 - id: symbol:policy_rule-timeline-event-read:timeline-service.list-events-for-broker-user-async
   node: policy_rule:timeline-event-read
   kind: method
   name: ListEventsForBrokerUserAsync
   file: engine/src/Nebula.Application/Services/TimelineService.cs
-  line: 39
+  line: 31
   signature: public async Task<IReadOnlyList<TimelineBrokerUserEventDto>> ListEventsForBrokerUserAsync(
   visibility: public
   language: csharp
@@ -31340,7 +31939,7 @@ symbols:
   kind: method
   name: ListEventsPagedAsync
   file: engine/src/Nebula.Application/Services/TimelineService.cs
-  line: 21
+  line: 13
   signature: public async Task<PaginatedResult<TimelineEventDto>> ListEventsPagedAsync(
   visibility: public
   language: csharp
@@ -31359,7 +31958,7 @@ symbols:
   kind: method
   name: MapToDto
   file: engine/src/Nebula.Application/Services/TimelineService.cs
-  line: 30
+  line: 22
   signature: private static TimelineEventDto MapToDto(ActivityTimelineEvent e)
   visibility: private
   language: csharp
