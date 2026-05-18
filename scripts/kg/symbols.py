@@ -84,6 +84,12 @@ class SymbolRecord:
     # Zero when the extractor didn't emit it (Python/TS pre-Phase-A2);
     # diff-impact.py falls back to "until next symbol's start" in that case.
     end_line: int = 0
+    # True when the symbol's file was matched via a code-index.yaml bucket
+    # whose path segment is "tests" (e.g. backend.tests, frontend.tests,
+    # tests). ANY-rule: if a file matches both a test and non-test bucket
+    # it's classified as test, since the worst case is excluding it from
+    # --check-untested reports rather than miscategorising production code.
+    is_test: bool = False
     callers: list[str] = field(default_factory=list)
     callees: list[str] = field(default_factory=list)
     # Calls harvested by the extractor. Each entry is either a bare string
@@ -112,6 +118,8 @@ class SymbolRecord:
             d.pop("end_line", None)
         if not d.get("implements"):
             d.pop("implements", None)
+        if not d.get("is_test"):
+            d.pop("is_test", None)
         return d
 
 
@@ -177,10 +185,24 @@ def _py_signature(node: ast.FunctionDef | ast.AsyncFunctionDef) -> str:
 
 class PythonAstExtractor(BaseExtractor):
     language = "python"
+    # Forward-compat seam for product opt-in. Per memo §7 the default is
+    # empty — Python is rarely a product's first-class language and the KG
+    # pipeline itself lives in scripts/kg/. Products with first-class
+    # Python override this on a per-product basis.
+    compilation_roots: list[str] = []
+    supports_sidecar: bool = True
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.last_sidecar: list[dict[str, Any]] = []
+        # See SubprocessExtractor.last_sidecar_authoritative for semantics.
+        self.last_sidecar_authoritative: bool = False
 
     def extract(
         self, files: list[Path], file_to_node: dict[str, str]
     ) -> list[SymbolRecord]:
+        self.last_sidecar = []
+        self.last_sidecar_authoritative = False
         records: list[SymbolRecord] = []
 
         for path in files:
@@ -199,7 +221,76 @@ class PythonAstExtractor(BaseExtractor):
 
             self._walk(tree, rel, node_id, records)
 
+        # Compilation-root walk for the sidecar. Best-effort name-matching
+        # only — Python AST has no semantic resolution, so we record every
+        # bare-name Call from unbound files; the orchestrator filters at
+        # aggregation time to entries that resolve to a bound symbol.
+        # Default compilation_roots is empty so this branch is a no-op
+        # unless a product opted in.
+        if self.compilation_roots and files:
+            bound_rels = {p.relative_to(REPO_ROOT).as_posix() for p in files}
+            bound_names: set[str] = set()
+            for rec in records:
+                bound_names.add(rec.name)
+            self._collect_sidecar(bound_rels, bound_names)
+
+        self.last_sidecar_authoritative = self.supports_sidecar
         return records
+
+    def _collect_sidecar(
+        self, bound_rels: set[str], bound_names: set[str]
+    ) -> None:
+        # Skip well-known noise directories so a product opting into
+        # --compilation-root scripts/ doesn't drown reviewers in
+        # site-packages-style entries.
+        skip_dirs = {
+            "node_modules", "dist", "bin", "obj", ".kg-state",
+            "__pycache__", ".venv", "venv", ".tox", ".mypy_cache",
+        }
+        seen: set[tuple[str, int, str]] = set()
+        for root in self.compilation_roots:
+            root_path = REPO_ROOT / root
+            if not root_path.is_dir():
+                print(
+                    f"[symbols] python compilation root missing: {root}",
+                    file=sys.stderr,
+                )
+                continue
+            for py in root_path.rglob("*.py"):
+                if any(part in skip_dirs for part in py.parts):
+                    continue
+                rel = py.relative_to(REPO_ROOT).as_posix()
+                if rel in bound_rels:
+                    continue
+                try:
+                    source = py.read_text(encoding="utf-8")
+                    tree = ast.parse(source, filename=str(py))
+                except (OSError, SyntaxError):
+                    continue
+                for child in ast.walk(tree):
+                    if not isinstance(child, ast.Call):
+                        continue
+                    func = child.func
+                    name: str | None = None
+                    if isinstance(func, ast.Name):
+                        name = func.id
+                    elif isinstance(func, ast.Attribute):
+                        name = func.attr
+                    if not name or name not in bound_names:
+                        continue
+                    line = getattr(child, "lineno", 0) or 0
+                    key = (rel, line, name)
+                    if key in seen:
+                        continue
+                    seen.add(key)
+                    # container=None since the AST extractor can't resolve
+                    # the declaring type without a type checker. The
+                    # orchestrator's by_name fallback resolves the entry.
+                    self.last_sidecar.append({
+                        "source_file": rel,
+                        "source_line": line,
+                        "target": {"name": name, "container": None},
+                    })
 
     def _walk(
         self,
@@ -218,6 +309,7 @@ class PythonAstExtractor(BaseExtractor):
                         name=stmt.name,
                         file=rel,
                         line=stmt.lineno,
+                        end_line=getattr(stmt, "end_lineno", 0) or 0,
                         signature=f"class {stmt.name}",
                         visibility=_py_visibility(stmt.name),
                         language=self.language,
@@ -241,6 +333,7 @@ class PythonAstExtractor(BaseExtractor):
                         name=stmt.name,
                         file=rel,
                         line=stmt.lineno,
+                        end_line=getattr(stmt, "end_lineno", 0) or 0,
                         signature=_py_signature(stmt),
                         visibility=_py_visibility(stmt.name),
                         language=self.language,
@@ -567,6 +660,26 @@ def resolve_files_for_binding(binding: dict[str, Any]) -> list[tuple[Path, str]]
             if lang:
                 out.append((abs_path, lang))
     return out
+
+
+def collect_test_files(bundle: dict[str, Any]) -> set[str]:
+    """Return the set of repo-relative paths matched via test buckets.
+
+    A bucket is a dotted YAML key path (kg_common._collect_patterns) such as
+    `backend.tests` or `frontend.tests`. The convention: any bucket whose
+    dot-segments include `tests` (case-insensitive) is a test bucket. ANY-rule
+    per memo §5 — a file matching both a test and non-test bucket counts as
+    test so it's excluded from --check-untested noise.
+    """
+    test_files: set[str] = set()
+    for binding in bundle["bindings"].values():
+        for entry in binding.get("declared_paths", []) or []:
+            bucket = str(entry.get("bucket", ""))
+            if "tests" not in {s.lower() for s in bucket.split(".") if s}:
+                continue
+            for rel in expand_declared_pattern(entry.get("pattern", "")):
+                test_files.add(rel)
+    return test_files
 
 
 def collect_work_items(
@@ -1004,6 +1117,7 @@ def load_symbol_records() -> list[SymbolRecord]:
             file=entry.get("file", ""),
             line=int(entry.get("line", 0) or 0),
             end_line=int(entry.get("end_line", 0) or 0),
+            is_test=bool(entry.get("is_test", False)),
             signature=entry.get("signature", ""),
             visibility=entry.get("visibility", "public"),
             language=entry.get("language", "unknown"),
@@ -1107,11 +1221,18 @@ def build_symbol_bundle(
     rewrites = disambiguate_ids(all_records)
     resolve_call_edges(all_records)
 
+    test_files = collect_test_files(bundle)
+    if test_files:
+        for rec in all_records:
+            if rec.file in test_files:
+                rec.is_test = True
+
     summary = {
         "total_symbols": len(all_records),
         "by_language": parse_stats,
         "disambiguated_ids": rewrites,
         "sidecar_authoritative": sorted(sidecar_authoritative),
+        "test_symbols": sum(1 for r in all_records if r.is_test),
     }
     return all_records, summary, new_cache, current_roots_hashes, sidecar_by_language
 
@@ -1306,6 +1427,8 @@ def main() -> int:
         )
     if summary.get("disambiguated_ids"):
         print(f"  Disambiguated ids: {summary['disambiguated_ids']}")
+    if summary.get("test_symbols"):
+        print(f"  Test symbols: {summary['test_symbols']}")
     if unbound_count:
         print(f"  Unbound-but-referenced invocations: {unbound_count}")
 

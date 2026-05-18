@@ -1,16 +1,16 @@
 version: 0
-generated_at: '2026-05-18T01:45:24+00:00'
+generated_at: '2026-05-18T02:06:22+00:00'
 summary:
   total_symbols: 2332
   by_language:
     typescript:
       files: 54
-      parsed: 0
-      cached: 54
+      parsed: 54
+      cached: 0
     csharp:
       files: 266
-      parsed: 0
-      cached: 266
+      parsed: 266
+      cached: 0
   disambiguated_ids: 10
 symbols:
 - id: symbol:capability-authorization-enforcement:casbin-authorization-service-tests.broker-policy-matches-policy-csv
@@ -25,6 +25,7 @@ symbols:
   language: csharp
   container: CasbinAuthorizationServiceTests
   end_line: 62
+  is_test: true
   callers: []
   callees:
   - symbol:capability-authorization-enforcement:casbin-authorization-service.authorize-async
@@ -38,6 +39,7 @@ symbols:
   visibility: public
   language: csharp
   end_line: 249
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-authorization-enforcement:casbin-authorization-service-tests.constructor-loads-successfully
@@ -51,6 +53,7 @@ symbols:
   language: csharp
   container: CasbinAuthorizationServiceTests
   end_line: 248
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-authorization-enforcement:casbin-authorization-service-tests.contact-policy-matches-policy-csv
@@ -65,6 +68,7 @@ symbols:
   language: csharp
   container: CasbinAuthorizationServiceTests
   end_line: 95
+  is_test: true
   callers: []
   callees:
   - symbol:capability-authorization-enforcement:casbin-authorization-service.authorize-async
@@ -80,6 +84,7 @@ symbols:
   language: csharp
   container: CasbinAuthorizationServiceTests
   end_line: 236
+  is_test: true
   callers: []
   callees:
   - symbol:capability-authorization-enforcement:casbin-authorization-service.authorize-async
@@ -95,6 +100,7 @@ symbols:
   language: csharp
   container: CasbinAuthorizationServiceTests
   end_line: 192
+  is_test: true
   callers: []
   callees:
   - symbol:capability-authorization-enforcement:casbin-authorization-service.authorize-async
@@ -109,6 +115,7 @@ symbols:
   language: csharp
   container: CasbinAuthorizationServiceTests
   end_line: 175
+  is_test: true
   callers: []
   callees:
   - symbol:capability-authorization-enforcement:casbin-authorization-service.authorize-async
@@ -123,6 +130,7 @@ symbols:
   language: csharp
   container: CasbinAuthorizationServiceTests
   end_line: 137
+  is_test: true
   callers: []
   callees:
   - symbol:capability-authorization-enforcement:casbin-authorization-service.authorize-async
@@ -137,6 +145,7 @@ symbols:
   language: csharp
   container: CasbinAuthorizationServiceTests
   end_line: 151
+  is_test: true
   callers: []
   callees:
   - symbol:capability-authorization-enforcement:casbin-authorization-service.authorize-async
@@ -151,6 +160,7 @@ symbols:
   language: csharp
   container: CasbinAuthorizationServiceTests
   end_line: 160
+  is_test: true
   callers: []
   callees:
   - symbol:capability-authorization-enforcement:casbin-authorization-service.authorize-async
@@ -166,6 +176,7 @@ symbols:
   language: csharp
   container: CasbinAuthorizationServiceTests
   end_line: 114
+  is_test: true
   callers: []
   callees:
   - symbol:capability-authorization-enforcement:casbin-authorization-service.authorize-async
@@ -180,6 +191,7 @@ symbols:
   language: csharp
   container: CasbinAuthorizationServiceTests
   end_line: 210
+  is_test: true
   callers: []
   callees:
   - symbol:capability-authorization-enforcement:casbin-authorization-service.authorize-async
@@ -194,6 +206,7 @@ symbols:
   language: csharp
   container: CasbinAuthorizationServiceTests
   end_line: 217
+  is_test: true
   callers: []
   callees:
   - symbol:capability-authorization-enforcement:casbin-authorization-service.authorize-async
@@ -208,6 +221,7 @@ symbols:
   language: csharp
   container: CasbinAuthorizationServiceTests
   end_line: 203
+  is_test: true
   callers: []
   callees:
   - symbol:capability-authorization-enforcement:casbin-authorization-service.authorize-async
@@ -332,6 +346,7 @@ symbols:
   language: csharp
   container: DashboardReadAuthorizationTests
   end_line: 33
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-authorization-enforcement:dashboard-read-authorization-tests.aggregate-dashboard-endpoints-as-broker-user-return-forbidden
@@ -346,6 +361,7 @@ symbols:
   language: csharp
   container: DashboardReadAuthorizationTests
   end_line: 48
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-authorization-enforcement:dashboard-read-authorization-tests.dashboard-read-authorization-tests
@@ -358,6 +374,7 @@ symbols:
   visibility: public
   language: csharp
   end_line: 78
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-authorization-enforcement:dashboard-read-authorization-tests.fixed-broker-user-auth-handler
@@ -371,6 +388,7 @@ symbols:
   language: csharp
   container: DashboardReadAuthorizationTests
   end_line: 77
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-authorization-enforcement:fixed-broker-user-auth-handler.handle-authenticate-async
@@ -384,6 +402,7 @@ symbols:
   language: csharp
   container: FixedBrokerUserAuthHandler
   end_line: 76
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-authorization-enforcement:i-authorization-service.authorize-async
@@ -514,6 +533,7 @@ symbols:
   language: csharp
   container: DashboardEndpointTests
   end_line: 37
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-endpoint-tests.dashboard-endpoint-tests
@@ -526,6 +546,7 @@ symbols:
   visibility: public
   language: csharp
   end_line: 379
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-endpoint-tests.fixed-admin-auth-handler
@@ -539,6 +560,7 @@ symbols:
   language: csharp
   container: DashboardEndpointTests
   end_line: 368
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-endpoint-tests.get-kpis-returns200-with-correct-shape
@@ -552,6 +574,7 @@ symbols:
   language: csharp
   container: DashboardEndpointTests
   end_line: 49
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-endpoint-tests.get-kpis-with-period-days-returns200
@@ -565,6 +588,7 @@ symbols:
   language: csharp
   container: DashboardEndpointTests
   end_line: 59
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-endpoint-tests.get-my-tasks-returns200
@@ -578,6 +602,7 @@ symbols:
   language: csharp
   container: DashboardEndpointTests
   end_line: 333
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-endpoint-tests.get-nudges-returns200
@@ -591,6 +616,7 @@ symbols:
   language: csharp
   container: DashboardEndpointTests
   end_line: 326
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-endpoint-tests.get-opportunities-returns200-with-correct-shape
@@ -604,6 +630,7 @@ symbols:
   language: csharp
   container: DashboardEndpointTests
   end_line: 71
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-endpoint-tests.get-opportunities-with-period-days-returns200
@@ -617,6 +644,7 @@ symbols:
   language: csharp
   container: DashboardEndpointTests
   end_line: 81
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-endpoint-tests.get-opportunity-aging-invalid-entity-type-returns400
@@ -630,6 +658,7 @@ symbols:
   language: csharp
   container: DashboardEndpointTests
   end_line: 221
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-endpoint-tests.get-opportunity-aging-returns200-with-correct-shape
@@ -643,6 +672,7 @@ symbols:
   language: csharp
   container: DashboardEndpointTests
   end_line: 155
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-endpoint-tests.get-opportunity-aging-supports-entity-types
@@ -656,6 +686,7 @@ symbols:
   language: csharp
   container: DashboardEndpointTests
   end_line: 214
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-endpoint-tests.get-opportunity-breakdown-invalid-group-by-returns400
@@ -669,6 +700,7 @@ symbols:
   language: csharp
   container: DashboardEndpointTests
   end_line: 181
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-endpoint-tests.get-opportunity-breakdown-returns200-for-supported-group-by-values
@@ -683,6 +715,7 @@ symbols:
   language: csharp
   container: DashboardEndpointTests
   end_line: 174
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-endpoint-tests.get-opportunity-breakdown-unauthenticated-returns401
@@ -696,6 +729,7 @@ symbols:
   language: csharp
   container: DashboardEndpointTests
   end_line: 202
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-endpoint-tests.get-opportunity-flow-invalid-entity-type-returns400
@@ -709,6 +743,7 @@ symbols:
   language: csharp
   container: DashboardEndpointTests
   end_line: 117
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-endpoint-tests.get-opportunity-flow-returns200-with-correct-shape
@@ -722,6 +757,7 @@ symbols:
   language: csharp
   container: DashboardEndpointTests
   end_line: 109
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-endpoint-tests.get-opportunity-hierarchy-child-counts-roll-up
@@ -735,6 +771,7 @@ symbols:
   language: csharp
   container: DashboardEndpointTests
   end_line: 258
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-endpoint-tests.get-opportunity-hierarchy-returns200-with-correct-shape
@@ -748,6 +785,7 @@ symbols:
   language: csharp
   container: DashboardEndpointTests
   end_line: 238
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-endpoint-tests.get-opportunity-items-returns200-with-correct-shape
@@ -761,6 +799,7 @@ symbols:
   language: csharp
   container: DashboardEndpointTests
   end_line: 129
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-endpoint-tests.get-opportunity-outcome-items-invalid-entity-types-returns400
@@ -774,6 +813,7 @@ symbols:
   language: csharp
   container: DashboardEndpointTests
   end_line: 319
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-endpoint-tests.get-opportunity-outcome-items-invalid-outcome-key-returns400
@@ -787,6 +827,7 @@ symbols:
   language: csharp
   container: DashboardEndpointTests
   end_line: 312
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-endpoint-tests.get-opportunity-outcome-items-returns200-with-correct-shape
@@ -800,6 +841,7 @@ symbols:
   language: csharp
   container: DashboardEndpointTests
   end_line: 305
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-endpoint-tests.get-opportunity-outcomes-filtered-by-renewal-returns200
@@ -813,6 +855,7 @@ symbols:
   language: csharp
   container: DashboardEndpointTests
   end_line: 286
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-endpoint-tests.get-opportunity-outcomes-invalid-entity-types-returns400
@@ -826,6 +869,7 @@ symbols:
   language: csharp
   container: DashboardEndpointTests
   end_line: 293
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-endpoint-tests.get-opportunity-outcomes-returns200-with-correct-shape
@@ -839,6 +883,7 @@ symbols:
   language: csharp
   container: DashboardEndpointTests
   end_line: 275
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-endpoint-tests.get-timeline-events-returns200
@@ -852,6 +897,7 @@ symbols:
   language: csharp
   container: DashboardEndpointTests
   end_line: 340
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-endpoint-tests.no-auth-handler
@@ -865,6 +911,7 @@ symbols:
   language: csharp
   container: DashboardEndpointTests
   end_line: 378
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-endpoints.dashboard-endpoints
@@ -1180,6 +1227,7 @@ symbols:
   language: csharp
   container: DashboardPartialFailureTests
   end_line: 47
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-partial-failure-tests.dashboard-partial-failure-tests
@@ -1193,6 +1241,7 @@ symbols:
   visibility: public
   language: csharp
   end_line: 149
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-partial-failure-tests.dispose
@@ -1206,6 +1255,7 @@ symbols:
   language: csharp
   container: DashboardPartialFailureTests
   end_line: 52
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-partial-failure-tests.fault-injecting-dashboard-repository
@@ -1219,6 +1269,7 @@ symbols:
   language: csharp
   container: DashboardPartialFailureTests
   end_line: 120
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-partial-failure-tests.fixed-admin-auth-handler
@@ -1232,6 +1283,7 @@ symbols:
   language: csharp
   container: DashboardPartialFailureTests
   end_line: 148
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-partial-failure-tests.get-kpis-when-repository-fails-returns-internal-error-problem-details
@@ -1245,6 +1297,7 @@ symbols:
   language: csharp
   container: DashboardPartialFailureTests
   end_line: 64
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-partial-failure-tests.other-dashboard-endpoints-remain-available-when-kpi-endpoint-fails
@@ -1258,6 +1311,7 @@ symbols:
   language: csharp
   container: DashboardPartialFailureTests
   end_line: 76
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-repository-breakdown-and-aging-tests.create-context
@@ -1271,6 +1325,7 @@ symbols:
   language: csharp
   container: DashboardRepositoryBreakdownAndAgingTests
   end_line: 239
+  is_test: true
   callers:
   - symbol:capability-dashboard-home:dashboard-repository-breakdown-and-aging-tests.get-opportunity-aging-async-computes-sla-bands-with-boundary-coverage
   - symbol:capability-dashboard-home:dashboard-repository-breakdown-and-aging-tests.get-opportunity-breakdown-async-renewal-resolves-program-and-unknown-groups
@@ -1287,6 +1342,7 @@ symbols:
   visibility: public
   language: csharp
   end_line: 363
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-repository-breakdown-and-aging-tests.get-opportunity-aging-async-computes-sla-bands-with-boundary-coverage
@@ -1300,6 +1356,7 @@ symbols:
   language: csharp
   container: DashboardRepositoryBreakdownAndAgingTests
   end_line: 167
+  is_test: true
   callers: []
   callees:
   - symbol:capability-dashboard-home:dashboard-repository-breakdown-and-aging-tests.create-context
@@ -1318,6 +1375,7 @@ symbols:
   language: csharp
   container: DashboardRepositoryBreakdownAndAgingTests
   end_line: 102
+  is_test: true
   callers: []
   callees:
   - symbol:capability-dashboard-home:dashboard-repository-breakdown-and-aging-tests.create-context
@@ -1339,6 +1397,7 @@ symbols:
   language: csharp
   container: DashboardRepositoryBreakdownAndAgingTests
   end_line: 64
+  is_test: true
   callers: []
   callees:
   - symbol:capability-dashboard-home:dashboard-repository-breakdown-and-aging-tests.create-context
@@ -1359,6 +1418,7 @@ symbols:
   language: csharp
   container: DashboardRepositoryBreakdownAndAgingTests
   end_line: 254
+  is_test: true
   callers:
   - symbol:capability-dashboard-home:dashboard-repository-breakdown-and-aging-tests.get-opportunity-aging-async-computes-sla-bands-with-boundary-coverage
   - symbol:capability-dashboard-home:dashboard-repository-breakdown-and-aging-tests.get-opportunity-breakdown-async-renewal-resolves-program-and-unknown-groups
@@ -1376,6 +1436,7 @@ symbols:
   language: csharp
   container: DashboardRepositoryBreakdownAndAgingTests
   end_line: 267
+  is_test: true
   callers:
   - symbol:capability-dashboard-home:dashboard-repository-breakdown-and-aging-tests.get-opportunity-aging-async-computes-sla-bands-with-boundary-coverage
   - symbol:capability-dashboard-home:dashboard-repository-breakdown-and-aging-tests.get-opportunity-breakdown-async-renewal-resolves-program-and-unknown-groups
@@ -1393,6 +1454,7 @@ symbols:
   language: csharp
   container: DashboardRepositoryBreakdownAndAgingTests
   end_line: 279
+  is_test: true
   callers:
   - symbol:capability-dashboard-home:dashboard-repository-breakdown-and-aging-tests.get-opportunity-breakdown-async-renewal-resolves-program-and-unknown-groups
   - symbol:capability-dashboard-home:dashboard-repository-breakdown-and-aging-tests.get-opportunity-breakdown-async-submission-supports-all-group-by-dimensions
@@ -1408,6 +1470,7 @@ symbols:
   language: csharp
   container: DashboardRepositoryBreakdownAndAgingTests
   end_line: 350
+  is_test: true
   callers:
   - symbol:capability-dashboard-home:dashboard-repository-breakdown-and-aging-tests.get-opportunity-breakdown-async-renewal-resolves-program-and-unknown-groups
   callees: []
@@ -1422,6 +1485,7 @@ symbols:
   language: csharp
   container: DashboardRepositoryBreakdownAndAgingTests
   end_line: 323
+  is_test: true
   callers:
   - symbol:capability-dashboard-home:dashboard-repository-breakdown-and-aging-tests.get-opportunity-aging-async-computes-sla-bands-with-boundary-coverage
   - symbol:capability-dashboard-home:dashboard-repository-breakdown-and-aging-tests.get-opportunity-breakdown-async-renewal-resolves-program-and-unknown-groups
@@ -1439,6 +1503,7 @@ symbols:
   language: csharp
   container: DashboardRepositoryBreakdownAndAgingTests
   end_line: 297
+  is_test: true
   callers:
   - symbol:capability-dashboard-home:dashboard-repository-breakdown-and-aging-tests.get-opportunity-breakdown-async-renewal-resolves-program-and-unknown-groups
   - symbol:capability-dashboard-home:dashboard-repository-breakdown-and-aging-tests.get-opportunity-breakdown-async-submission-supports-all-group-by-dimensions
@@ -1454,6 +1519,7 @@ symbols:
   language: csharp
   container: DashboardRepositoryBreakdownAndAgingTests
   end_line: 230
+  is_test: true
   callers: []
   callees:
   - symbol:capability-dashboard-home:dashboard-repository-breakdown-and-aging-tests.create-context
@@ -1474,6 +1540,7 @@ symbols:
   language: csharp
   container: DashboardRepositoryBreakdownAndAgingTests
   end_line: 362
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-repository-kpi-tests.create-context
@@ -1487,6 +1554,7 @@ symbols:
   language: csharp
   container: DashboardRepositoryKpiTests
   end_line: 237
+  is_test: true
   callers:
   - symbol:capability-dashboard-home:dashboard-repository-kpi-tests.get-kpis-async-applies-default-and-maximum-period-bounds
   - symbol:capability-dashboard-home:dashboard-repository-kpi-tests.get-kpis-async-uses-period-window-for-renewal-rate-and-turnaround
@@ -1501,6 +1569,7 @@ symbols:
   visibility: public
   language: csharp
   end_line: 262
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-repository-kpi-tests.get-kpis-async-applies-default-and-maximum-period-bounds
@@ -1514,6 +1583,7 @@ symbols:
   language: csharp
   container: DashboardRepositoryKpiTests
   end_line: 228
+  is_test: true
   callers: []
   callees:
   - symbol:capability-dashboard-home:dashboard-repository-kpi-tests.create-context
@@ -1530,6 +1600,7 @@ symbols:
   language: csharp
   container: DashboardRepositoryKpiTests
   end_line: 156
+  is_test: true
   callers: []
   callees:
   - symbol:capability-dashboard-home:dashboard-repository-kpi-tests.create-context
@@ -1546,6 +1617,7 @@ symbols:
   language: csharp
   container: DashboardRepositoryKpiTests
   end_line: 249
+  is_test: true
   callers:
   - symbol:capability-dashboard-home:dashboard-repository-kpi-tests.get-kpis-async-applies-default-and-maximum-period-bounds
   - symbol:capability-dashboard-home:dashboard-repository-kpi-tests.get-kpis-async-uses-period-window-for-renewal-rate-and-turnaround
@@ -1561,6 +1633,7 @@ symbols:
   language: csharp
   container: DashboardRepositoryKpiTests
   end_line: 261
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-repository.breakdown-aggregation
@@ -2266,6 +2339,7 @@ symbols:
   language: csharp
   container: DashboardScopeFilteringTests
   end_line: 66
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-scope-filtering-tests.add-scope-submission-if-missing
@@ -2279,6 +2353,7 @@ symbols:
   language: csharp
   container: DashboardScopeFilteringTests
   end_line: 328
+  is_test: true
   callers:
   - symbol:capability-dashboard-home:dashboard-scope-filtering-tests.initialize-async
   callees:
@@ -2294,6 +2369,7 @@ symbols:
   visibility: public
   language: csharp
   end_line: 397
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-scope-filtering-tests.dispose-async
@@ -2307,6 +2383,7 @@ symbols:
   language: csharp
   container: DashboardScopeFilteringTests
   end_line: 235
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-scope-filtering-tests.get-opportunities-filters-scope-stage-counts-by-role
@@ -2320,6 +2397,7 @@ symbols:
   language: csharp
   container: DashboardScopeFilteringTests
   end_line: 258
+  is_test: true
   callers: []
   callees:
   - symbol:capability-dashboard-home:dashboard-scope-filtering-tests.send-dashboard-request-async
@@ -2335,6 +2413,7 @@ symbols:
   language: csharp
   container: DashboardScopeFilteringTests
   end_line: 278
+  is_test: true
   callers: []
   callees:
   - symbol:capability-dashboard-home:dashboard-scope-filtering-tests.send-dashboard-request-async
@@ -2349,6 +2428,7 @@ symbols:
   language: csharp
   container: DashboardScopeFilteringTests
   end_line: 233
+  is_test: true
   callers: []
   callees:
   - symbol:capability-dashboard-home:dashboard-scope-filtering-tests.add-scope-submission-if-missing
@@ -2364,6 +2444,7 @@ symbols:
   language: csharp
   container: DashboardScopeFilteringTests
   end_line: 396
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:dashboard-scope-filtering-tests.send-dashboard-request-async
@@ -2378,6 +2459,7 @@ symbols:
   language: csharp
   container: DashboardScopeFilteringTests
   end_line: 290
+  is_test: true
   callers:
   - symbol:capability-dashboard-home:dashboard-scope-filtering-tests.get-opportunities-filters-scope-stage-counts-by-role
   - symbol:capability-dashboard-home:dashboard-scope-filtering-tests.get-opportunity-breakdown-distribution-user-does-not-leak-out-of-scope-groups
@@ -2393,6 +2475,7 @@ symbols:
   language: csharp
   container: DashboardScopeFilteringTests
   end_line: 356
+  is_test: true
   callers:
   - symbol:capability-dashboard-home:dashboard-scope-filtering-tests.initialize-async
   callees: []
@@ -2613,6 +2696,7 @@ symbols:
   language: csharp
   container: FaultInjectingDashboardRepository
   end_line: 89
+  is_test: true
   callers:
   - symbol:capability-dashboard-home:i-dashboard-repository.get-kpis-async
   callees:
@@ -2631,6 +2715,7 @@ symbols:
   language: csharp
   container: FaultInjectingDashboardRepository
   end_line: 116
+  is_test: true
   callers:
   - symbol:capability-dashboard-home:i-dashboard-repository.get-nudges-async
   callees:
@@ -2649,6 +2734,7 @@ symbols:
   language: csharp
   container: FaultInjectingDashboardRepository
   end_line: 119
+  is_test: true
   callers:
   - symbol:capability-dashboard-home:i-dashboard-repository.get-nudges-for-broker-user-async
   callees:
@@ -2667,6 +2753,7 @@ symbols:
   language: csharp
   container: FaultInjectingDashboardRepository
   end_line: 92
+  is_test: true
   callers:
   - symbol:capability-dashboard-home:i-dashboard-repository.get-opportunities-async
   callees:
@@ -2685,6 +2772,7 @@ symbols:
   language: csharp
   container: FaultInjectingDashboardRepository
   end_line: 104
+  is_test: true
   callers:
   - symbol:capability-dashboard-home:i-dashboard-repository.get-opportunity-aging-async
   callees:
@@ -2704,6 +2792,7 @@ symbols:
   language: csharp
   container: FaultInjectingDashboardRepository
   end_line: 101
+  is_test: true
   callers:
   - symbol:capability-dashboard-home:i-dashboard-repository.get-opportunity-breakdown-async
   callees:
@@ -2722,6 +2811,7 @@ symbols:
   language: csharp
   container: FaultInjectingDashboardRepository
   end_line: 95
+  is_test: true
   callers:
   - symbol:capability-dashboard-home:i-dashboard-repository.get-opportunity-flow-async
   callees:
@@ -2740,6 +2830,7 @@ symbols:
   language: csharp
   container: FaultInjectingDashboardRepository
   end_line: 107
+  is_test: true
   callers:
   - symbol:capability-dashboard-home:i-dashboard-repository.get-opportunity-hierarchy-async
   callees:
@@ -2758,6 +2849,7 @@ symbols:
   language: csharp
   container: FaultInjectingDashboardRepository
   end_line: 98
+  is_test: true
   callers:
   - symbol:capability-dashboard-home:i-dashboard-repository.get-opportunity-items-async
   callees:
@@ -2777,6 +2869,7 @@ symbols:
   language: csharp
   container: FaultInjectingDashboardRepository
   end_line: 113
+  is_test: true
   callers:
   - symbol:capability-dashboard-home:i-dashboard-repository.get-opportunity-outcome-items-async
   callees:
@@ -2796,6 +2889,7 @@ symbols:
   language: csharp
   container: FaultInjectingDashboardRepository
   end_line: 110
+  is_test: true
   callers:
   - symbol:capability-dashboard-home:i-dashboard-repository.get-opportunity-outcomes-async
   callees:
@@ -2813,6 +2907,7 @@ symbols:
   language: csharp
   container: FixedAdminAuthHandler
   end_line: 367
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:fixed-admin-auth-handler.handle-authenticate-async-2
@@ -2826,6 +2921,7 @@ symbols:
   language: csharp
   container: FixedAdminAuthHandler
   end_line: 147
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:i-dashboard-repository.get-kpis-async
@@ -3051,6 +3147,7 @@ symbols:
   visibility: public
   language: csharp
   end_line: 54
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:line-of-business-validation-tests.submission-create-validator-accepts-known-line-of-business
@@ -3064,6 +3161,7 @@ symbols:
   language: csharp
   container: LineOfBusinessValidationTests
   end_line: 18
+  is_test: true
   callers: []
   callees:
   - symbol:capability-dashboard-home:line-of-business-validation-tests.valid-model
@@ -3078,6 +3176,7 @@ symbols:
   language: csharp
   container: LineOfBusinessValidationTests
   end_line: 29
+  is_test: true
   callers: []
   callees:
   - symbol:capability-dashboard-home:line-of-business-validation-tests.valid-model
@@ -3092,6 +3191,7 @@ symbols:
   language: csharp
   container: LineOfBusinessValidationTests
   end_line: 43
+  is_test: true
   callers: []
   callees:
   - symbol:capability-dashboard-home:line-of-business-validation-tests.valid-model
@@ -3106,6 +3206,7 @@ symbols:
   language: csharp
   container: LineOfBusinessValidationTests
   end_line: 53
+  is_test: true
   callers:
   - symbol:capability-dashboard-home:line-of-business-validation-tests.submission-create-validator-accepts-known-line-of-business
   - symbol:capability-dashboard-home:line-of-business-validation-tests.submission-create-validator-accepts-null-line-of-business
@@ -3122,6 +3223,7 @@ symbols:
   language: csharp
   container: NoAuthHandler
   end_line: 377
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:opportunity-aging-dto.opportunity-aging-bucket-dto
@@ -3246,6 +3348,7 @@ symbols:
   language: csharp
   container: OpportunityFlowNodeEmphasisCalculatorTests
   end_line: 28
+  is_test: true
   callers: []
   callees:
   - symbol:capability-dashboard-home:opportunity-flow-node-emphasis-calculator.compute
@@ -3260,6 +3363,7 @@ symbols:
   language: csharp
   container: OpportunityFlowNodeEmphasisCalculatorTests
   end_line: 45
+  is_test: true
   callers: []
   callees:
   - symbol:capability-dashboard-home:opportunity-flow-node-emphasis-calculator.compute
@@ -3274,6 +3378,7 @@ symbols:
   language: csharp
   container: OpportunityFlowNodeEmphasisCalculatorTests
   end_line: 61
+  is_test: true
   callers: []
   callees:
   - symbol:capability-dashboard-home:opportunity-flow-node-emphasis-calculator.compute
@@ -3287,6 +3392,7 @@ symbols:
   visibility: public
   language: csharp
   end_line: 62
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:opportunity-flow-node-emphasis-calculator.compute
@@ -3401,6 +3507,7 @@ symbols:
   language: csharp
   container: ScopedRoleAuthHandler
   end_line: 395
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:test-current-user-service.broker-tenant-id
@@ -3414,6 +3521,7 @@ symbols:
   language: csharp
   container: TestCurrentUserService
   end_line: 361
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:test-current-user-service.broker-tenant-id-2
@@ -3427,6 +3535,7 @@ symbols:
   language: csharp
   container: TestCurrentUserService
   end_line: 260
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:test-current-user-service.display-name
@@ -3440,6 +3549,7 @@ symbols:
   language: csharp
   container: TestCurrentUserService
   end_line: 358
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:test-current-user-service.display-name-2
@@ -3453,6 +3563,7 @@ symbols:
   language: csharp
   container: TestCurrentUserService
   end_line: 257
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:test-current-user-service.regions
@@ -3466,6 +3577,7 @@ symbols:
   language: csharp
   container: TestCurrentUserService
   end_line: 360
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:test-current-user-service.regions-2
@@ -3479,6 +3591,7 @@ symbols:
   language: csharp
   container: TestCurrentUserService
   end_line: 259
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:test-current-user-service.roles
@@ -3492,6 +3605,7 @@ symbols:
   language: csharp
   container: TestCurrentUserService
   end_line: 359
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:test-current-user-service.roles-2
@@ -3505,6 +3619,7 @@ symbols:
   language: csharp
   container: TestCurrentUserService
   end_line: 258
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:test-current-user-service.user-id
@@ -3518,6 +3633,7 @@ symbols:
   language: csharp
   container: TestCurrentUserService
   end_line: 357
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dashboard-home:test-current-user-service.user-id-2
@@ -3531,6 +3647,7 @@ symbols:
   language: csharp
   container: TestCurrentUserService
   end_line: 256
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-dynamic-lob-attributes:lob-attribute-service.add-enum
@@ -3925,6 +4042,7 @@ symbols:
   language: csharp
   container: FakeLobSchemaRepository
   end_line: 218
+  is_test: true
   callers:
   - symbol:capability-product-schema-registry:i-lob-schema-repository.add-activation-event-async
   callees: []
@@ -3941,6 +4059,7 @@ symbols:
   language: csharp
   container: FakeLobSchemaRepository
   end_line: 215
+  is_test: true
   callers:
   - symbol:capability-product-schema-registry:i-lob-schema-repository.deactivate-active-bundles-async
   callees: []
@@ -3957,6 +4076,7 @@ symbols:
   language: csharp
   container: FakeLobSchemaRepository
   end_line: 207
+  is_test: true
   callers:
   - symbol:capability-product-schema-registry:i-lob-schema-repository.get-active-bundle-async
   callees: []
@@ -3974,6 +4094,7 @@ symbols:
   language: csharp
   container: FakeLobSchemaRepository
   end_line: 190
+  is_test: true
   callers:
   - symbol:capability-product-schema-registry:i-lob-schema-repository.get-bundle-by-id-async
   callees: []
@@ -3991,6 +4112,7 @@ symbols:
   language: csharp
   container: FakeLobSchemaRepository
   end_line: 193
+  is_test: true
   callers:
   - symbol:capability-product-schema-registry:i-lob-schema-repository.get-bundle-by-product-version-id-async
   callees: []
@@ -4007,6 +4129,7 @@ symbols:
   language: csharp
   container: FakeLobSchemaRepository
   end_line: 187
+  is_test: true
   callers:
   - symbol:capability-product-schema-registry:i-lob-schema-repository.list-bundles-async
   callees: []
@@ -4211,6 +4334,7 @@ symbols:
   language: csharp
   container: LobAttributeServiceTests
   end_line: 156
+  is_test: true
   callers:
   - symbol:capability-product-schema-registry:lob-attribute-service-tests.deserialize-returns-valid-envelopes
   - symbol:capability-product-schema-registry:lob-attribute-service-tests.validate-and-serialize-async-accepts-valid-cyber-envelope
@@ -4229,6 +4353,7 @@ symbols:
   language: csharp
   container: LobAttributeServiceTests
   end_line: 122
+  is_test: true
   callers: []
   callees:
   - symbol:capability-dynamic-lob-attributes:lob-attribute-service.deserialize
@@ -4243,6 +4368,7 @@ symbols:
   language: csharp
   container: LobAttributeServiceTests
   end_line: 113
+  is_test: true
   callers: []
   callees:
   - symbol:capability-dynamic-lob-attributes:lob-attribute-service.deserialize
@@ -4257,6 +4383,7 @@ symbols:
   language: csharp
   container: LobAttributeServiceTests
   end_line: 149
+  is_test: true
   callers: []
   callees:
   - symbol:capability-dynamic-lob-attributes:lob-attribute-service.deserialize
@@ -4272,6 +4399,7 @@ symbols:
   language: csharp
   container: LobAttributeServiceTests
   end_line: 219
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-product-schema-registry:lob-attribute-service-tests.lob-attribute-service-tests
@@ -4284,6 +4412,7 @@ symbols:
   visibility: public
   language: csharp
   end_line: 220
+  is_test: true
   callers: []
   callees: []
 - id: symbol:capability-product-schema-registry:lob-attribute-service-tests.validate-and-serialize-async-accepts-valid-cyber-envelope
@@ -4297,6 +4426,7 @@ symbols:
   language: csharp
   container: LobAttributeServiceTests
   end_line: 40
+  is_test: true
   callers: []
   callees:
   - symbol:capability-dynamic-lob-attributes:lob-attribute-service.validate-and-serialize-async
@@ -4312,6 +4442,7 @@ symbols:
   language: csharp
   container: LobAttributeServiceTests
   end_line: 93
+  is_test: true
   callers: []
   callees:
   - symbol:capability-dynamic-lob-attributes:lob-attribute-service.validate-and-serialize-async
@@ -4327,6 +4458,7 @@ symbols:
   language: csharp
   container: LobAttributeServiceTests
   end_line: 105
+  is_test: true
   callers: []
   callees:
   - symbol:capability-dynamic-lob-attributes:lob-attribute-service.validate-and-serialize-async
@@ -4341,6 +4473,7 @@ symbols:
   language: csharp
   container: LobAttributeServiceTests
   end_line: 66
+  is_test: true
   callers: []
   callees:
   - symbol:capability-dynamic-lob-attributes:lob-attribute-service.validate-and-serialize-async
@@ -10172,6 +10305,7 @@ symbols:
   visibility: public
   language: csharp
   end_line: 109
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-broker:broker-authorization-tests.create-broker-with-no-roles-returns403
@@ -10185,6 +10319,7 @@ symbols:
   language: csharp
   container: BrokerAuthorizationTests
   end_line: 49
+  is_test: true
   callers: []
   callees:
   - symbol:entity-broker:broker-authorization-tests.set-no-roles-context
@@ -10199,6 +10334,7 @@ symbols:
   language: csharp
   container: BrokerAuthorizationTests
   end_line: 91
+  is_test: true
   callers: []
   callees:
   - symbol:entity-broker:broker-authorization-tests.set-no-roles-context
@@ -10213,6 +10349,7 @@ symbols:
   language: csharp
   container: BrokerAuthorizationTests
   end_line: 65
+  is_test: true
   callers: []
   callees:
   - symbol:entity-broker:broker-authorization-tests.set-no-roles-context
@@ -10228,6 +10365,7 @@ symbols:
   language: csharp
   container: BrokerAuthorizationTests
   end_line: 99
+  is_test: true
   callers: []
   callees:
   - symbol:entity-broker:broker-authorization-tests.set-no-roles-context
@@ -10243,6 +10381,7 @@ symbols:
   language: csharp
   container: BrokerAuthorizationTests
   end_line: 25
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-broker:broker-authorization-tests.get-broker-with-no-roles-returns403
@@ -10256,6 +10395,7 @@ symbols:
   language: csharp
   container: BrokerAuthorizationTests
   end_line: 57
+  is_test: true
   callers: []
   callees:
   - symbol:entity-broker:broker-authorization-tests.set-no-roles-context
@@ -10270,6 +10410,7 @@ symbols:
   language: csharp
   container: BrokerAuthorizationTests
   end_line: 108
+  is_test: true
   callers: []
   callees:
   - symbol:entity-broker:broker-authorization-tests.set-no-roles-context
@@ -10284,6 +10425,7 @@ symbols:
   language: csharp
   container: BrokerAuthorizationTests
   end_line: 40
+  is_test: true
   callers: []
   callees:
   - symbol:entity-broker:broker-authorization-tests.set-no-roles-context
@@ -10298,6 +10440,7 @@ symbols:
   language: csharp
   container: BrokerAuthorizationTests
   end_line: 82
+  is_test: true
   callers: []
   callees:
   - symbol:entity-broker:broker-authorization-tests.set-no-roles-context
@@ -10312,6 +10455,7 @@ symbols:
   language: csharp
   container: BrokerAuthorizationTests
   end_line: 73
+  is_test: true
   callers: []
   callees:
   - symbol:entity-broker:broker-authorization-tests.set-no-roles-context
@@ -10326,6 +10470,7 @@ symbols:
   language: csharp
   container: BrokerAuthorizationTests
   end_line: 31
+  is_test: true
   callers:
   - symbol:entity-broker:broker-authorization-tests.create-broker-with-no-roles-returns403
   - symbol:entity-broker:broker-authorization-tests.create-contact-with-no-roles-returns403
@@ -10433,6 +10578,7 @@ symbols:
   visibility: local
   language: typescript
   end_line: 236
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-broker:broker-detail-page.integration.test.render-broker-detail-page
@@ -10446,6 +10592,7 @@ symbols:
   visibility: local
   language: typescript
   end_line: 244
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-broker:broker-dto.broker-dto
@@ -10471,6 +10618,7 @@ symbols:
   visibility: public
   language: csharp
   end_line: 167
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-broker:broker-endpoint-tests.create-broker-duplicate-license-returns409
@@ -10484,6 +10632,7 @@ symbols:
   language: csharp
   container: BrokerEndpointTests
   end_line: 37
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-broker:broker-endpoint-tests.create-broker-invalid-state-returns400
@@ -10497,6 +10646,7 @@ symbols:
   language: csharp
   container: BrokerEndpointTests
   end_line: 108
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-broker:broker-endpoint-tests.create-broker-with-valid-data-returns201
@@ -10510,6 +10660,7 @@ symbols:
   language: csharp
   container: BrokerEndpointTests
   end_line: 25
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-broker:broker-endpoint-tests.delete-broker-existing-broker-returns204
@@ -10523,6 +10674,7 @@ symbols:
   language: csharp
   container: BrokerEndpointTests
   end_line: 100
+  is_test: true
   callers: []
   callees:
   - symbol:entity-broker:broker-service.delete-async
@@ -10537,6 +10689,7 @@ symbols:
   language: csharp
   container: BrokerEndpointTests
   end_line: 126
+  is_test: true
   callers: []
   callees:
   - symbol:entity-broker:broker-service.delete-async
@@ -10551,6 +10704,7 @@ symbols:
   language: csharp
   container: BrokerEndpointTests
   end_line: 64
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-broker:broker-endpoint-tests.get-broker-non-existent-id-returns404
@@ -10564,6 +10718,7 @@ symbols:
   language: csharp
   container: BrokerEndpointTests
   end_line: 71
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-broker:broker-endpoint-tests.json-paginated-broker-list
@@ -10577,6 +10732,7 @@ symbols:
   language: csharp
   container: BrokerEndpointTests
   end_line: 166
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-broker:broker-endpoint-tests.list-brokers-returns-paged-result
@@ -10590,6 +10746,7 @@ symbols:
   language: csharp
   container: BrokerEndpointTests
   end_line: 52
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-broker:broker-endpoint-tests.reactivate-broker-after-deactivation-returns200-with-active-status
@@ -10603,6 +10760,7 @@ symbols:
   language: csharp
   container: BrokerEndpointTests
   end_line: 144
+  is_test: true
   callers: []
   callees:
   - symbol:entity-broker:broker-service.delete-async
@@ -10617,6 +10775,7 @@ symbols:
   language: csharp
   container: BrokerEndpointTests
   end_line: 156
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-broker:broker-endpoint-tests.reactivate-broker-non-existent-returns404
@@ -10630,6 +10789,7 @@ symbols:
   language: csharp
   container: BrokerEndpointTests
   end_line: 163
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-broker:broker-endpoint-tests.update-broker-with-if-match-returns200
@@ -10643,6 +10803,7 @@ symbols:
   language: csharp
   container: BrokerEndpointTests
   end_line: 89
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-broker:broker-endpoints.broker-endpoints
@@ -10854,6 +11015,7 @@ symbols:
   language: csharp
   container: BrokerListProviderPactTests
   end_line: 15
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-broker:broker-list-provider-pact-tests.broker-list-provider-pact-tests
@@ -10866,6 +11028,7 @@ symbols:
   visibility: public
   language: csharp
   end_line: 37
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-broker:broker-list-provider-pact-tests.verify-broker-list-contract
@@ -10879,6 +11042,7 @@ symbols:
   language: csharp
   container: BrokerListProviderPactTests
   end_line: 36
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-broker:broker-region-configuration.broker-region-configuration
@@ -11112,6 +11276,7 @@ symbols:
   visibility: public
   language: csharp
   end_line: 96
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-broker:broker-scope-resolver-tests.resolve-async-ambiguous-matches-throws-broker-scope-unresolvable-exception
@@ -11125,6 +11290,7 @@ symbols:
   language: csharp
   container: BrokerScopeResolverTests
   end_line: 59
+  is_test: true
   callers: []
   callees:
   - symbol:entity-broker:broker-scope-resolver.resolve-async
@@ -11139,6 +11305,7 @@ symbols:
   language: csharp
   container: BrokerScopeResolverTests
   end_line: 83
+  is_test: true
   callers: []
   callees:
   - symbol:entity-broker:broker-scope-resolver.resolve-async
@@ -11153,6 +11320,7 @@ symbols:
   language: csharp
   container: BrokerScopeResolverTests
   end_line: 34
+  is_test: true
   callers: []
   callees:
   - symbol:entity-broker:broker-scope-resolver.resolve-async
@@ -11167,6 +11335,7 @@ symbols:
   language: csharp
   container: BrokerScopeResolverTests
   end_line: 95
+  is_test: true
   callers: []
   callees:
   - symbol:entity-broker:broker-scope-resolver.resolve-async
@@ -11181,6 +11350,7 @@ symbols:
   language: csharp
   container: BrokerScopeResolverTests
   end_line: 73
+  is_test: true
   callers: []
   callees:
   - symbol:entity-broker:broker-scope-resolver.resolve-async
@@ -11195,6 +11365,7 @@ symbols:
   language: csharp
   container: BrokerScopeResolverTests
   end_line: 48
+  is_test: true
   callers: []
   callees:
   - symbol:entity-broker:broker-scope-resolver.resolve-async
@@ -11208,6 +11379,7 @@ symbols:
   visibility: internal
   language: csharp
   end_line: 123
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-broker:broker-scope-resolver-tests.stub-current-user-service
@@ -11220,6 +11392,7 @@ symbols:
   visibility: internal
   language: csharp
   end_line: 134
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-broker:broker-scope-resolver.broker-scope-resolver
@@ -11545,6 +11718,7 @@ symbols:
   visibility: public
   language: csharp
   end_line: 216
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-broker:broker-user-access-tests.contains-property
@@ -11558,6 +11732,7 @@ symbols:
   language: csharp
   container: BrokerUserAccessTests
   end_line: 203
+  is_test: true
   callers:
   - symbol:entity-broker:broker-user-access-tests.get-brokers-as-broker-user-returns-broker-user-dto-without-internal-fields
   callees:
@@ -11573,6 +11748,7 @@ symbols:
   language: csharp
   container: BrokerUserAccessTests
   end_line: 185
+  is_test: true
   callers:
   - symbol:entity-broker:broker-user-access-tests.get-broker-by-id-as-broker-user-cross-scope-request-returns403-broker-scope-unresolvable
   - symbol:entity-broker:broker-user-access-tests.get-brokers-as-broker-user-returns-broker-user-dto-without-internal-fields
@@ -11588,6 +11764,7 @@ symbols:
   language: csharp
   container: BrokerUserAccessTests
   end_line: 30
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-broker:broker-user-access-tests.get-broker-by-id-as-broker-user-cross-scope-request-returns403-broker-scope-unresolvable
@@ -11601,6 +11778,7 @@ symbols:
   language: csharp
   container: BrokerUserAccessTests
   end_line: 113
+  is_test: true
   callers: []
   callees:
   - symbol:entity-broker:broker-user-access-tests.create-broker-and-set-tenant-id
@@ -11616,6 +11794,7 @@ symbols:
   language: csharp
   container: BrokerUserAccessTests
   end_line: 137
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-broker:broker-user-access-tests.get-brokers-as-broker-user-returns-broker-user-dto-without-internal-fields
@@ -11629,6 +11808,7 @@ symbols:
   language: csharp
   container: BrokerUserAccessTests
   end_line: 87
+  is_test: true
   callers: []
   callees:
   - symbol:entity-broker:broker-user-access-tests.contains-property
@@ -11646,6 +11826,7 @@ symbols:
   language: csharp
   container: BrokerUserAccessTests
   end_line: 151
+  is_test: true
   callers: []
   callees:
   - symbol:entity-broker:broker-user-access-tests.set-broker-user-context
@@ -11660,6 +11841,7 @@ symbols:
   language: csharp
   container: BrokerUserAccessTests
   end_line: 212
+  is_test: true
   callers:
   - symbol:entity-broker:broker-user-access-tests.get-brokers-as-broker-user-returns-broker-user-dto-without-internal-fields
   callees: []
@@ -11675,6 +11857,7 @@ symbols:
   language: csharp
   container: BrokerUserAccessTests
   end_line: 42
+  is_test: true
   callers:
   - symbol:entity-broker:broker-user-access-tests.get-broker-by-id-as-broker-user-cross-scope-request-returns403-broker-scope-unresolvable
   - symbol:entity-broker:broker-user-access-tests.get-brokers-as-broker-user-returns-broker-user-dto-without-internal-fields
@@ -11691,6 +11874,7 @@ symbols:
   language: csharp
   container: BrokerUserAccessTests
   end_line: 215
+  is_test: true
   callers:
   - symbol:entity-broker:broker-user-access-tests.contains-property
   callees: []
@@ -11910,6 +12094,7 @@ symbols:
   visibility: local
   language: typescript
   end_line: 46
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-broker:f0009-broker-tenant-id-broker-description.build-target-model
@@ -12126,6 +12311,7 @@ symbols:
   language: csharp
   container: StubBrokerRepository
   end_line: 107
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-broker:stub-broker-repository.add-async
@@ -12139,6 +12325,7 @@ symbols:
   language: csharp
   container: StubBrokerRepository
   end_line: 119
+  is_test: true
   callers:
   - symbol:entity-broker:i-broker-repository.add-async
   callees: []
@@ -12155,6 +12342,7 @@ symbols:
   language: csharp
   container: StubBrokerRepository
   end_line: 105
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-broker:stub-broker-repository.exists-by-license-async
@@ -12169,6 +12357,7 @@ symbols:
   language: csharp
   container: StubBrokerRepository
   end_line: 121
+  is_test: true
   callers:
   - symbol:entity-broker:i-broker-repository.exists-by-license-async
   callees: []
@@ -12185,6 +12374,7 @@ symbols:
   language: csharp
   container: StubBrokerRepository
   end_line: 116
+  is_test: true
   callers:
   - symbol:entity-broker:i-broker-repository.get-by-id-async
   callees: []
@@ -12202,6 +12392,7 @@ symbols:
   language: csharp
   container: StubBrokerRepository
   end_line: 117
+  is_test: true
   callers:
   - symbol:entity-broker:i-broker-repository.get-by-id-including-deactivated-async
   callees: []
@@ -12219,6 +12410,7 @@ symbols:
   language: csharp
   container: StubBrokerRepository
   end_line: 113
+  is_test: true
   callers:
   - symbol:entity-broker:i-broker-repository.get-id-by-broker-tenant-id-async
   callees: []
@@ -12236,6 +12428,7 @@ symbols:
   language: csharp
   container: StubBrokerRepository
   end_line: 122
+  is_test: true
   callers:
   - symbol:entity-broker:i-broker-repository.has-active-submissions-or-renewals-async
   callees: []
@@ -12253,6 +12446,7 @@ symbols:
   language: csharp
   container: StubBrokerRepository
   end_line: 118
+  is_test: true
   callers:
   - symbol:entity-broker:i-broker-repository.list-async
   callees: []
@@ -12269,6 +12463,7 @@ symbols:
   language: csharp
   container: StubBrokerRepository
   end_line: 120
+  is_test: true
   callers:
   - symbol:entity-broker:i-broker-repository.update-async
   callees: []
@@ -12285,6 +12480,7 @@ symbols:
   language: csharp
   container: StubCurrentUserService
   end_line: 127
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-broker:stub-current-user-service.broker-tenant-id
@@ -12298,6 +12494,7 @@ symbols:
   language: csharp
   container: StubCurrentUserService
   end_line: 133
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-broker:stub-current-user-service.display-name
@@ -12311,6 +12508,7 @@ symbols:
   language: csharp
   container: StubCurrentUserService
   end_line: 130
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-broker:stub-current-user-service.regions
@@ -12324,6 +12522,7 @@ symbols:
   language: csharp
   container: StubCurrentUserService
   end_line: 132
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-broker:stub-current-user-service.roles
@@ -12337,6 +12536,7 @@ symbols:
   language: csharp
   container: StubCurrentUserService
   end_line: 131
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-broker:stub-current-user-service.user-id
@@ -12350,6 +12550,7 @@ symbols:
   language: csharp
   container: StubCurrentUserService
   end_line: 129
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-document:account-detail-page.account-detail-page
@@ -12569,6 +12770,7 @@ symbols:
   language: csharp
   container: AllowingDocumentGate
   end_line: 137
+  is_test: true
   callers:
   - symbol:entity-document:i-document-classification-gate.authorize-document-async
   callees: []
@@ -12585,6 +12787,7 @@ symbols:
   language: csharp
   container: AllowingDocumentGate
   end_line: 146
+  is_test: true
   callers:
   - symbol:entity-document:i-document-classification-gate.authorize-template-async
   callees: []
@@ -12723,6 +12926,7 @@ symbols:
   visibility: local
   language: typescript
   end_line: 29
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-document:data.build-opportunity-breakdown-fixture
@@ -14000,6 +14204,7 @@ symbols:
   language: csharp
   container: DocumentServiceTests
   end_line: 147
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-document:document-service-tests.create-service
@@ -14013,6 +14218,7 @@ symbols:
   language: csharp
   container: DocumentServiceTests
   end_line: 82
+  is_test: true
   callers:
   - symbol:entity-document:document-service-tests.upload-async-accepts-valid-pdf-as-quarantined-and-records-timeline
   - symbol:entity-document:document-service-tests.upload-async-rejects-metadata-outside-configured-schema
@@ -14028,6 +14234,7 @@ symbols:
   visibility: public
   language: csharp
   end_line: 215
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-document:document-service-tests.fake-document-configuration-provider
@@ -14041,6 +14248,7 @@ symbols:
   language: csharp
   container: DocumentServiceTests
   end_line: 125
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-document:document-service-tests.fake-document-repository
@@ -14054,6 +14262,7 @@ symbols:
   language: csharp
   container: DocumentServiceTests
   end_line: 214
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-document:document-service-tests.fake-timeline-repository
@@ -14067,6 +14276,7 @@ symbols:
   language: csharp
   container: DocumentServiceTests
   end_line: 167
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-document:document-service-tests.file-input
@@ -14081,6 +14291,7 @@ symbols:
   language: csharp
   container: DocumentServiceTests
   end_line: 91
+  is_test: true
   callers:
   - symbol:entity-document:document-service-tests.upload-async-accepts-valid-pdf-as-quarantined-and-records-timeline
   - symbol:entity-document:document-service-tests.upload-async-rejects-metadata-outside-configured-schema
@@ -14097,6 +14308,7 @@ symbols:
   language: csharp
   container: DocumentServiceTests
   end_line: 100
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-document:document-service-tests.upload-async-accepts-valid-pdf-as-quarantined-and-records-timeline
@@ -14110,6 +14322,7 @@ symbols:
   language: csharp
   container: DocumentServiceTests
   end_line: 50
+  is_test: true
   callers: []
   callees:
   - symbol:entity-document:document-service-tests.create-service
@@ -14126,6 +14339,7 @@ symbols:
   language: csharp
   container: DocumentServiceTests
   end_line: 69
+  is_test: true
   callers: []
   callees:
   - symbol:entity-document:document-service-tests.create-service
@@ -14142,6 +14356,7 @@ symbols:
   language: csharp
   container: DocumentServiceTests
   end_line: 30
+  is_test: true
   callers: []
   callees:
   - symbol:entity-document:document-service-tests.create-service
@@ -15166,6 +15381,7 @@ symbols:
   language: csharp
   container: FakeDocumentConfigurationProvider
   end_line: 111
+  is_test: true
   callers:
   - symbol:entity-document:i-document-configuration-provider.get-snapshot-async
   - symbol:entity-document:quarantine-promotion-worker.execute-async
@@ -15184,6 +15400,7 @@ symbols:
   language: csharp
   container: FakeDocumentConfigurationProvider
   end_line: 124
+  is_test: true
   callers:
   - symbol:entity-document:fake-document-configuration-provider.get-snapshot-async
   callees: []
@@ -15199,6 +15416,7 @@ symbols:
   language: csharp
   container: FakeDocumentRepository
   end_line: 198
+  is_test: true
   callers:
   - symbol:entity-document:i-document-repository.append-event-async
   callees: []
@@ -15216,6 +15434,7 @@ symbols:
   language: csharp
   container: FakeDocumentRepository
   end_line: 192
+  is_test: true
   callers:
   - symbol:entity-document:i-document-repository.append-replacement-async
   callees: []
@@ -15232,6 +15451,7 @@ symbols:
   language: csharp
   container: FakeDocumentRepository
   end_line: 171
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-document:fake-document-repository.create-quarantined-async
@@ -15246,6 +15466,7 @@ symbols:
   language: csharp
   container: FakeDocumentRepository
   end_line: 177
+  is_test: true
   callers:
   - symbol:entity-document:i-document-repository.create-quarantined-async
   callees: []
@@ -15263,6 +15484,7 @@ symbols:
   language: csharp
   container: FakeDocumentRepository
   end_line: 186
+  is_test: true
   callers:
   - symbol:entity-document:i-document-repository.find-sidecar-async
   callees: []
@@ -15280,6 +15502,7 @@ symbols:
   language: csharp
   container: FakeDocumentRepository
   end_line: 201
+  is_test: true
   callers:
   - symbol:entity-document:i-document-repository.increment-template-use-async
   callees: []
@@ -15297,6 +15520,7 @@ symbols:
   language: csharp
   container: FakeDocumentRepository
   end_line: 180
+  is_test: true
   callers:
   - symbol:entity-document:i-document-repository.list-parent-sidecars-async
   callees: []
@@ -15314,6 +15538,7 @@ symbols:
   language: csharp
   container: FakeDocumentRepository
   end_line: 204
+  is_test: true
   callers:
   - symbol:entity-document:i-document-repository.list-promotable-quarantine-entries-async
   callees: []
@@ -15331,6 +15556,7 @@ symbols:
   language: csharp
   container: FakeDocumentRepository
   end_line: 210
+  is_test: true
   callers:
   - symbol:entity-document:i-document-repository.list-retention-candidates-async
   callees: []
@@ -15348,6 +15574,7 @@ symbols:
   language: csharp
   container: FakeDocumentRepository
   end_line: 183
+  is_test: true
   callers:
   - symbol:entity-document:i-document-repository.list-template-sidecars-async
   callees: []
@@ -15365,6 +15592,7 @@ symbols:
   language: csharp
   container: FakeDocumentRepository
   end_line: 189
+  is_test: true
   callers:
   - symbol:entity-document:i-document-repository.open-version-for-read-async
   callees: []
@@ -15382,6 +15610,7 @@ symbols:
   language: csharp
   container: FakeDocumentRepository
   end_line: 207
+  is_test: true
   callers:
   - symbol:entity-document:i-document-repository.promote-async
   callees: []
@@ -15399,6 +15628,7 @@ symbols:
   language: csharp
   container: FakeDocumentRepository
   end_line: 213
+  is_test: true
   callers:
   - symbol:entity-document:document-retention-hosted-service.execute-async
   - symbol:entity-document:i-document-repository.sweep-async
@@ -15417,6 +15647,7 @@ symbols:
   language: csharp
   container: FakeDocumentRepository
   end_line: 195
+  is_test: true
   callers:
   - symbol:entity-document:i-document-repository.update-metadata-async
   callees: []
@@ -15434,6 +15665,7 @@ symbols:
   language: csharp
   container: FakeTimelineRepository
   end_line: 166
+  is_test: true
   callers:
   - symbol:entity-activity-timeline-event:i-timeline-repository.add-event-async
   callees: []
@@ -15450,6 +15682,7 @@ symbols:
   language: csharp
   container: FakeTimelineRepository
   end_line: 151
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-document:fake-timeline-repository.list-events-async
@@ -15464,6 +15697,7 @@ symbols:
   language: csharp
   container: FakeTimelineRepository
   end_line: 154
+  is_test: true
   callers:
   - symbol:entity-activity-timeline-event:i-timeline-repository.list-events-async
   callees: []
@@ -15481,6 +15715,7 @@ symbols:
   language: csharp
   container: FakeTimelineRepository
   end_line: 160
+  is_test: true
   callers:
   - symbol:entity-activity-timeline-event:i-timeline-repository.list-events-for-broker-user-async
   callees: []
@@ -15498,6 +15733,7 @@ symbols:
   language: csharp
   container: FakeTimelineRepository
   end_line: 157
+  is_test: true
   callers:
   - symbol:entity-activity-timeline-event:i-timeline-repository.list-events-paged-async
   callees: []
@@ -17241,6 +17477,7 @@ symbols:
   language: csharp
   container: TestUser
   end_line: 99
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-document:test-user.display-name
@@ -17254,6 +17491,7 @@ symbols:
   language: csharp
   container: TestUser
   end_line: 96
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-document:test-user.regions
@@ -17267,6 +17505,7 @@ symbols:
   language: csharp
   container: TestUser
   end_line: 98
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-document:test-user.roles
@@ -17280,6 +17519,7 @@ symbols:
   language: csharp
   container: TestUser
   end_line: 97
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-document:test-user.user-id
@@ -17293,6 +17533,7 @@ symbols:
   language: csharp
   container: TestUser
   end_line: 95
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-document:types.document-classification
@@ -18284,6 +18525,7 @@ symbols:
   visibility: public
   language: csharp
   end_line: 739
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-policy:account-endpoint-tests.change-relationship-records-history-and-timeline
@@ -18297,6 +18539,7 @@ symbols:
   language: csharp
   container: AccountEndpointTests
   end_line: 117
+  is_test: true
   callers: []
   callees:
   - symbol:entity-policy:account-endpoint-tests.ensure-current-user-profile-async
@@ -18316,6 +18559,7 @@ symbols:
   language: csharp
   container: AccountEndpointTests
   end_line: 167
+  is_test: true
   callers: []
   callees:
   - symbol:entity-policy:account-endpoint-tests.delete-async
@@ -18333,6 +18577,7 @@ symbols:
   language: csharp
   container: AccountEndpointTests
   end_line: 83
+  is_test: true
   callers: []
   callees:
   - symbol:entity-policy:account-endpoint-tests.create-account-via-api-async
@@ -18352,6 +18597,7 @@ symbols:
   language: csharp
   container: AccountEndpointTests
   end_line: 404
+  is_test: true
   callers:
   - symbol:entity-policy:account-endpoint-tests.create-account-list-summary-and-workspace-rails-return-expected-data
   - symbol:entity-policy:account-endpoint-tests.delete-account-returns410-and-only-appears-when-include-removed
@@ -18367,6 +18613,7 @@ symbols:
   language: csharp
   container: AccountEndpointTests
   end_line: 204
+  is_test: true
   callers: []
   callees:
   - symbol:entity-policy:account-endpoint-tests.create-account-via-api-async
@@ -18384,6 +18631,7 @@ symbols:
   language: csharp
   container: AccountEndpointTests
   end_line: 731
+  is_test: true
   callers:
   - symbol:entity-policy:account-endpoint-tests.contact-crud-enforces-primary-uniqueness-and-soft-delete
   callees: []
@@ -18398,6 +18646,7 @@ symbols:
   language: csharp
   container: AccountEndpointTests
   end_line: 662
+  is_test: true
   callers:
   - symbol:entity-policy:account-endpoint-tests.change-relationship-records-history-and-timeline
   - symbol:entity-policy:account-endpoint-tests.contact-crud-enforces-primary-uniqueness-and-soft-delete
@@ -18421,6 +18670,7 @@ symbols:
   language: csharp
   container: AccountEndpointTests
   end_line: 411
+  is_test: true
   callers:
   - symbol:entity-policy:account-endpoint-tests.change-relationship-records-history-and-timeline
   - symbol:entity-policy:account-endpoint-tests.merge-account-propagates-submission-and-renewal-fallback-contract
@@ -18438,6 +18688,7 @@ symbols:
   language: csharp
   container: AccountEndpointTests
   end_line: 425
+  is_test: true
   callers:
   - symbol:entity-policy:account-endpoint-tests.merge-account-propagates-submission-and-renewal-fallback-contract
   callees: []
@@ -18452,6 +18703,7 @@ symbols:
   language: csharp
   container: AccountEndpointTests
   end_line: 418
+  is_test: true
   callers:
   - symbol:entity-policy:account-endpoint-tests.merge-account-propagates-submission-and-renewal-fallback-contract
   callees: []
@@ -18466,6 +18718,7 @@ symbols:
   language: csharp
   container: AccountEndpointTests
   end_line: 670
+  is_test: true
   callers:
   - symbol:entity-policy:account-endpoint-tests.ensure-current-user-profile-async
   callees: []
@@ -18480,6 +18733,7 @@ symbols:
   language: csharp
   container: AccountEndpointTests
   end_line: 264
+  is_test: true
   callers: []
   callees:
   - symbol:entity-policy:account-endpoint-tests.ensure-current-user-profile-async
@@ -18504,6 +18758,7 @@ symbols:
   language: csharp
   container: AccountEndpointTests
   end_line: 320
+  is_test: true
   callers: []
   callees:
   - symbol:entity-policy:account-endpoint-tests.ensure-current-user-profile-async
@@ -18523,6 +18778,7 @@ symbols:
   language: csharp
   container: AccountEndpointTests
   end_line: 358
+  is_test: true
   callers: []
   callees:
   - symbol:entity-policy:account-endpoint-tests.ensure-current-user-profile-async
@@ -18541,6 +18797,7 @@ symbols:
   language: csharp
   container: AccountEndpointTests
   end_line: 300
+  is_test: true
   callers: []
   callees:
   - symbol:entity-policy:account-endpoint-tests.ensure-current-user-profile-async
@@ -18556,6 +18813,7 @@ symbols:
   language: csharp
   container: AccountEndpointTests
   end_line: 289
+  is_test: true
   callers: []
   callees:
   - symbol:entity-policy:account-endpoint-tests.ensure-current-user-profile-async
@@ -18575,6 +18833,7 @@ symbols:
   language: csharp
   container: AccountEndpointTests
   end_line: 592
+  is_test: true
   callers:
   - symbol:entity-policy:account-endpoint-tests.seed-policy-async
   callees: []
@@ -18589,6 +18848,7 @@ symbols:
   language: csharp
   container: AccountEndpointTests
   end_line: 738
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-policy:account-endpoint-tests.post-json-async
@@ -18603,6 +18863,7 @@ symbols:
   language: csharp
   container: AccountEndpointTests
   end_line: 712
+  is_test: true
   callers:
   - symbol:entity-policy:account-endpoint-tests.change-relationship-records-history-and-timeline
   - symbol:entity-policy:account-endpoint-tests.delete-account-returns410-and-only-appears-when-include-removed
@@ -18623,6 +18884,7 @@ symbols:
   language: csharp
   container: AccountEndpointTests
   end_line: 724
+  is_test: true
   callers:
   - symbol:entity-policy:account-endpoint-tests.change-relationship-records-history-and-timeline
   - symbol:entity-policy:account-endpoint-tests.delete-account-returns410-and-only-appears-when-include-removed
@@ -18643,6 +18905,7 @@ symbols:
   language: csharp
   container: AccountEndpointTests
   end_line: 709
+  is_test: true
   callers:
   - symbol:entity-policy:account-endpoint-tests.contact-crud-enforces-primary-uniqueness-and-soft-delete
   callees: []
@@ -18658,6 +18921,7 @@ symbols:
   language: csharp
   container: AccountEndpointTests
   end_line: 458
+  is_test: true
   callers:
   - symbol:entity-policy:account-endpoint-tests.change-relationship-records-history-and-timeline
   - symbol:entity-policy:account-endpoint-tests.contact-crud-enforces-primary-uniqueness-and-soft-delete
@@ -18679,6 +18943,7 @@ symbols:
   language: csharp
   container: AccountEndpointTests
   end_line: 379
+  is_test: true
   callers:
   - symbol:entity-policy:account-endpoint-tests.merge-account-returns-content-too-large-when-linked-records-exceed-threshold
   callees: []
@@ -18694,6 +18959,7 @@ symbols:
   language: csharp
   container: AccountEndpointTests
   end_line: 485
+  is_test: true
   callers:
   - symbol:entity-policy:account-endpoint-tests.change-relationship-records-history-and-timeline
   - symbol:entity-policy:account-endpoint-tests.create-account-list-summary-and-workspace-rails-return-expected-data
@@ -18711,6 +18977,7 @@ symbols:
   language: csharp
   container: AccountEndpointTests
   end_line: 583
+  is_test: true
   callers:
   - symbol:entity-policy:account-endpoint-tests.create-account-list-summary-and-workspace-rails-return-expected-data
   - symbol:entity-policy:account-endpoint-tests.merge-account-propagates-submission-and-renewal-fallback-contract
@@ -18728,6 +18995,7 @@ symbols:
   language: csharp
   container: AccountEndpointTests
   end_line: 651
+  is_test: true
   callers:
   - symbol:entity-policy:account-endpoint-tests.create-account-list-summary-and-workspace-rails-return-expected-data
   - symbol:entity-policy:account-endpoint-tests.merge-account-propagates-submission-and-renewal-fallback-contract
@@ -18745,6 +19013,7 @@ symbols:
   language: csharp
   container: AccountEndpointTests
   end_line: 543
+  is_test: true
   callers:
   - symbol:entity-policy:account-endpoint-tests.create-account-list-summary-and-workspace-rails-return-expected-data
   - symbol:entity-policy:account-endpoint-tests.merge-account-propagates-submission-and-renewal-fallback-contract
@@ -18763,6 +19032,7 @@ symbols:
   language: csharp
   container: AccountEndpointTests
   end_line: 699
+  is_test: true
   callers:
   - symbol:entity-policy:account-endpoint-tests.ensure-current-user-profile-async
   callees: []
@@ -19471,6 +19741,7 @@ symbols:
   language: csharp
   container: NudgePriorityTests
   end_line: 167
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-policy:nudge-priority-tests.get-nudges-never-exceeds-ten-items
@@ -19484,6 +19755,7 @@ symbols:
   language: csharp
   container: NudgePriorityTests
   end_line: 223
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-policy:nudge-priority-tests.get-nudges-returns-all-three-types-in-priority-order
@@ -19497,6 +19769,7 @@ symbols:
   language: csharp
   container: NudgePriorityTests
   end_line: 212
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-policy:nudge-priority-tests.get-nudges-stale-submission-uses-workflow-transition-staleness-not-updated-at
@@ -19510,6 +19783,7 @@ symbols:
   language: csharp
   container: NudgePriorityTests
   end_line: 240
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-policy:nudge-priority-tests.initialize-async
@@ -19523,6 +19797,7 @@ symbols:
   language: csharp
   container: NudgePriorityTests
   end_line: 165
+  is_test: true
   callers: []
   callees:
   - symbol:capability-product-schema-registry:lob-schema-defaults.resolve-default-product-version-id
@@ -19538,6 +19813,7 @@ symbols:
   language: csharp
   container: NudgePriorityTests
   end_line: 176
+  is_test: true
   callers:
   - symbol:entity-policy:nudge-priority-tests.initialize-async
   callees: []
@@ -19551,6 +19827,7 @@ symbols:
   visibility: public
   language: csharp
   end_line: 241
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-policy:policies-page.policies-page
@@ -25388,6 +25665,7 @@ symbols:
   language: csharp
   container: StubLobSchemaRepository
   end_line: 787
+  is_test: true
   callers:
   - symbol:capability-product-schema-registry:i-lob-schema-repository.add-activation-event-async
   callees: []
@@ -25405,6 +25683,7 @@ symbols:
   language: csharp
   container: StubLobSchemaRepository
   end_line: 784
+  is_test: true
   callers:
   - symbol:capability-product-schema-registry:i-lob-schema-repository.deactivate-active-bundles-async
   callees: []
@@ -25423,6 +25702,7 @@ symbols:
   language: csharp
   container: StubLobSchemaRepository
   end_line: 781
+  is_test: true
   callers:
   - symbol:capability-product-schema-registry:i-lob-schema-repository.get-active-bundle-async
   callees: []
@@ -25440,6 +25720,7 @@ symbols:
   language: csharp
   container: StubLobSchemaRepository
   end_line: 775
+  is_test: true
   callers:
   - symbol:capability-product-schema-registry:i-lob-schema-repository.get-bundle-by-id-async
   callees: []
@@ -25457,6 +25738,7 @@ symbols:
   language: csharp
   container: StubLobSchemaRepository
   end_line: 778
+  is_test: true
   callers:
   - symbol:capability-product-schema-registry:i-lob-schema-repository.get-bundle-by-product-version-id-async
   callees: []
@@ -25474,6 +25756,7 @@ symbols:
   language: csharp
   container: StubLobSchemaRepository
   end_line: 772
+  is_test: true
   callers:
   - symbol:capability-product-schema-registry:i-lob-schema-repository.list-bundles-async
   callees: []
@@ -25490,6 +25773,7 @@ symbols:
   language: csharp
   container: StubPolicyRepository
   end_line: 712
+  is_test: true
   callers:
   - symbol:entity-policy:i-policy-repository.add-async
   - symbol:entity-renewal:renewal-repository.add-async
@@ -25508,6 +25792,7 @@ symbols:
   language: csharp
   container: StubPolicyRepository
   end_line: 721
+  is_test: true
   callers:
   - symbol:entity-policy:i-policy-repository.add-coverage-lines-async
   callees: []
@@ -25525,6 +25810,7 @@ symbols:
   language: csharp
   container: StubPolicyRepository
   end_line: 718
+  is_test: true
   callers:
   - symbol:entity-policy:i-policy-repository.add-endorsement-async
   callees: []
@@ -25542,6 +25828,7 @@ symbols:
   language: csharp
   container: StubPolicyRepository
   end_line: 715
+  is_test: true
   callers:
   - symbol:entity-policy:i-policy-repository.add-version-async
   callees: []
@@ -25559,6 +25846,7 @@ symbols:
   language: csharp
   container: StubPolicyRepository
   end_line: 757
+  is_test: true
   callers:
   - symbol:entity-policy:i-policy-repository.count-current-coverage-lines-async
   callees: []
@@ -25576,6 +25864,7 @@ symbols:
   language: csharp
   container: StubPolicyRepository
   end_line: 754
+  is_test: true
   callers:
   - symbol:entity-policy:i-policy-repository.count-endorsements-async
   callees: []
@@ -25593,6 +25882,7 @@ symbols:
   language: csharp
   container: StubPolicyRepository
   end_line: 760
+  is_test: true
   callers:
   - symbol:entity-policy:i-policy-repository.count-open-renewals-async
   callees: []
@@ -25610,6 +25900,7 @@ symbols:
   language: csharp
   container: StubPolicyRepository
   end_line: 748
+  is_test: true
   callers:
   - symbol:entity-policy:i-policy-repository.count-policies-for-year-async
   callees: []
@@ -25627,6 +25918,7 @@ symbols:
   language: csharp
   container: StubPolicyRepository
   end_line: 751
+  is_test: true
   callers:
   - symbol:entity-policy:i-policy-repository.count-versions-async
   callees: []
@@ -25644,6 +25936,7 @@ symbols:
   language: csharp
   container: StubPolicyRepository
   end_line: 691
+  is_test: true
   callers:
   - symbol:entity-policy:i-policy-repository.get-accessible-by-id-async
   callees: []
@@ -25661,6 +25954,7 @@ symbols:
   language: csharp
   container: StubPolicyRepository
   end_line: 700
+  is_test: true
   callers:
   - symbol:entity-policy:i-policy-repository.get-account-by-id-async
   callees: []
@@ -25678,6 +25972,7 @@ symbols:
   language: csharp
   container: StubPolicyRepository
   end_line: 745
+  is_test: true
   callers:
   - symbol:entity-policy:i-policy-repository.get-account-summary-async
   callees: []
@@ -25695,6 +25990,7 @@ symbols:
   language: csharp
   container: StubPolicyRepository
   end_line: 703
+  is_test: true
   callers:
   - symbol:entity-policy:i-policy-repository.get-broker-by-id-async
   callees: []
@@ -25712,6 +26008,7 @@ symbols:
   language: csharp
   container: StubPolicyRepository
   end_line: 694
+  is_test: true
   callers:
   - symbol:entity-policy:i-policy-repository.get-by-id-for-update-async
   callees: []
@@ -25729,6 +26026,7 @@ symbols:
   language: csharp
   container: StubPolicyRepository
   end_line: 697
+  is_test: true
   callers:
   - symbol:entity-policy:i-policy-repository.get-by-id-with-relations-async
   callees: []
@@ -25746,6 +26044,7 @@ symbols:
   language: csharp
   container: StubPolicyRepository
   end_line: 706
+  is_test: true
   callers:
   - symbol:entity-policy:i-policy-repository.get-carrier-by-id-async
   callees: []
@@ -25763,6 +26062,7 @@ symbols:
   language: csharp
   container: StubPolicyRepository
   end_line: 730
+  is_test: true
   callers:
   - symbol:entity-policy:i-policy-repository.get-current-version-async
   callees: []
@@ -25780,6 +26080,7 @@ symbols:
   language: csharp
   container: StubPolicyRepository
   end_line: 733
+  is_test: true
   callers:
   - symbol:entity-policy:i-policy-repository.get-current-version-for-update-async
   callees: []
@@ -25797,6 +26098,7 @@ symbols:
   language: csharp
   container: StubPolicyRepository
   end_line: 763
+  is_test: true
   callers:
   - symbol:entity-policy:i-policy-repository.get-successor-policy-async
   callees: []
@@ -25814,6 +26116,7 @@ symbols:
   language: csharp
   container: StubPolicyRepository
   end_line: 736
+  is_test: true
   callers:
   - symbol:entity-policy:i-policy-repository.get-version-async
   callees: []
@@ -25831,6 +26134,7 @@ symbols:
   language: csharp
   container: StubPolicyRepository
   end_line: 688
+  is_test: true
   callers:
   - symbol:entity-policy:i-policy-repository.list-async
   callees: []
@@ -25848,6 +26152,7 @@ symbols:
   language: csharp
   container: StubPolicyRepository
   end_line: 742
+  is_test: true
   callers:
   - symbol:entity-policy:i-policy-repository.list-current-coverage-lines-async
   callees: []
@@ -25865,6 +26170,7 @@ symbols:
   language: csharp
   container: StubPolicyRepository
   end_line: 739
+  is_test: true
   callers:
   - symbol:entity-policy:i-policy-repository.list-endorsements-async
   callees: []
@@ -25882,6 +26188,7 @@ symbols:
   language: csharp
   container: StubPolicyRepository
   end_line: 766
+  is_test: true
   callers:
   - symbol:entity-policy:i-policy-repository.list-issued-policies-expired-before-async
   callees: []
@@ -25899,6 +26206,7 @@ symbols:
   language: csharp
   container: StubPolicyRepository
   end_line: 727
+  is_test: true
   callers:
   - symbol:entity-policy:i-policy-repository.list-versions-async
   callees: []
@@ -25916,6 +26224,7 @@ symbols:
   language: csharp
   container: StubPolicyRepository
   end_line: 709
+  is_test: true
   callers:
   - symbol:entity-policy:i-policy-repository.producer-exists-async
   callees: []
@@ -25933,6 +26242,7 @@ symbols:
   language: csharp
   container: StubPolicyRepository
   end_line: 724
+  is_test: true
   callers:
   - symbol:entity-policy:i-policy-repository.set-coverage-current-async
   callees: []
@@ -25950,6 +26260,7 @@ symbols:
   language: csharp
   container: StubReferenceDataRepository
   end_line: 679
+  is_test: true
   callers:
   - symbol:entity-mga:i-reference-data-repository.get-account-by-id-async
   callees: []
@@ -25967,6 +26278,7 @@ symbols:
   language: csharp
   container: StubReferenceDataRepository
   end_line: 673
+  is_test: true
   callers:
   - symbol:entity-mga:i-reference-data-repository.get-accounts-async
   callees: []
@@ -25983,6 +26295,7 @@ symbols:
   language: csharp
   container: StubReferenceDataRepository
   end_line: 674
+  is_test: true
   callers:
   - symbol:entity-mga:i-reference-data-repository.get-mgas-async
   callees: []
@@ -26000,6 +26313,7 @@ symbols:
   language: csharp
   container: StubReferenceDataRepository
   end_line: 680
+  is_test: true
   callers:
   - symbol:entity-mga:i-reference-data-repository.get-policy-by-id-async
   callees: []
@@ -26017,6 +26331,7 @@ symbols:
   language: csharp
   container: StubReferenceDataRepository
   end_line: 682
+  is_test: true
   callers:
   - symbol:entity-mga:i-reference-data-repository.get-program-by-id-async
   callees: []
@@ -26034,6 +26349,7 @@ symbols:
   language: csharp
   container: StubReferenceDataRepository
   end_line: 676
+  is_test: true
   callers:
   - symbol:entity-mga:i-reference-data-repository.get-programs-async
   callees: []
@@ -26051,6 +26367,7 @@ symbols:
   language: csharp
   container: StubReferenceDataRepository
   end_line: 678
+  is_test: true
   callers:
   - symbol:entity-mga:i-reference-data-repository.get-renewal-statuses-async
   callees: []
@@ -26068,6 +26385,7 @@ symbols:
   language: csharp
   container: StubReferenceDataRepository
   end_line: 677
+  is_test: true
   callers:
   - symbol:entity-mga:i-reference-data-repository.get-submission-statuses-async
   callees: []
@@ -26084,6 +26402,7 @@ symbols:
   language: csharp
   container: StubReferenceDataRepository
   end_line: 671
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-renewal:stub-renewal-repository.add-async
@@ -26097,6 +26416,7 @@ symbols:
   language: csharp
   container: StubRenewalRepository
   end_line: 632
+  is_test: true
   callers:
   - symbol:entity-renewal:i-renewal-repository.add-async
   - symbol:entity-renewal:renewal-repository.add-async
@@ -26114,6 +26434,7 @@ symbols:
   language: csharp
   container: StubRenewalRepository
   end_line: 623
+  is_test: true
   callers:
   - symbol:entity-renewal:i-renewal-repository.get-by-id-async
   callees: []
@@ -26131,6 +26452,7 @@ symbols:
   language: csharp
   container: StubRenewalRepository
   end_line: 626
+  is_test: true
   callers:
   - symbol:entity-renewal:i-renewal-repository.get-by-id-with-relations-async
   callees: []
@@ -26148,6 +26470,7 @@ symbols:
   language: csharp
   container: StubRenewalRepository
   end_line: 637
+  is_test: true
   callers:
   - symbol:entity-renewal:i-renewal-repository.has-active-renewal-for-policy-async
   callees: []
@@ -26165,6 +26488,7 @@ symbols:
   language: csharp
   container: StubRenewalRepository
   end_line: 640
+  is_test: true
   callers:
   - symbol:entity-renewal:i-renewal-repository.list-async
   callees: []
@@ -26181,6 +26505,7 @@ symbols:
   language: csharp
   container: StubRenewalRepository
   end_line: 619
+  is_test: true
   callers:
   - symbol:entity-renewal:workflow-service-tests.renewal-service-get-by-id-async-maps-dto
   - symbol:entity-renewal:workflow-service-tests.renewal-service-transition-async-invalid-transition-returns-invalid-transition
@@ -26197,6 +26522,7 @@ symbols:
   language: csharp
   container: StubRenewalRepository
   end_line: 620
+  is_test: true
   callers:
   - symbol:entity-renewal:stub-submission-repository.single
   - symbol:entity-renewal:workflow-service-tests.renewal-service-transition-async-invalid-transition-returns-invalid-transition
@@ -26214,6 +26540,7 @@ symbols:
   language: csharp
   container: StubRenewalRepository
   end_line: 646
+  is_test: true
   callers:
   - symbol:entity-renewal:i-renewal-repository.update-async
   callees: []
@@ -26231,6 +26558,7 @@ symbols:
   language: csharp
   container: StubSubmissionDocumentChecklistReader
   end_line: 812
+  is_test: true
   callers:
   - symbol:entity-submission:i-submission-document-checklist-reader.get-checklist-async
   callees: []
@@ -26247,6 +26575,7 @@ symbols:
   language: csharp
   container: StubSubmissionRepository
   end_line: 595
+  is_test: true
   callers:
   - symbol:entity-renewal:renewal-repository.add-async
   - symbol:entity-submission:i-submission-repository.add-async
@@ -26265,6 +26594,7 @@ symbols:
   language: csharp
   container: StubSubmissionRepository
   end_line: 586
+  is_test: true
   callers:
   - symbol:entity-submission:i-submission-repository.get-by-id-async
   callees: []
@@ -26282,6 +26612,7 @@ symbols:
   language: csharp
   container: StubSubmissionRepository
   end_line: 589
+  is_test: true
   callers:
   - symbol:entity-submission:i-submission-repository.get-by-id-with-includes-async
   callees: []
@@ -26298,6 +26629,7 @@ symbols:
   language: csharp
   container: StubSubmissionRepository
   end_line: 612
+  is_test: true
   callers:
   - symbol:entity-submission:i-submission-repository.get-stale-flags-async
   callees: []
@@ -26314,6 +26646,7 @@ symbols:
   language: csharp
   container: StubSubmissionRepository
   end_line: 607
+  is_test: true
   callers:
   - symbol:entity-submission:i-submission-repository.list-async
   callees: []
@@ -26330,6 +26663,7 @@ symbols:
   language: csharp
   container: StubSubmissionRepository
   end_line: 582
+  is_test: true
   callers:
   - symbol:entity-renewal:workflow-service-tests.submission-service-get-by-id-async-maps-dto
   - symbol:entity-renewal:workflow-service-tests.submission-service-transition-async-invalid-transition-returns-invalid-transition
@@ -26348,6 +26682,7 @@ symbols:
   language: csharp
   container: StubSubmissionRepository
   end_line: 583
+  is_test: true
   callers:
   - symbol:entity-renewal:stub-renewal-repository.single
   - symbol:entity-renewal:workflow-service-tests.submission-service-transition-async-invalid-transition-returns-invalid-transition
@@ -26368,6 +26703,7 @@ symbols:
   language: csharp
   container: StubSubmissionRepository
   end_line: 601
+  is_test: true
   callers:
   - symbol:entity-submission:i-submission-repository.update-async
   callees: []
@@ -26384,6 +26720,7 @@ symbols:
   language: csharp
   container: StubWorkflowSlaThresholdRepository
   end_line: 806
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-renewal:stub-workflow-transition-repository.add-async
@@ -26398,6 +26735,7 @@ symbols:
   language: csharp
   container: StubWorkflowTransitionRepository
   end_line: 664
+  is_test: true
   callers:
   - symbol:entity-renewal:renewal-repository.add-async
   - symbol:entity-workflow-transition:i-workflow-transition-repository.add-async
@@ -26415,6 +26753,7 @@ symbols:
   language: csharp
   container: StubWorkflowTransitionRepository
   end_line: 651
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-renewal:stub-workflow-transition-repository.list-by-entity-async
@@ -26429,6 +26768,7 @@ symbols:
   language: csharp
   container: StubWorkflowTransitionRepository
   end_line: 658
+  is_test: true
   callers:
   - symbol:entity-workflow-transition:i-workflow-transition-repository.list-by-entity-async
   callees: []
@@ -26445,6 +26785,7 @@ symbols:
   language: csharp
   container: StubWorkflowTransitionRepository
   end_line: 653
+  is_test: true
   callers:
   - symbol:entity-renewal:workflow-service-tests.renewal-service-get-transitions-async-maps-transitions
   - symbol:entity-renewal:workflow-service-tests.submission-service-get-transitions-async-maps-transitions
@@ -26460,6 +26801,7 @@ symbols:
   language: csharp
   container: WorkflowServiceTests
   end_line: 502
+  is_test: true
   callers:
   - symbol:entity-renewal:workflow-service-tests.renewal-service-get-by-id-async-maps-dto
   - symbol:entity-renewal:workflow-service-tests.renewal-service-get-transitions-async-maps-transitions
@@ -26480,6 +26822,7 @@ symbols:
   language: csharp
   container: WorkflowServiceTests
   end_line: 485
+  is_test: true
   callers:
   - symbol:entity-renewal:workflow-service-tests.submission-service-get-by-id-async-maps-dto
   - symbol:entity-renewal:workflow-service-tests.submission-service-get-transitions-async-maps-transitions
@@ -26501,6 +26844,7 @@ symbols:
   language: csharp
   container: WorkflowServiceTests
   end_line: 575
+  is_test: true
   callers:
   - symbol:entity-renewal:workflow-service-tests.submission-service-update-async-clear-optional-fields-sets-null-and-tracks-changes
   - symbol:entity-renewal:workflow-service-tests.submission-service-update-async-omitted-optional-fields-preserve-existing-values
@@ -26516,6 +26860,7 @@ symbols:
   language: csharp
   container: WorkflowServiceTests
   end_line: 515
+  is_test: true
   callers:
   - symbol:entity-renewal:workflow-service-tests.renewal-service-get-by-id-async-maps-dto
   - symbol:entity-renewal:workflow-service-tests.renewal-service-transition-async-invalid-transition-returns-invalid-transition
@@ -26537,6 +26882,7 @@ symbols:
   language: csharp
   container: WorkflowServiceTests
   end_line: 527
+  is_test: true
   callers:
   - symbol:entity-renewal:workflow-service-tests.renewal-service-get-by-id-async-maps-dto
   - symbol:entity-renewal:workflow-service-tests.renewal-service-transition-async-invalid-transition-returns-invalid-transition
@@ -26558,6 +26904,7 @@ symbols:
   language: csharp
   container: WorkflowServiceTests
   end_line: 557
+  is_test: true
   callers:
   - symbol:entity-renewal:workflow-service-tests.new-policy
   callees: []
@@ -26572,6 +26919,7 @@ symbols:
   language: csharp
   container: WorkflowServiceTests
   end_line: 548
+  is_test: true
   callers:
   - symbol:entity-renewal:workflow-service-tests.renewal-service-get-by-id-async-maps-dto
   - symbol:entity-renewal:workflow-service-tests.renewal-service-transition-async-invalid-transition-returns-invalid-transition
@@ -26589,6 +26937,7 @@ symbols:
   language: csharp
   container: WorkflowServiceTests
   end_line: 572
+  is_test: true
   callers:
   - symbol:entity-renewal:workflow-service-tests.create-renewal-service
   - symbol:entity-renewal:workflow-service-tests.renewal-service-get-by-id-async-maps-dto
@@ -26611,6 +26960,7 @@ symbols:
   language: csharp
   container: WorkflowServiceTests
   end_line: 329
+  is_test: true
   callers: []
   callees:
   - symbol:entity-renewal:renewal-service.get-by-id-async
@@ -26631,6 +26981,7 @@ symbols:
   language: csharp
   container: WorkflowServiceTests
   end_line: 354
+  is_test: true
   callers: []
   callees:
   - symbol:entity-renewal:renewal-service.get-transitions-async
@@ -26647,6 +26998,7 @@ symbols:
   language: csharp
   container: WorkflowServiceTests
   end_line: 416
+  is_test: true
   callers: []
   callees:
   - symbol:entity-renewal:renewal-service.transition-async
@@ -26668,6 +27020,7 @@ symbols:
   language: csharp
   container: WorkflowServiceTests
   end_line: 371
+  is_test: true
   callers: []
   callees:
   - symbol:entity-renewal:renewal-service.transition-async
@@ -26683,6 +27036,7 @@ symbols:
   language: csharp
   container: WorkflowServiceTests
   end_line: 465
+  is_test: true
   callers: []
   callees:
   - symbol:entity-renewal:renewal-service.transition-async
@@ -26703,6 +27057,7 @@ symbols:
   visibility: internal
   language: csharp
   end_line: 788
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-renewal:workflow-service-tests.stub-policy-repository
@@ -26715,6 +27070,7 @@ symbols:
   visibility: internal
   language: csharp
   end_line: 767
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-renewal:workflow-service-tests.stub-reference-data-repository
@@ -26727,6 +27083,7 @@ symbols:
   visibility: internal
   language: csharp
   end_line: 683
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-renewal:workflow-service-tests.stub-renewal-repository
@@ -26739,6 +27096,7 @@ symbols:
   visibility: internal
   language: csharp
   end_line: 647
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-renewal:workflow-service-tests.stub-submission-document-checklist-reader
@@ -26751,6 +27109,7 @@ symbols:
   visibility: internal
   language: csharp
   end_line: 813
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-renewal:workflow-service-tests.stub-submission-repository
@@ -26763,6 +27122,7 @@ symbols:
   visibility: internal
   language: csharp
   end_line: 613
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-renewal:workflow-service-tests.stub-workflow-sla-threshold-repository
@@ -26775,6 +27135,7 @@ symbols:
   visibility: internal
   language: csharp
   end_line: 807
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-renewal:workflow-service-tests.stub-workflow-transition-repository
@@ -26787,6 +27148,7 @@ symbols:
   visibility: internal
   language: csharp
   end_line: 665
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-renewal:workflow-service-tests.submission-service-get-by-id-async-maps-dto
@@ -26800,6 +27162,7 @@ symbols:
   language: csharp
   container: WorkflowServiceTests
   end_line: 54
+  is_test: true
   callers: []
   callees:
   - symbol:entity-renewal:stub-submission-repository.seed
@@ -26819,6 +27182,7 @@ symbols:
   language: csharp
   container: WorkflowServiceTests
   end_line: 80
+  is_test: true
   callers: []
   callees:
   - symbol:entity-renewal:stub-workflow-transition-repository.seed
@@ -26835,6 +27199,7 @@ symbols:
   language: csharp
   container: WorkflowServiceTests
   end_line: 135
+  is_test: true
   callers: []
   callees:
   - symbol:entity-renewal:stub-submission-repository.seed
@@ -26855,6 +27220,7 @@ symbols:
   language: csharp
   container: WorkflowServiceTests
   end_line: 96
+  is_test: true
   callers: []
   callees:
   - symbol:entity-renewal:workflow-service-tests.create-submission-service
@@ -26870,6 +27236,7 @@ symbols:
   language: csharp
   container: WorkflowServiceTests
   end_line: 181
+  is_test: true
   callers: []
   callees:
   - symbol:entity-renewal:stub-submission-repository.seed
@@ -26890,6 +27257,7 @@ symbols:
   language: csharp
   container: WorkflowServiceTests
   end_line: 237
+  is_test: true
   callers: []
   callees:
   - symbol:entity-renewal:stub-submission-repository.seed
@@ -26911,6 +27279,7 @@ symbols:
   language: csharp
   container: WorkflowServiceTests
   end_line: 286
+  is_test: true
   callers: []
   callees:
   - symbol:entity-renewal:stub-submission-repository.seed
@@ -26931,6 +27300,7 @@ symbols:
   visibility: public
   language: csharp
   end_line: 576
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-renewal:workflow-state-machine-tests.get-available-renewal-transitions-filters-by-role
@@ -26944,6 +27314,7 @@ symbols:
   language: csharp
   container: WorkflowStateMachineTests
   end_line: 68
+  is_test: true
   callers: []
   callees:
   - symbol:entity-workflow-transition:workflow-state-machine.get-available-renewal-transitions
@@ -26958,6 +27329,7 @@ symbols:
   language: csharp
   container: WorkflowStateMachineTests
   end_line: 47
+  is_test: true
   callers: []
   callees:
   - symbol:entity-workflow-transition:workflow-state-machine.get-available-transitions
@@ -26974,6 +27346,7 @@ symbols:
   language: csharp
   container: WorkflowStateMachineTests
   end_line: 39
+  is_test: true
   callers: []
   callees:
   - symbol:entity-workflow-transition:workflow-state-machine.is-terminal-state
@@ -26989,6 +27362,7 @@ symbols:
   language: csharp
   container: WorkflowStateMachineTests
   end_line: 16
+  is_test: true
   callers: []
   callees:
   - symbol:entity-workflow-transition:workflow-state-machine.is-valid-transition
@@ -27005,6 +27379,7 @@ symbols:
   language: csharp
   container: WorkflowStateMachineTests
   end_line: 28
+  is_test: true
   callers: []
   callees:
   - symbol:entity-workflow-transition:workflow-state-machine.is-valid-transition
@@ -27020,6 +27395,7 @@ symbols:
   language: csharp
   container: WorkflowStateMachineTests
   end_line: 58
+  is_test: true
   callers: []
   callees:
   - symbol:entity-workflow-transition:workflow-state-machine.validate-renewal-transition
@@ -27033,6 +27409,7 @@ symbols:
   visibility: public
   language: csharp
   end_line: 69
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-renewal:workflow-transition-record-dto.workflow-transition-record-dto
@@ -27587,6 +27964,7 @@ symbols:
   visibility: local
   language: typescript
   end_line: 180
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-submission:submission-detail-page.pill
@@ -28945,6 +29323,7 @@ symbols:
   language: csharp
   container: WorkflowEndpointTests
   end_line: 277
+  is_test: true
   callers: []
   callees:
   - symbol:entity-submission:workflow-endpoint-tests.ensure-current-user-profile-async
@@ -28961,6 +29340,7 @@ symbols:
   language: csharp
   container: WorkflowEndpointTests
   end_line: 260
+  is_test: true
   callers: []
   callees:
   - symbol:entity-submission:workflow-endpoint-tests.ensure-current-user-profile-async
@@ -28976,6 +29356,7 @@ symbols:
   language: csharp
   container: WorkflowEndpointTests
   end_line: 463
+  is_test: true
   callers:
   - symbol:entity-submission:workflow-endpoint-tests.get-submission-timeline-returns-paged-events
   - symbol:entity-submission:workflow-endpoint-tests.post-submission-transition-to-ready-for-uw-review-when-incomplete-returns409
@@ -28995,6 +29376,7 @@ symbols:
   language: csharp
   container: WorkflowEndpointTests
   end_line: 46
+  is_test: true
   callers: []
   callees:
   - symbol:entity-submission:workflow-endpoint-tests.ensure-current-user-profile-async
@@ -29010,6 +29392,7 @@ symbols:
   language: csharp
   container: WorkflowEndpointTests
   end_line: 692
+  is_test: true
   callers:
   - symbol:entity-submission:workflow-endpoint-tests.create-renewal-for-policy-with-existing-active-renewal-returns409
   - symbol:entity-submission:workflow-endpoint-tests.create-renewal-with-valid-policy-returns201-with-policy-context
@@ -29045,6 +29428,7 @@ symbols:
   language: csharp
   container: WorkflowEndpointTests
   end_line: 470
+  is_test: true
   callers:
   - symbol:entity-submission:workflow-endpoint-tests.post-renewal-transition-valid-returns201-and-persists
   - symbol:entity-submission:workflow-endpoint-tests.put-renewal-assignment-as-distribution-manager-returns200-and-persists
@@ -29061,6 +29445,7 @@ symbols:
   language: csharp
   container: WorkflowEndpointTests
   end_line: 315
+  is_test: true
   callers: []
   callees:
   - symbol:entity-submission:workflow-endpoint-tests.ensure-current-user-profile-async
@@ -29077,6 +29462,7 @@ symbols:
   language: csharp
   container: WorkflowEndpointTests
   end_line: 756
+  is_test: true
   callers:
   - symbol:entity-submission:workflow-endpoint-tests.seed-renewal-async
   callees: []
@@ -29091,6 +29477,7 @@ symbols:
   language: csharp
   container: WorkflowEndpointTests
   end_line: 446
+  is_test: true
   callers: []
   callees:
   - symbol:entity-submission:workflow-endpoint-tests.ensure-current-user-profile-async
@@ -29107,6 +29494,7 @@ symbols:
   language: csharp
   container: WorkflowEndpointTests
   end_line: 477
+  is_test: true
   callers:
   - symbol:entity-submission:workflow-endpoint-tests.post-submission-transition-to-ready-for-uw-review-when-incomplete-returns409
   - symbol:entity-submission:workflow-endpoint-tests.put-submission-assignment-ready-for-uw-review-to-non-underwriter-returns400
@@ -29123,6 +29511,7 @@ symbols:
   language: csharp
   container: WorkflowEndpointTests
   end_line: 63
+  is_test: true
   callers: []
   callees:
   - symbol:entity-submission:workflow-endpoint-tests.ensure-current-user-profile-async
@@ -29138,6 +29527,7 @@ symbols:
   language: csharp
   container: WorkflowEndpointTests
   end_line: 237
+  is_test: true
   callers: []
   callees:
   - symbol:entity-submission:workflow-endpoint-tests.create-submission-via-api-async
@@ -29153,6 +29543,7 @@ symbols:
   language: csharp
   container: WorkflowEndpointTests
   end_line: 700
+  is_test: true
   callers:
   - symbol:entity-submission:workflow-endpoint-tests.ensure-current-user-profile-async
   callees: []
@@ -29167,6 +29558,7 @@ symbols:
   language: csharp
   container: WorkflowEndpointTests
   end_line: 295
+  is_test: true
   callers: []
   callees:
   - symbol:entity-submission:workflow-endpoint-tests.ensure-current-user-profile-async
@@ -29183,6 +29575,7 @@ symbols:
   language: csharp
   container: WorkflowEndpointTests
   end_line: 77
+  is_test: true
   callers: []
   callees:
   - symbol:entity-submission:workflow-endpoint-tests.ensure-current-user-profile-async
@@ -29198,6 +29591,7 @@ symbols:
   language: csharp
   container: WorkflowEndpointTests
   end_line: 529
+  is_test: true
   callers:
   - symbol:entity-submission:workflow-endpoint-tests.seed-policy-async
   callees: []
@@ -29213,6 +29607,7 @@ symbols:
   language: csharp
   container: WorkflowEndpointTests
   end_line: 749
+  is_test: true
   callers:
   - symbol:entity-submission:workflow-endpoint-tests.post-renewal-transition-valid-returns201-and-persists
   - symbol:entity-submission:workflow-endpoint-tests.post-submission-transition-to-ready-for-uw-review-when-incomplete-returns409
@@ -29229,6 +29624,7 @@ symbols:
   language: csharp
   container: WorkflowEndpointTests
   end_line: 354
+  is_test: true
   callers: []
   callees:
   - symbol:entity-submission:workflow-endpoint-tests.ensure-current-user-profile-async
@@ -29247,6 +29643,7 @@ symbols:
   language: csharp
   container: WorkflowEndpointTests
   end_line: 329
+  is_test: true
   callers: []
   callees:
   - symbol:entity-submission:workflow-endpoint-tests.ensure-current-user-profile-async
@@ -29263,6 +29660,7 @@ symbols:
   language: csharp
   container: WorkflowEndpointTests
   end_line: 205
+  is_test: true
   callers: []
   callees:
   - symbol:entity-submission:workflow-endpoint-tests.create-submission-via-api-async
@@ -29280,6 +29678,7 @@ symbols:
   language: csharp
   container: WorkflowEndpointTests
   end_line: 183
+  is_test: true
   callers: []
   callees:
   - symbol:entity-submission:workflow-endpoint-tests.create-submission-via-api-async
@@ -29296,6 +29695,7 @@ symbols:
   language: csharp
   container: WorkflowEndpointTests
   end_line: 160
+  is_test: true
   callers: []
   callees:
   - symbol:entity-submission:workflow-endpoint-tests.create-submission-via-api-async
@@ -29312,6 +29712,7 @@ symbols:
   language: csharp
   container: WorkflowEndpointTests
   end_line: 739
+  is_test: true
   callers:
   - symbol:entity-submission:workflow-endpoint-tests.put-renewal-assignment-as-distribution-manager-returns200-and-persists
   - symbol:entity-submission:workflow-endpoint-tests.put-renewal-assignment-as-distribution-user-returns403
@@ -29330,6 +29731,7 @@ symbols:
   language: csharp
   container: WorkflowEndpointTests
   end_line: 431
+  is_test: true
   callers: []
   callees:
   - symbol:entity-submission:workflow-endpoint-tests.ensure-current-user-profile-async
@@ -29349,6 +29751,7 @@ symbols:
   language: csharp
   container: WorkflowEndpointTests
   end_line: 389
+  is_test: true
   callers: []
   callees:
   - symbol:entity-submission:workflow-endpoint-tests.ensure-current-user-profile-async
@@ -29367,6 +29770,7 @@ symbols:
   language: csharp
   container: WorkflowEndpointTests
   end_line: 223
+  is_test: true
   callers: []
   callees:
   - symbol:entity-submission:workflow-endpoint-tests.ensure-current-user-profile-async
@@ -29386,6 +29790,7 @@ symbols:
   language: csharp
   container: WorkflowEndpointTests
   end_line: 626
+  is_test: true
   callers:
   - symbol:entity-submission:workflow-endpoint-tests.create-submission-via-api-async
   - symbol:entity-submission:workflow-endpoint-tests.create-submission-with-valid-data-returns201-and-sets-current-user-as-owner
@@ -29404,6 +29809,7 @@ symbols:
   language: csharp
   container: WorkflowEndpointTests
   end_line: 520
+  is_test: true
   callers:
   - symbol:entity-submission:workflow-endpoint-tests.create-renewal-for-policy-with-existing-active-renewal-returns409
   - symbol:entity-submission:workflow-endpoint-tests.create-renewal-with-valid-policy-returns201-with-policy-context
@@ -29429,6 +29835,7 @@ symbols:
   language: csharp
   container: WorkflowEndpointTests
   end_line: 580
+  is_test: true
   callers:
   - symbol:entity-submission:workflow-endpoint-tests.create-renewal-for-policy-with-existing-active-renewal-returns409
   - symbol:entity-submission:workflow-endpoint-tests.get-renewal-existing-returns-detail-with-policy-account-and-broker-context
@@ -29453,6 +29860,7 @@ symbols:
   language: csharp
   container: WorkflowEndpointTests
   end_line: 681
+  is_test: true
   callers:
   - symbol:entity-submission:workflow-endpoint-tests.get-submission-existing-returns200-with-completeness-payload
   - symbol:entity-submission:workflow-endpoint-tests.list-submissions-filtered-by-account-id-returns-only-seeded-submission
@@ -29473,6 +29881,7 @@ symbols:
   language: csharp
   container: WorkflowEndpointTests
   end_line: 729
+  is_test: true
   callers:
   - symbol:entity-submission:workflow-endpoint-tests.ensure-current-user-profile-async
   - symbol:entity-submission:workflow-endpoint-tests.put-renewal-assignment-as-distribution-manager-returns200-and-persists
@@ -29489,6 +29898,7 @@ symbols:
   language: csharp
   container: WorkflowEndpointTests
   end_line: 147
+  is_test: true
   callers: []
   callees:
   - symbol:entity-submission:workflow-endpoint-tests.ensure-current-user-profile-async
@@ -29506,6 +29916,7 @@ symbols:
   language: csharp
   container: WorkflowEndpointTests
   end_line: 102
+  is_test: true
   callers: []
   callees:
   - symbol:entity-submission:workflow-endpoint-tests.create-submission-via-api-async
@@ -29521,6 +29932,7 @@ symbols:
   visibility: public
   language: csharp
   end_line: 757
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-task-item:20260322184705-f0004-add-task-and-user-profile-indexes.designer.f0004-add-task-and-user-profile-indexes
@@ -29790,6 +30202,7 @@ symbols:
   language: csharp
   container: StubAuthorizationService
   end_line: 949
+  is_test: true
   callers:
   - symbol:capability-authorization-enforcement:i-authorization-service.authorize-async
   callees: []
@@ -29806,6 +30219,7 @@ symbols:
   language: csharp
   container: StubBrokerRepository
   end_line: 959
+  is_test: true
   callers:
   - symbol:entity-broker:i-broker-repository.add-async
   - symbol:entity-task-item:task-repository.add-async
@@ -29824,6 +30238,7 @@ symbols:
   language: csharp
   container: StubBrokerRepository
   end_line: 961
+  is_test: true
   callers:
   - symbol:entity-broker:i-broker-repository.exists-by-license-async
   callees: []
@@ -29840,6 +30255,7 @@ symbols:
   language: csharp
   container: StubBrokerRepository
   end_line: 956
+  is_test: true
   callers:
   - symbol:entity-broker:i-broker-repository.get-by-id-async
   callees: []
@@ -29857,6 +30273,7 @@ symbols:
   language: csharp
   container: StubBrokerRepository
   end_line: 957
+  is_test: true
   callers:
   - symbol:entity-broker:i-broker-repository.get-by-id-including-deactivated-async
   callees: []
@@ -29874,6 +30291,7 @@ symbols:
   language: csharp
   container: StubBrokerRepository
   end_line: 955
+  is_test: true
   callers:
   - symbol:entity-broker:i-broker-repository.get-id-by-broker-tenant-id-async
   callees: []
@@ -29891,6 +30309,7 @@ symbols:
   language: csharp
   container: StubBrokerRepository
   end_line: 962
+  is_test: true
   callers:
   - symbol:entity-broker:i-broker-repository.has-active-submissions-or-renewals-async
   callees: []
@@ -29908,6 +30327,7 @@ symbols:
   language: csharp
   container: StubBrokerRepository
   end_line: 958
+  is_test: true
   callers:
   - symbol:entity-broker:i-broker-repository.list-async
   callees: []
@@ -29924,6 +30344,7 @@ symbols:
   language: csharp
   container: StubBrokerRepository
   end_line: 960
+  is_test: true
   callers:
   - symbol:entity-broker:i-broker-repository.update-async
   callees: []
@@ -29940,6 +30361,7 @@ symbols:
   language: csharp
   container: StubCurrentUserService
   end_line: 918
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-task-item:stub-current-user-service.display-name
@@ -29953,6 +30375,7 @@ symbols:
   language: csharp
   container: StubCurrentUserService
   end_line: 915
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-task-item:stub-current-user-service.regions
@@ -29966,6 +30389,7 @@ symbols:
   language: csharp
   container: StubCurrentUserService
   end_line: 917
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-task-item:stub-current-user-service.roles
@@ -29979,6 +30403,7 @@ symbols:
   language: csharp
   container: StubCurrentUserService
   end_line: 916
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-task-item:stub-current-user-service.user-id
@@ -29992,6 +30417,7 @@ symbols:
   language: csharp
   container: StubCurrentUserService
   end_line: 914
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-task-item:stub-task-repository.add-async
@@ -30005,6 +30431,7 @@ symbols:
   language: csharp
   container: StubTaskRepository
   end_line: 870
+  is_test: true
   callers:
   - symbol:entity-task-item:i-task-repository.add-async
   - symbol:entity-task-item:task-repository.add-async
@@ -30022,6 +30449,7 @@ symbols:
   language: csharp
   container: StubTaskRepository
   end_line: 838
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-task-item:stub-task-repository.get-broker-scoped-tasks-async
@@ -30035,6 +30463,7 @@ symbols:
   language: csharp
   container: StubTaskRepository
   end_line: 851
+  is_test: true
   callers:
   - symbol:entity-task-item:i-task-repository.get-broker-scoped-tasks-async
   callees: []
@@ -30051,6 +30480,7 @@ symbols:
   language: csharp
   container: StubTaskRepository
   end_line: 843
+  is_test: true
   callers:
   - symbol:entity-task-item:i-task-repository.get-by-id-async
   callees: []
@@ -30067,6 +30497,7 @@ symbols:
   language: csharp
   container: StubTaskRepository
   end_line: 847
+  is_test: true
   callers:
   - symbol:entity-task-item:i-task-repository.get-my-tasks-async
   callees: []
@@ -30083,6 +30514,7 @@ symbols:
   language: csharp
   container: StubTaskRepository
   end_line: 863
+  is_test: true
   callers:
   - symbol:entity-task-item:i-task-repository.get-task-list-async
   callees: []
@@ -30100,6 +30532,7 @@ symbols:
   language: csharp
   container: StubTaskRepository
   end_line: 873
+  is_test: true
   callers:
   - symbol:entity-task-item:i-task-repository.resolve-linked-entity-name-async
   callees: []
@@ -30116,6 +30549,7 @@ symbols:
   language: csharp
   container: StubTaskRepository
   end_line: 840
+  is_test: true
   callers:
   - symbol:entity-task-item:task-service-tests.seed-task
   - symbol:entity-task-item:task-service-tests.seed-task-with-creator
@@ -30132,6 +30566,7 @@ symbols:
   language: csharp
   container: StubTimelineRepository
   end_line: 884
+  is_test: true
   callers:
   - symbol:entity-activity-timeline-event:i-timeline-repository.add-event-async
   callees: []
@@ -30148,6 +30583,7 @@ symbols:
   language: csharp
   container: StubTimelineRepository
   end_line: 878
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-task-item:stub-timeline-repository.list-events-async
@@ -30161,6 +30597,7 @@ symbols:
   language: csharp
   container: StubTimelineRepository
   end_line: 888
+  is_test: true
   callers:
   - symbol:entity-activity-timeline-event:i-timeline-repository.list-events-async
   callees: []
@@ -30177,6 +30614,7 @@ symbols:
   language: csharp
   container: StubTimelineRepository
   end_line: 896
+  is_test: true
   callers:
   - symbol:entity-activity-timeline-event:i-timeline-repository.list-events-for-broker-user-async
   callees: []
@@ -30193,6 +30631,7 @@ symbols:
   language: csharp
   container: StubTimelineRepository
   end_line: 892
+  is_test: true
   callers:
   - symbol:entity-activity-timeline-event:i-timeline-repository.list-events-paged-async
   callees: []
@@ -30209,6 +30648,7 @@ symbols:
   language: csharp
   container: StubUnitOfWork
   end_line: 906
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-task-item:stub-unit-of-work.commit-count
@@ -30222,6 +30662,7 @@ symbols:
   language: csharp
   container: StubUnitOfWork
   end_line: 901
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-task-item:stub-user-profile-repository.get-by-id-async
@@ -30236,6 +30677,7 @@ symbols:
   language: csharp
   container: StubUserProfileRepository
   end_line: 972
+  is_test: true
   callers:
   - symbol:entity-user-profile:i-user-profile-repository.get-by-id-async
   callees: []
@@ -30253,6 +30695,7 @@ symbols:
   language: csharp
   container: StubUserProfileRepository
   end_line: 980
+  is_test: true
   callers:
   - symbol:entity-user-profile:i-user-profile-repository.search-async
   callees: []
@@ -30269,6 +30712,7 @@ symbols:
   language: csharp
   container: StubUserProfileRepository
   end_line: 969
+  is_test: true
   callers:
   - symbol:entity-renewal:workflow-service-tests.create-renewal-service
   - symbol:entity-renewal:workflow-service-tests.create-submission-service
@@ -30390,6 +30834,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 71
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.get-current-user-id
@@ -30404,6 +30849,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 396
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.get-current-user-id
@@ -30418,6 +30864,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 172
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-task-item:task-endpoint-tests.create-task-invalid-linked-entity-type-returns400
@@ -30431,6 +30878,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 134
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.get-current-user-id
@@ -30445,6 +30893,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 123
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.get-current-user-id
@@ -30459,6 +30908,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 145
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.get-current-user-id
@@ -30473,6 +30923,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 775
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.get-current-user-id
@@ -30488,6 +30939,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 810
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.get-current-user-id
@@ -30502,6 +30954,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 101
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.get-current-user-id
@@ -30516,6 +30969,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 792
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-task-item:task-endpoint-tests.create-task-past-due-date-returns201
@@ -30529,6 +30983,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 410
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.get-current-user-id
@@ -30543,6 +30998,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 89
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.get-current-user-id
@@ -30557,6 +31013,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 424
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.get-current-user-id
@@ -30571,6 +31028,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 112
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.get-current-user-id
@@ -30585,6 +31043,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 160
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.get-current-user-id
@@ -30599,6 +31058,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 58
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.get-current-user-id
@@ -30613,6 +31073,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 989
+  is_test: true
   callers:
   - symbol:entity-task-item:task-endpoint-tests.delete-task-already-deleted-returns404
   - symbol:entity-task-item:task-endpoint-tests.delete-task-completed-task-returns204
@@ -30648,6 +31109,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 998
+  is_test: true
   callers:
   - symbol:entity-task-item:task-endpoint-tests.create-test-task
   callees:
@@ -30663,6 +31125,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 348
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.create-test-task
@@ -30678,6 +31141,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 368
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.create-test-task
@@ -30694,6 +31158,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 919
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.get-or-create-user-id
@@ -30709,6 +31174,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 381
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.create-test-task
@@ -30724,6 +31190,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 539
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.create-test-task
@@ -30740,6 +31207,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 356
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service.delete-async
@@ -30754,6 +31222,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 326
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.create-test-task
@@ -30769,6 +31238,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 528
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.create-test-task
@@ -30784,6 +31254,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 337
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.create-test-task
@@ -30799,6 +31270,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 36
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-task-item:task-endpoint-tests.full-lifecycle-create-update-completion-reopen-delete
@@ -30812,6 +31284,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 583
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.get-current-user-id
@@ -30828,6 +31301,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 950
+  is_test: true
   callers:
   - symbol:entity-task-item:task-endpoint-tests.create-task-default-priority-returns-normal
   - symbol:entity-task-item:task-endpoint-tests.create-task-description-too-long-returns400
@@ -30864,6 +31338,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 983
+  is_test: true
   callers:
   - symbol:entity-task-item:task-endpoint-tests.create-task-manager-assigns-to-other-returns201
   - symbol:entity-task-item:task-endpoint-tests.delete-task-creator-returns204
@@ -30883,6 +31358,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 646
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.get-current-user-id
@@ -30898,6 +31374,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 659
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-task-item:task-endpoint-tests.get-tasks-empty-result-returns-empty-array
@@ -30911,6 +31388,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 702
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-task-item:task-endpoint-tests.get-tasks-my-work-default-when-no-view-param
@@ -30924,6 +31402,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 622
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.get-current-user-id
@@ -30938,6 +31417,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 606
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.get-current-user-id
@@ -30952,6 +31432,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 682
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.get-current-user-id
@@ -30966,6 +31447,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 27
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-task-item:task-endpoint-tests.put-json-async
@@ -30980,6 +31462,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 1026
+  is_test: true
   callers:
   - symbol:entity-task-item:task-endpoint-tests.delete-task-completed-task-returns204
   - symbol:entity-task-item:task-endpoint-tests.delete-task-in-progress-task-returns204
@@ -31015,6 +31498,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 747
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-task-item:task-endpoint-tests.search-users-query-too-short-returns400
@@ -31028,6 +31512,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 736
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-task-item:task-endpoint-tests.search-users-valid-query-returns-matches
@@ -31041,6 +31526,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 725
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-task-item:task-endpoint-tests.task-endpoint-tests
@@ -31053,6 +31539,7 @@ symbols:
   visibility: public
   language: csharp
   end_line: 1027
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-task-item:task-endpoint-tests.update-task-assignee-changes-status-returns200
@@ -31066,6 +31553,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 890
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.get-or-create-user-id
@@ -31081,6 +31569,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 189
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.create-test-task
@@ -31096,6 +31585,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 511
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.get-current-user-id
@@ -31111,6 +31601,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 495
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.get-current-user-id
@@ -31126,6 +31617,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 861
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.get-or-create-user-id
@@ -31141,6 +31633,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 839
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.get-or-create-user-id
@@ -31156,6 +31649,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 439
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.create-test-task
@@ -31171,6 +31665,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 253
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.create-test-task
@@ -31186,6 +31681,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 312
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.create-test-task
@@ -31201,6 +31697,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 450
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.create-test-task
@@ -31216,6 +31713,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 288
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.create-test-task
@@ -31231,6 +31729,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 277
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.create-test-task
@@ -31245,6 +31744,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 264
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.put-json-async
@@ -31259,6 +31759,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 465
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.create-test-task
@@ -31274,6 +31775,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 243
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.create-test-task
@@ -31289,6 +31791,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 217
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.create-test-task
@@ -31304,6 +31807,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 478
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.create-test-task
@@ -31319,6 +31823,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 228
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.create-test-task
@@ -31334,6 +31839,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 202
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.create-test-task
@@ -31349,6 +31855,7 @@ symbols:
   language: csharp
   container: TaskEndpointTests
   end_line: 299
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-endpoint-tests.create-test-task
@@ -31796,6 +32303,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 556
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:stub-user-profile-repository.seed
@@ -31812,6 +32320,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 574
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service-tests.create-service
@@ -31827,6 +32336,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 61
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service-tests.create-service
@@ -31842,6 +32352,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 91
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service-tests.create-service
@@ -31857,6 +32368,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 512
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:stub-user-profile-repository.seed
@@ -31873,6 +32385,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 591
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service-tests.create-service
@@ -31888,6 +32401,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 530
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service-tests.create-service
@@ -31903,6 +32417,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 400
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service-tests.create-service
@@ -31918,6 +32433,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 79
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service-tests.create-service
@@ -31933,6 +32449,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 420
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service-tests.create-service
@@ -31948,6 +32465,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 50
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service-tests.create-service
@@ -31963,6 +32481,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 105
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service-tests.create-service
@@ -31978,6 +32497,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 26
+  is_test: true
   callers:
   - symbol:entity-task-item:task-service-tests.create-async-assign-to-inactive-user-returns-inactive-assignee
   - symbol:entity-task-item:task-service-tests.create-async-assign-to-non-existent-returns-invalid-assignee
@@ -32033,6 +32553,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 296
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service-tests.create-service
@@ -32049,6 +32570,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 784
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service-tests.create-service
@@ -32065,6 +32587,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 272
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service-tests.create-service
@@ -32080,6 +32603,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 283
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service-tests.create-service
@@ -32096,6 +32620,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 262
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service-tests.create-service
@@ -32112,6 +32637,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 450
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service-tests.create-service
@@ -32128,6 +32654,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 437
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service-tests.create-service
@@ -32144,6 +32671,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 828
+  is_test: true
   callers:
   - symbol:entity-task-item:task-service-tests.update-async-assignee-can-change-status-on-manager-created-task
   - symbol:entity-task-item:task-service-tests.update-async-assignee-cannot-reassign-returns-forbidden
@@ -32178,6 +32706,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 480
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service-tests.create-service
@@ -32193,6 +32722,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 465
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service-tests.create-service
@@ -32208,6 +32738,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 805
+  is_test: true
   callers:
   - symbol:entity-task-item:task-service-tests.delete-async-completed-task-succeeds
   - symbol:entity-task-item:task-service-tests.delete-async-other-users-task-returns-not-found
@@ -32240,6 +32771,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 825
+  is_test: true
   callers:
   - symbol:entity-task-item:task-service-tests.delete-async-creator-can-delete-succeeds
   - symbol:entity-task-item:task-service-tests.update-async-assignee-can-change-status-on-manager-created-task
@@ -32262,6 +32794,7 @@ symbols:
   visibility: internal
   language: csharp
   end_line: 950
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-task-item:task-service-tests.stub-broker-repository
@@ -32274,6 +32807,7 @@ symbols:
   visibility: internal
   language: csharp
   end_line: 963
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-task-item:task-service-tests.stub-current-user-service
@@ -32286,6 +32820,7 @@ symbols:
   visibility: internal
   language: csharp
   end_line: 919
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-task-item:task-service-tests.stub-task-repository
@@ -32298,6 +32833,7 @@ symbols:
   visibility: internal
   language: csharp
   end_line: 874
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-task-item:task-service-tests.stub-timeline-repository
@@ -32310,6 +32846,7 @@ symbols:
   visibility: internal
   language: csharp
   end_line: 897
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-task-item:task-service-tests.stub-unit-of-work
@@ -32322,6 +32859,7 @@ symbols:
   visibility: internal
   language: csharp
   end_line: 907
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-task-item:task-service-tests.stub-user-profile-repository
@@ -32334,6 +32872,7 @@ symbols:
   visibility: internal
   language: csharp
   end_line: 981
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-task-item:task-service-tests.task-service-tests
@@ -32346,6 +32885,7 @@ symbols:
   visibility: public
   language: csharp
   end_line: 829
+  is_test: true
   callers: []
   callees: []
 - id: symbol:entity-task-item:task-service-tests.update-async-assignee-can-change-status-on-manager-created-task
@@ -32359,6 +32899,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 652
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service-tests.create-service
@@ -32376,6 +32917,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 732
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service-tests.create-service
@@ -32393,6 +32935,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 242
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service-tests.create-service
@@ -32410,6 +32953,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 227
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service-tests.create-service
@@ -32427,6 +32971,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 633
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service-tests.create-service
@@ -32444,6 +32989,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 614
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service-tests.create-service
@@ -32461,6 +33007,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 712
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:stub-user-profile-repository.seed
@@ -32479,6 +33026,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 681
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:stub-user-profile-repository.seed
@@ -32497,6 +33045,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 367
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service-tests.create-service
@@ -32514,6 +33063,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 183
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service-tests.create-service
@@ -32530,6 +33080,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 197
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service-tests.create-service
@@ -32547,6 +33098,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 760
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:stub-user-profile-repository.seed
@@ -32565,6 +33117,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 212
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service-tests.create-service
@@ -32582,6 +33135,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 387
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service-tests.create-service
@@ -32599,6 +33153,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 347
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service-tests.create-service
@@ -32616,6 +33171,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 317
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service-tests.create-service
@@ -32633,6 +33189,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 157
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service-tests.create-service
@@ -32650,6 +33207,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 140
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service-tests.create-service
@@ -32667,6 +33225,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 332
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service-tests.create-service
@@ -32684,6 +33243,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 171
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service-tests.create-service
@@ -32701,6 +33261,7 @@ symbols:
   language: csharp
   container: TaskServiceTests
   end_line: 124
+  is_test: true
   callers: []
   callees:
   - symbol:entity-task-item:task-service-tests.create-service
@@ -33918,6 +34479,7 @@ symbols:
   visibility: public
   language: csharp
   end_line: 170
+  is_test: true
   callers: []
   callees: []
 - id: symbol:event-contact-created:contact-endpoint-tests.create-broker-async
@@ -33931,6 +34493,7 @@ symbols:
   language: csharp
   container: ContactEndpointTests
   end_line: 20
+  is_test: true
   callers:
   - symbol:event-contact-created:contact-endpoint-tests.create-contact-async
   - symbol:event-contact-created:contact-endpoint-tests.create-contact-response-includes-row-version
@@ -33949,6 +34512,7 @@ symbols:
   language: csharp
   container: ContactEndpointTests
   end_line: 169
+  is_test: true
   callers:
   - symbol:event-contact-created:contact-endpoint-tests.delete-contact-existing-returns204
   - symbol:event-contact-created:contact-endpoint-tests.delete-contact-then-get-returns404
@@ -33968,6 +34532,7 @@ symbols:
   language: csharp
   container: ContactEndpointTests
   end_line: 151
+  is_test: true
   callers: []
   callees:
   - symbol:event-contact-created:contact-endpoint-tests.create-broker-async
@@ -33982,6 +34547,7 @@ symbols:
   language: csharp
   container: ContactEndpointTests
   end_line: 34
+  is_test: true
   callers: []
   callees:
   - symbol:event-contact-created:contact-endpoint-tests.create-broker-async
@@ -33996,6 +34562,7 @@ symbols:
   language: csharp
   container: ContactEndpointTests
   end_line: 106
+  is_test: true
   callers: []
   callees:
   - symbol:event-contact-created:contact-endpoint-tests.create-contact-async
@@ -34011,6 +34578,7 @@ symbols:
   language: csharp
   container: ContactEndpointTests
   end_line: 117
+  is_test: true
   callers: []
   callees:
   - symbol:event-contact-created:contact-endpoint-tests.create-contact-async
@@ -34026,6 +34594,7 @@ symbols:
   language: csharp
   container: ContactEndpointTests
   end_line: 65
+  is_test: true
   callers: []
   callees:
   - symbol:event-contact-created:contact-endpoint-tests.create-contact-async
@@ -34040,6 +34609,7 @@ symbols:
   language: csharp
   container: ContactEndpointTests
   end_line: 52
+  is_test: true
   callers: []
   callees: []
 - id: symbol:event-contact-created:contact-endpoint-tests.json-paginated-contact-list
@@ -34053,6 +34623,7 @@ symbols:
   language: csharp
   container: ContactEndpointTests
   end_line: 154
+  is_test: true
   callers: []
   callees: []
 - id: symbol:event-contact-created:contact-endpoint-tests.list-contacts-filter-by-broker-id-returns-filtered
@@ -34066,6 +34637,7 @@ symbols:
   language: csharp
   container: ContactEndpointTests
   end_line: 45
+  is_test: true
   callers: []
   callees:
   - symbol:event-contact-created:contact-endpoint-tests.create-broker-async
@@ -34080,6 +34652,7 @@ symbols:
   language: csharp
   container: ContactEndpointTests
   end_line: 136
+  is_test: true
   callers: []
   callees:
   - symbol:event-contact-created:contact-endpoint-tests.create-broker-async
@@ -34094,6 +34667,7 @@ symbols:
   language: csharp
   container: ContactEndpointTests
   end_line: 96
+  is_test: true
   callers: []
   callees:
   - symbol:event-contact-created:contact-endpoint-tests.create-contact-async
@@ -34108,6 +34682,7 @@ symbols:
   language: csharp
   container: ContactEndpointTests
   end_line: 84
+  is_test: true
   callers: []
   callees:
   - symbol:event-contact-created:contact-endpoint-tests.create-contact-async
@@ -34442,6 +35017,7 @@ symbols:
   visibility: local
   language: typescript
   end_line: 126
+  is_test: true
   callers: []
   callees: []
 - id: symbol:evidence-theme-smoke-visual-tests:theme-smoke.spec.composite-over
@@ -34454,6 +35030,7 @@ symbols:
   visibility: local
   language: typescript
   end_line: 542
+  is_test: true
   callers: []
   callees: []
 - id: symbol:evidence-theme-smoke-visual-tests:theme-smoke.spec.contrast-ratio
@@ -34466,6 +35043,7 @@ symbols:
   visibility: local
   language: typescript
   end_line: 549
+  is_test: true
   callers: []
   callees:
   - symbol:evidence-theme-smoke-visual-tests:theme-smoke.spec.relative-luminance
@@ -34479,6 +35057,7 @@ symbols:
   visibility: local
   language: typescript
   end_line: 498
+  is_test: true
   callers: []
   callees: []
 - id: symbol:evidence-theme-smoke-visual-tests:theme-smoke.spec.open-app-page
@@ -34491,6 +35070,7 @@ symbols:
   visibility: local
   language: typescript
   end_line: 110
+  is_test: true
   callers: []
   callees: []
 - id: symbol:evidence-theme-smoke-visual-tests:theme-smoke.spec.parse-css-color
@@ -34503,6 +35083,7 @@ symbols:
   visibility: local
   language: typescript
   end_line: 528
+  is_test: true
   callers: []
   callees: []
 - id: symbol:evidence-theme-smoke-visual-tests:theme-smoke.spec.relative-luminance
@@ -34515,6 +35096,7 @@ symbols:
   visibility: local
   language: typescript
   end_line: 558
+  is_test: true
   callers:
   - symbol:evidence-theme-smoke-visual-tests:theme-smoke.spec.contrast-ratio
   callees: []
@@ -34528,6 +35110,7 @@ symbols:
   visibility: local
   language: typescript
   end_line: 500
+  is_test: true
   callers: []
   callees: []
 - id: symbol:evidence-theme-smoke-visual-tests:theme-smoke.spec.theme
@@ -34540,6 +35123,7 @@ symbols:
   visibility: local
   language: typescript
   end_line: 3
+  is_test: true
   callers: []
   callees: []
 - id: symbol:migration-f0005-idp-principal-refactor:20260301000000-f0005-idp-principal-refactor.f0005-idp-principal-refactor
@@ -34832,6 +35416,7 @@ symbols:
   visibility: local
   language: typescript
   end_line: 65
+  is_test: true
   callers: []
   callees: []
 - id: symbol:ui_route-login:login-page.test.render-with-router
@@ -34844,6 +35429,7 @@ symbols:
   visibility: local
   language: typescript
   end_line: 76
+  is_test: true
   callers: []
   callees: []
 - id: symbol:ui_route-login:login-page.test.set-oidc-env
@@ -34856,5 +35442,6 @@ symbols:
   visibility: local
   language: typescript
   end_line: 43
+  is_test: true
   callers: []
   callees: []
