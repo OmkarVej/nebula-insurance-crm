@@ -1,0 +1,45 @@
+version: 0
+generated_at: '2026-05-18T01:45:06+00:00'
+summary:
+  total_invocations: 7
+  by_language:
+    csharp: 5
+    typescript: 2
+  source_files: 3
+  bound_targets: 3
+invocations:
+- source_file: engine/tests/Nebula.Tests/Unit/AuthEndpoints/LogoutHandlerTests.cs
+  source_line: 36
+  language: csharp
+  target_symbol: symbol:config_key-authentication-authority:auth-endpoints.logout-async
+  target_node: config_key:authentication-authority
+- source_file: engine/tests/Nebula.Tests/Unit/AuthEndpoints/LogoutHandlerTests.cs
+  source_line: 71
+  language: csharp
+  target_symbol: symbol:config_key-authentication-authority:auth-endpoints.logout-async
+  target_node: config_key:authentication-authority
+- source_file: engine/tests/Nebula.Tests/Unit/AuthEndpoints/LogoutHandlerTests.cs
+  source_line: 93
+  language: csharp
+  target_symbol: symbol:config_key-authentication-authority:auth-endpoints.logout-async
+  target_node: config_key:authentication-authority
+- source_file: engine/tests/Nebula.Tests/Unit/AuthEndpoints/LogoutHandlerTests.cs
+  source_line: 116
+  language: csharp
+  target_symbol: symbol:config_key-authentication-authority:auth-endpoints.logout-async
+  target_node: config_key:authentication-authority
+- source_file: engine/tests/Nebula.Tests/Unit/AuthEndpoints/LogoutHandlerTests.cs
+  source_line: 144
+  language: csharp
+  target_symbol: symbol:config_key-authentication-authority:auth-endpoints.logout-async
+  target_node: config_key:authentication-authority
+- source_file: experience/src/features/lob-attributes/components/DynamicAttributePanel.tsx
+  source_line: 30
+  language: typescript
+  target_symbol: symbol:capability-validator-equivalence:cyber.is-cyber-line-of-business
+  target_node: capability:validator-equivalence
+- source_file: experience/src/test-setup.ts
+  source_line: 58
+  language: typescript
+  target_symbol: symbol:entity-document:documents.reset-document-mock-state
+  target_node: entity:document

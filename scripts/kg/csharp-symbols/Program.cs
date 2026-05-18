@@ -1,7 +1,8 @@
 // Symbol-layer extractor for C#. Invoked by scripts/kg/symbols.py.
-// Reads a JSON array of repo-relative file paths from stdin, parses them
-// with Roslyn into a single CSharpCompilation, and emits a JSON array of
-// symbol records to stdout. Each method/property/constructor record carries:
+// Reads a JSON array of repo-relative file paths from stdin (the bound-files
+// list — emission scope), parses them with Roslyn into a single
+// CSharpCompilation, and emits a JSON array of symbol records to stdout.
+// Each method/property/constructor record carries:
 //
 //   calls       — resolved {name, container} for invocations whose target
 //                 symbol the semantic model can determine. Falls back to
@@ -10,6 +11,24 @@
 //   implements  — {name, container} for every interface member this method
 //                 satisfies. Lets symbols.py grow polymorphic-dispatch groups
 //                 so reaching an interface member reaches its implementations.
+//   line, end_line — 1-based start and end lines of the declaration span;
+//                 consumed by diff-impact.py to map changed hunks to symbols.
+//
+// CLI args:
+//   --compilation-root <dir>   widens the parse scope. Each root is walked
+//                              recursively for *.cs (bin/obj/node_modules
+//                              skipped); discovered files join the
+//                              compilation but symbols are emitted only for
+//                              files present in stdin (the bound set).
+//                              Repeatable; comma-separated also accepted.
+//                              Default: none — compilation = stdin only,
+//                              preserving prior behavior.
+//   --sidecar <path>           write {source_file, source_line, target} JSON
+//                              for every invocation in an UNBOUND file that
+//                              resolves to a symbol declared in a BOUND
+//                              file. Consumed by symbols.py to build
+//                              unbound-but-referenced.yaml. When omitted,
+//                              no sidecar is written.
 //
 // The compilation is built without metadata references — we only care about
 // resolving calls between application source symbols. Framework calls are
@@ -40,10 +59,22 @@ public sealed record SymbolItem(
     [property: JsonPropertyName("container")] string? Container,
     [property: JsonPropertyName("kind")] string Kind,
     [property: JsonPropertyName("line")] int Line,
+    [property: JsonPropertyName("end_line")] int EndLine,
     [property: JsonPropertyName("signature")] string Signature,
     [property: JsonPropertyName("visibility")] string Visibility,
     [property: JsonPropertyName("calls")] CallRef[] Calls,
     [property: JsonPropertyName("implements")] CallRef[] Implements
+);
+
+public sealed record SidecarTarget(
+    [property: JsonPropertyName("name")] string Name,
+    [property: JsonPropertyName("container")] string? Container
+);
+
+public sealed record SidecarEntry(
+    [property: JsonPropertyName("source_file")] string SourceFile,
+    [property: JsonPropertyName("source_line")] int SourceLine,
+    [property: JsonPropertyName("target")] SidecarTarget Target
 );
 
 public static class Program
@@ -56,7 +87,7 @@ public static class Program
 
     public static int Main(string[] args)
     {
-        try { return Run(); }
+        try { return Run(args); }
         catch (Exception ex)
         {
             Console.Error.WriteLine("extractor crashed: " + ex);
@@ -64,13 +95,36 @@ public static class Program
         }
     }
 
-    private static int Run()
+    private static int Run(string[] args)
     {
+        var compilationRoots = new List<string>();
+        string? sidecarPath = null;
+        for (int i = 0; i < args.Length; i++)
+        {
+            if (args[i] == "--compilation-root" && i + 1 < args.Length)
+            {
+                foreach (var part in args[++i].Split(','))
+                {
+                    var trimmed = part.Trim();
+                    if (trimmed.Length > 0) compilationRoots.Add(trimmed);
+                }
+            }
+            else if (args[i] == "--sidecar" && i + 1 < args.Length)
+            {
+                sidecarPath = args[++i];
+            }
+            else
+            {
+                Console.Error.WriteLine($"unknown arg: {args[i]}");
+                return 1;
+            }
+        }
+
         var stdin = Console.In.ReadToEnd();
-        string[] files;
+        string[] boundFiles;
         try
         {
-            files = JsonSerializer.Deserialize<string[]>(stdin) ?? Array.Empty<string>();
+            boundFiles = JsonSerializer.Deserialize<string[]>(stdin) ?? Array.Empty<string>();
         }
         catch (JsonException ex)
         {
@@ -78,25 +132,50 @@ public static class Program
             return 1;
         }
 
-        var trees = new List<(string Rel, SyntaxTree Tree)>(files.Length);
-        foreach (var rel in files)
-        {
-            string source;
-            try { source = File.ReadAllText(rel); }
-            catch (Exception ex)
-            {
-                Console.Error.WriteLine($"read failed {rel}: {ex.Message}");
-                continue;
-            }
+        // Normalize bound paths to forward slashes so they match SyntaxTree.FilePath.
+        var boundRels = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var rel in boundFiles) boundRels.Add(rel.Replace('\\', '/'));
 
-            try
+        var trees = new List<(string Rel, SyntaxTree Tree, bool IsBound)>(boundFiles.Length);
+
+        foreach (var rel in boundRels)
+        {
+            var tree = TryParse(rel);
+            if (tree is not null) trees.Add((rel, tree, IsBound: true));
+        }
+
+        // Compilation roots widen the parse scope. Files already in the bound
+        // set are skipped — otherwise the same file would appear twice as
+        // separate SyntaxTrees and overload resolution would deduplicate via
+        // SymbolEqualityComparer but cost extra parse time.
+        if (compilationRoots.Count > 0)
+        {
+            var cwdAbs = Environment.CurrentDirectory;
+            foreach (var root in compilationRoots)
             {
-                var tree = CSharpSyntaxTree.ParseText(SourceText.From(source), path: rel);
-                trees.Add((rel, tree));
-            }
-            catch (Exception ex)
-            {
-                Console.Error.WriteLine($"parse failed {rel}: {ex.Message}");
+                string rootAbs;
+                try { rootAbs = Path.GetFullPath(root); }
+                catch (Exception ex)
+                {
+                    Console.Error.WriteLine($"invalid compilation root '{root}': {ex.Message}");
+                    continue;
+                }
+                if (!Directory.Exists(rootAbs))
+                {
+                    Console.Error.WriteLine($"compilation root missing: {root}");
+                    continue;
+                }
+
+                foreach (var abs in EnumerateCSharpFiles(rootAbs))
+                {
+                    string rel;
+                    try { rel = Path.GetRelativePath(cwdAbs, abs).Replace('\\', '/'); }
+                    catch { continue; }
+                    if (boundRels.Contains(rel)) continue;
+
+                    var tree = TryParse(rel);
+                    if (tree is not null) trees.Add((rel, tree, IsBound: false));
+                }
             }
         }
 
@@ -109,21 +188,130 @@ public static class Program
             references: null,
             options: new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
 
-        var items = new List<SymbolItem>(capacity: trees.Count * 8);
+        var items = new List<SymbolItem>(capacity: boundRels.Count * 8);
+        var sidecar = sidecarPath is not null ? new List<SidecarEntry>() : null;
 
-        foreach (var (rel, tree) in trees)
+        foreach (var (rel, tree, isBound) in trees)
         {
             var root = (CompilationUnitSyntax)tree.GetRoot();
             var model = compilation.GetSemanticModel(tree);
 
-            foreach (var member in EnumerateTopLevelMembers(root))
+            if (isBound)
             {
-                EmitMember(rel, container: null, member, items, model);
+                foreach (var member in EnumerateTopLevelMembers(root))
+                {
+                    EmitMember(rel, container: null, member, items, model);
+                }
+            }
+            else if (sidecar is not null)
+            {
+                CollectSidecar(rel, root, model, boundRels, sidecar);
             }
         }
 
         Console.Out.Write(JsonSerializer.Serialize(items, JsonOptions));
+
+        if (sidecarPath is not null)
+        {
+            try
+            {
+                File.WriteAllText(sidecarPath, JsonSerializer.Serialize(sidecar, JsonOptions));
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"sidecar write failed {sidecarPath}: {ex.Message}");
+                return 1;
+            }
+        }
         return 0;
+    }
+
+    private static SyntaxTree? TryParse(string rel)
+    {
+        string source;
+        try { source = File.ReadAllText(rel); }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"read failed {rel}: {ex.Message}");
+            return null;
+        }
+        try
+        {
+            return CSharpSyntaxTree.ParseText(SourceText.From(source), path: rel);
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"parse failed {rel}: {ex.Message}");
+            return null;
+        }
+    }
+
+    private static IEnumerable<string> EnumerateCSharpFiles(string rootAbs)
+    {
+        // Manual recursion so we can skip bin/obj/node_modules subtrees rather
+        // than enumerating them and discarding — generated *.cs under bin/obj
+        // can be large and adds nothing to the symbol layer.
+        var stack = new Stack<string>();
+        stack.Push(rootAbs);
+        while (stack.Count > 0)
+        {
+            var dir = stack.Pop();
+            IEnumerable<string> subdirs;
+            try { subdirs = Directory.EnumerateDirectories(dir); }
+            catch { continue; }
+            foreach (var sub in subdirs)
+            {
+                var name = Path.GetFileName(sub);
+                if (name.Equals("bin", StringComparison.OrdinalIgnoreCase)) continue;
+                if (name.Equals("obj", StringComparison.OrdinalIgnoreCase)) continue;
+                if (name.Equals("node_modules", StringComparison.OrdinalIgnoreCase)) continue;
+                stack.Push(sub);
+            }
+            IEnumerable<string> files;
+            try { files = Directory.EnumerateFiles(dir, "*.cs"); }
+            catch { continue; }
+            foreach (var f in files) yield return f;
+        }
+    }
+
+    private static void CollectSidecar(
+        string sourceRel, CompilationUnitSyntax root, SemanticModel model,
+        HashSet<string> boundRels, List<SidecarEntry> sidecar)
+    {
+        // Dedupe within a source file on (target, line) so a tight loop of
+        // identical calls doesn't inflate sidecar volume.
+        var seen = new HashSet<(string Name, string? Container, int Line)>();
+        foreach (var inv in root.DescendantNodes().OfType<InvocationExpressionSyntax>())
+        {
+            var info = model.GetSymbolInfo(inv);
+            var symbol = info.Symbol as IMethodSymbol
+                ?? info.CandidateSymbols.OfType<IMethodSymbol>().FirstOrDefault();
+            if (symbol is null) continue;
+
+            var reduced = symbol.ReducedFrom ?? symbol;
+
+            bool resolvesIntoBound = false;
+            foreach (var loc in reduced.Locations)
+            {
+                if (!loc.IsInSource) continue;
+                var declPath = loc.SourceTree?.FilePath;
+                if (declPath is null) continue;
+                if (boundRels.Contains(declPath))
+                {
+                    resolvesIntoBound = true;
+                    break;
+                }
+            }
+            if (!resolvesIntoBound) continue;
+
+            var name = reduced.Name;
+            var container = reduced.ContainingType?.Name;
+            var line = inv.GetLocation().GetLineSpan().StartLinePosition.Line + 1;
+            if (seen.Add((name, container, line)))
+            {
+                sidecar.Add(new SidecarEntry(sourceRel, line, new SidecarTarget(name, container)));
+            }
+        }
     }
 
     private static IEnumerable<MemberDeclarationSyntax> EnumerateTopLevelMembers(CompilationUnitSyntax root)
@@ -157,6 +345,7 @@ public static class Program
                     Container: container,
                     Kind: "enum",
                     Line: LineOf(e),
+                    EndLine: EndLineOf(e),
                     Signature: Signature(e),
                     Visibility: VisibilityOf(e.Modifiers),
                     Calls: Array.Empty<CallRef>(),
@@ -169,6 +358,7 @@ public static class Program
                     Container: container,
                     Kind: "delegate",
                     Line: LineOf(d),
+                    EndLine: EndLineOf(d),
                     Signature: Signature(d),
                     Visibility: VisibilityOf(d.Modifiers),
                     Calls: Array.Empty<CallRef>(),
@@ -196,6 +386,7 @@ public static class Program
             Container: container,
             Kind: kind,
             Line: LineOf(type),
+            EndLine: EndLineOf(type),
             Signature: Signature(type),
             Visibility: VisibilityOf(type.Modifiers),
             Calls: Array.Empty<CallRef>(),
@@ -215,6 +406,7 @@ public static class Program
                         Container: name,
                         Kind: "enum",
                         Line: LineOf(e),
+                        EndLine: EndLineOf(e),
                         Signature: Signature(e),
                         Visibility: VisibilityOf(e.Modifiers),
                         Calls: Array.Empty<CallRef>(),
@@ -227,6 +419,7 @@ public static class Program
                         Container: name,
                         Kind: "method",
                         Line: LineOf(m),
+                        EndLine: EndLineOf(m),
                         Signature: Signature(m),
                         Visibility: VisibilityOf(m.Modifiers),
                         Calls: ResolvedCalls(m, model),
@@ -239,6 +432,7 @@ public static class Program
                         Container: name,
                         Kind: "property",
                         Line: LineOf(p),
+                        EndLine: EndLineOf(p),
                         Signature: Signature(p),
                         Visibility: VisibilityOf(p.Modifiers),
                         Calls: ResolvedCalls(p, model),
@@ -253,6 +447,7 @@ public static class Program
                         Container: name,
                         Kind: "constructor",
                         Line: LineOf(ctor),
+                        EndLine: EndLineOf(ctor),
                         Signature: Signature(ctor),
                         Visibility: VisibilityOf(ctor.Modifiers),
                         Calls: ResolvedCalls(ctor, model),
@@ -264,6 +459,9 @@ public static class Program
 
     private static int LineOf(SyntaxNode node) =>
         node.GetLocation().GetLineSpan().StartLinePosition.Line + 1;
+
+    private static int EndLineOf(SyntaxNode node) =>
+        node.GetLocation().GetLineSpan().EndLinePosition.Line + 1;
 
     private static string VisibilityOf(SyntaxTokenList modifiers)
     {

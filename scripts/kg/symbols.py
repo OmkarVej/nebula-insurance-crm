@@ -42,8 +42,14 @@ from kg_common import (
 
 
 SYMBOL_INDEX_PATH = KG_DIR / "symbol-index.yaml"
+UNBOUND_REFS_PATH = KG_DIR / "unbound-but-referenced.yaml"
 CACHE_DIR = REPO_ROOT / ".kg-state"
 CACHE_PATH = CACHE_DIR / "symbols-cache.json"
+# Tracks compilation_roots hash per language between runs. When a language's
+# roots change, every cached entry for files of that language is invalidated
+# because Roslyn / ts-morph resolution depends on which files are in the
+# compilation, not just on the file being parsed.
+COMPILATION_ROOTS_PATH = CACHE_DIR / "compilation-roots.json"
 
 LANGUAGE_BY_EXT = {
     ".py": "python",
@@ -73,6 +79,11 @@ class SymbolRecord:
     visibility: str
     language: str
     container: str | None = None
+    # 1-based last line of the declaration's syntax span. Consumed by
+    # diff-impact.py to map a changed hunk to its enclosing symbol(s).
+    # Zero when the extractor didn't emit it (Python/TS pre-Phase-A2);
+    # diff-impact.py falls back to "until next symbol's start" in that case.
+    end_line: int = 0
     callers: list[str] = field(default_factory=list)
     callees: list[str] = field(default_factory=list)
     # Calls harvested by the extractor. Each entry is either a bare string
@@ -82,10 +93,12 @@ class SymbolRecord:
     # callers/callees by the orchestrator. Persisted in the cache but stripped
     # from the on-disk symbol-index.yaml.
     raw_calls: list[Any] = field(default_factory=list)
-    # Interface members and base methods this symbol satisfies. Used to grow
-    # polymorphic-dispatch edges so reaching ``IFoo.Bar`` also reaches every
-    # ``Foo.Bar`` impl. Format: list of ``{name, container}``.
-    implements: list[dict[str, Any]] = field(default_factory=list)
+    # Interface members and base methods this symbol satisfies. Extractors emit
+    # raw ``{name, container}`` dicts; ``resolve_call_edges`` replaces them
+    # in-place with resolved symbol ids (list[str]) so the on-disk index can
+    # answer ``--implementers`` / ``--overrides`` without re-resolution.
+    # Unresolvable entries are dropped during resolution.
+    implements: list[Any] = field(default_factory=list)
 
     def to_cache_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -93,9 +106,12 @@ class SymbolRecord:
     def to_index_dict(self) -> dict[str, Any]:
         d = asdict(self)
         d.pop("raw_calls", None)
-        d.pop("implements", None)
         if d.get("container") is None:
             d.pop("container", None)
+        if not d.get("end_line"):
+            d.pop("end_line", None)
+        if not d.get("implements"):
+            d.pop("implements", None)
         return d
 
 
@@ -243,6 +259,26 @@ class PythonAstExtractor(BaseExtractor):
 class SubprocessExtractor(BaseExtractor):
     command: list[str] = []
     timeout_seconds: int = 600
+    # Per-subclass defaults. Subclasses opt into the new C#-extractor CLI:
+    #   compilation_roots — directories the extractor walks for files to add
+    #     to the semantic compilation (emission stays scoped to the bound-files
+    #     list passed via stdin).
+    #   supports_sidecar — when True, the orchestrator passes --sidecar
+    #     <tempfile> and reads the resulting JSON into self.last_sidecar.
+    compilation_roots: list[str] = []
+    supports_sidecar: bool = False
+
+    def __init__(self) -> None:
+        super().__init__()
+        # Populated after each extract() call. Empty list when the extractor
+        # does not support sidecar emission or produced no entries.
+        self.last_sidecar: list[dict[str, Any]] = []
+        # True iff the extractor actually ran the subprocess (i.e., emitted
+        # current-truth sidecar data). False when extract() short-circuited
+        # because there were no files to parse — in that case last_sidecar
+        # carries no information and the previous on-disk sidecar yaml
+        # should be preserved rather than overwritten.
+        self.last_sidecar_authoritative: bool = False
 
     def is_available(self) -> bool:
         return bool(self.command)
@@ -250,6 +286,8 @@ class SubprocessExtractor(BaseExtractor):
     def extract(
         self, files: list[Path], file_to_node: dict[str, str]
     ) -> list[SymbolRecord]:
+        self.last_sidecar = []
+        self.last_sidecar_authoritative = False
         if not files:
             return []
         if not self.is_available():
@@ -260,9 +298,21 @@ class SubprocessExtractor(BaseExtractor):
             return []
 
         payload = [p.relative_to(REPO_ROOT).as_posix() for p in files]
+
+        cli = list(self.command)
+        for root in self.compilation_roots:
+            cli.extend(["--compilation-root", root])
+        sidecar_path: Path | None = None
+        if self.supports_sidecar:
+            CACHE_DIR.mkdir(parents=True, exist_ok=True)
+            sidecar_path = CACHE_DIR / f"sidecar-{self.language}.json"
+            if sidecar_path.exists():
+                sidecar_path.unlink()
+            cli.extend(["--sidecar", str(sidecar_path)])
+
         try:
             result = subprocess.run(
-                self.command,
+                cli,
                 input=json.dumps(payload),
                 capture_output=True,
                 text=True,
@@ -323,6 +373,7 @@ class SubprocessExtractor(BaseExtractor):
                 name=name,
                 file=rel_file,
                 line=int(item.get("line", 0)) or 0,
+                end_line=int(item.get("end_line", 0)) or 0,
                 signature=item.get("signature", name),
                 visibility=item.get("visibility", "public"),
                 language=self.language,
@@ -330,13 +381,39 @@ class SubprocessExtractor(BaseExtractor):
                 raw_calls=raw_calls,
                 implements=implements,
             ))
+
+        if sidecar_path is not None and sidecar_path.exists():
+            try:
+                loaded = json.loads(sidecar_path.read_text(encoding="utf-8") or "[]")
+                if isinstance(loaded, list):
+                    self.last_sidecar = loaded
+            except json.JSONDecodeError as exc:
+                print(
+                    f"[symbols] {self.language} sidecar parse failed: {exc}",
+                    file=sys.stderr,
+                )
+            try:
+                sidecar_path.unlink()
+            except OSError:
+                pass
+        # Subprocess completed (with or without sidecar entries); the current
+        # state is authoritative for this language.
+        self.last_sidecar_authoritative = self.supports_sidecar
+
         return records
 
 
 class TsExtractor(SubprocessExtractor):
     language = "typescript"
+    # Product-specific defaults. The TS extractor walks these roots in
+    # addition to the bound-files stdin list so cross-binding callers (test
+    # files, helpers outside code-index.yaml) participate in semantic
+    # resolution. Symbols are still emitted only for bound files.
+    compilation_roots = ["experience/src", "experience/tests"]
+    supports_sidecar = True
 
     def __init__(self) -> None:
+        super().__init__()
         node = shutil.which("node")
         entry = TS_EXTRACTOR_ROOT / "extract.js"
         node_modules = TS_EXTRACTOR_ROOT / "node_modules"
@@ -348,8 +425,15 @@ class TsExtractor(SubprocessExtractor):
 
 class CsExtractor(SubprocessExtractor):
     language = "csharp"
+    # Product-specific defaults. The C# extractor walks these roots in
+    # addition to the bound-files stdin list so cross-binding callers (test
+    # files, helpers outside code-index.yaml) participate in semantic
+    # resolution. Symbols are still emitted only for bound files.
+    compilation_roots = ["engine/src", "engine/tests"]
+    supports_sidecar = True
 
     def __init__(self) -> None:
+        super().__init__()
         dotnet = shutil.which("dotnet")
         project = CS_EXTRACTOR_ROOT / "CSharpSymbols.csproj"
         if not (dotnet and project.exists()):
@@ -422,6 +506,45 @@ def save_cache(cache: dict[str, FileCacheEntry]) -> None:
 
 def hash_file(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def compilation_roots_hash(roots: list[str]) -> str:
+    """Stable digest of a sorted, normalized root list."""
+    normalized = sorted({r.replace("\\", "/").rstrip("/") for r in roots if r})
+    joined = "\n".join(normalized).encode("utf-8")
+    return hashlib.sha256(joined).hexdigest()
+
+
+def load_previous_roots_hashes() -> dict[str, str]:
+    if not COMPILATION_ROOTS_PATH.exists():
+        return {}
+    try:
+        data = json.loads(COMPILATION_ROOTS_PATH.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    return {k: str(v) for k, v in data.items() if isinstance(v, str)}
+
+
+def save_roots_hashes(hashes: dict[str, str]) -> None:
+    CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    COMPILATION_ROOTS_PATH.write_text(
+        json.dumps(hashes, sort_keys=True), encoding="utf-8"
+    )
+
+
+def invalidate_cache_by_language(
+    cache: dict[str, FileCacheEntry], languages: set[str]
+) -> int:
+    """Drop cache entries for files of the given languages. Returns drop count."""
+    if not languages:
+        return 0
+    dropped = 0
+    for rel in list(cache.keys()):
+        ext = Path(rel).suffix.lower()
+        if LANGUAGE_BY_EXT.get(ext) in languages:
+            cache.pop(rel, None)
+            dropped += 1
+    return dropped
 
 
 # ---------------------------------------------------------------------------
@@ -574,7 +697,11 @@ def resolve_call_edges(records: list[SymbolRecord]) -> None:
                     add_edge(caller, callee)
 
     # Polymorphic dispatch: every interface member reaches its implementations.
+    # Also rewrites each impl.implements list from raw {name, container} dicts
+    # into resolved symbol ids so the on-disk index can answer --implementers /
+    # --overrides without re-resolution. Unresolvable entries are dropped.
     for impl in records:
+        resolved_iface_ids: list[str] = []
         for iface_ref in impl.implements:
             iface_name = iface_ref.get("name") if isinstance(iface_ref, dict) else None
             iface_container = iface_ref.get("container") if isinstance(iface_ref, dict) else None
@@ -582,6 +709,9 @@ def resolve_call_edges(records: list[SymbolRecord]) -> None:
                 continue
             for iface_member in by_qualified.get((iface_container, iface_name), []):
                 add_edge(iface_member, impl)
+                resolved_iface_ids.append(iface_member.id)
+        # Sort/dedupe for stable diffs.
+        impl.implements = sorted(set(resolved_iface_ids))
 
     for rec in records:
         rec.callers.sort()
@@ -873,12 +1003,14 @@ def load_symbol_records() -> list[SymbolRecord]:
             name=entry.get("name", ""),
             file=entry.get("file", ""),
             line=int(entry.get("line", 0) or 0),
+            end_line=int(entry.get("end_line", 0) or 0),
             signature=entry.get("signature", ""),
             visibility=entry.get("visibility", "public"),
             language=entry.get("language", "unknown"),
             container=entry.get("container"),
             callers=list(entry.get("callers", []) or []),
             callees=list(entry.get("callees", []) or []),
+            implements=list(entry.get("implements", []) or []),
         ))
     return records
 
@@ -908,7 +1040,13 @@ def build_symbol_bundle(
     node_filter: set[str] | None,
     language_filter: set[str] | None,
     force: bool,
-) -> tuple[list[SymbolRecord], dict[str, Any], dict[str, FileCacheEntry]]:
+) -> tuple[
+    list[SymbolRecord],
+    dict[str, Any],
+    dict[str, FileCacheEntry],
+    dict[str, str],
+    dict[str, list[dict[str, Any]]],
+]:
     cache = {} if force else load_cache()
     new_cache: dict[str, FileCacheEntry] = {}
 
@@ -920,8 +1058,32 @@ def build_symbol_bundle(
         "csharp": CsExtractor(),
     }
 
+    # Compilation-roots cache invalidation: if a language's roots changed
+    # between runs, drop every cached entry for that language because Roslyn /
+    # ts-morph resolution depends on what else is in the compilation.
+    current_roots_hashes: dict[str, str] = {
+        lang: compilation_roots_hash(getattr(ext, "compilation_roots", []))
+        for lang, ext in extractors.items()
+    }
+    if not force:
+        previous = load_previous_roots_hashes()
+        stale = {
+            lang for lang, h in current_roots_hashes.items()
+            if previous.get(lang) != h
+        }
+        if stale:
+            dropped = invalidate_cache_by_language(cache, stale)
+            if dropped:
+                print(
+                    f"[symbols] compilation-roots changed for {sorted(stale)}; "
+                    f"dropped {dropped} cache entries",
+                    file=sys.stderr,
+                )
+
     parse_stats: dict[str, dict[str, int]] = {}
     all_records: list[SymbolRecord] = []
+    sidecar_by_language: dict[str, list[dict[str, Any]]] = {}
+    sidecar_authoritative: set[str] = set()
 
     for lang, extractor in extractors.items():
         file_map = work.get(lang) or {}
@@ -938,6 +1100,9 @@ def build_symbol_bundle(
         all_records.extend(
             run_extractor(extractor, files, file_to_node, cache, new_cache, force, stats)
         )
+        if getattr(extractor, "last_sidecar_authoritative", False):
+            sidecar_authoritative.add(lang)
+            sidecar_by_language[lang] = getattr(extractor, "last_sidecar", [])
 
     rewrites = disambiguate_ids(all_records)
     resolve_call_edges(all_records)
@@ -946,8 +1111,113 @@ def build_symbol_bundle(
         "total_symbols": len(all_records),
         "by_language": parse_stats,
         "disambiguated_ids": rewrites,
+        "sidecar_authoritative": sorted(sidecar_authoritative),
     }
-    return all_records, summary, new_cache
+    return all_records, summary, new_cache, current_roots_hashes, sidecar_by_language
+
+
+def write_unbound_but_referenced(
+    sidecar_by_language: dict[str, list[dict[str, Any]]],
+    records: list[SymbolRecord],
+    authoritative_languages: set[str],
+) -> int:
+    """Write planning-mds/knowledge-graph/unbound-but-referenced.yaml.
+
+    Resolves each {target.name, target.container} to a bound symbol id using
+    the same (container, name) global lookup the orchestrator uses for
+    caller/callee edges. When a target is unresolvable, falls back to leaving
+    target_symbol absent and emitting target_name / target_container strings.
+    Returns the total number of invocation entries written.
+
+    `authoritative_languages` is the set of languages whose extractor actually
+    ran this invocation (vs. fully satisfied by cache). When the set is empty
+    we have no fresh sidecar truth — leave any existing yaml in place rather
+    than rewriting it.
+
+    NOTE: in Phase A1 only C# has sidecar support. When TS gains a sidecar in
+    Phase A2 this function will need to merge fresh entries for authoritative
+    languages with preserved entries (from the existing yaml on disk) for
+    non-authoritative languages. Today the simpler all-or-nothing rule is
+    enough.
+    """
+    if not authoritative_languages:
+        return 0
+    by_qualified: dict[tuple[str, str], list[SymbolRecord]] = {}
+    by_name: dict[str, list[SymbolRecord]] = {}
+    for rec in records:
+        by_name.setdefault(rec.name, []).append(rec)
+        if rec.container:
+            by_qualified.setdefault((rec.container, rec.name), []).append(rec)
+
+    invocations: list[dict[str, Any]] = []
+    source_files: set[str] = set()
+    bound_targets: set[str] = set()
+
+    for language, entries in sorted(sidecar_by_language.items()):
+        for entry in entries:
+            source_file = entry.get("source_file")
+            source_line = entry.get("source_line")
+            target = entry.get("target") or {}
+            name = target.get("name")
+            container = target.get("container")
+            if not (source_file and name):
+                continue
+            source_files.add(source_file)
+
+            matches: list[SymbolRecord] = []
+            if container:
+                matches = by_qualified.get((container, name), [])
+            if not matches:
+                matches = by_name.get(name, [])
+
+            payload: dict[str, Any] = {
+                "source_file": source_file,
+                "source_line": int(source_line or 0) or 0,
+                "language": language,
+            }
+            if matches:
+                # When multiple symbols share (container, name) — collisions
+                # in code-index bindings — pick the first by id for stability.
+                target_sym = sorted(matches, key=lambda r: r.id)[0]
+                payload["target_symbol"] = target_sym.id
+                payload["target_node"] = target_sym.node
+                bound_targets.add(target_sym.id)
+            else:
+                payload["target_name"] = name
+                if container:
+                    payload["target_container"] = container
+            invocations.append(payload)
+
+    if not invocations:
+        # Remove a stale file if a prior run wrote one and this run is clean.
+        if UNBOUND_REFS_PATH.exists():
+            UNBOUND_REFS_PATH.unlink()
+        return 0
+
+    invocations.sort(
+        key=lambda e: (e.get("language", ""), e["source_file"], e["source_line"])
+    )
+    by_lang_counts: dict[str, int] = {}
+    for e in invocations:
+        by_lang_counts[e["language"]] = by_lang_counts.get(e["language"], 0) + 1
+
+    payload = {
+        "version": 0,
+        "generated_at": datetime.now(UTC).isoformat(timespec="seconds"),
+        "summary": {
+            "total_invocations": len(invocations),
+            "by_language": by_lang_counts,
+            "source_files": len(source_files),
+            "bound_targets": len(bound_targets),
+        },
+        "invocations": invocations,
+    }
+    UNBOUND_REFS_PATH.parent.mkdir(parents=True, exist_ok=True)
+    UNBOUND_REFS_PATH.write_text(
+        yaml.safe_dump(payload, sort_keys=False, allow_unicode=False),
+        encoding="utf-8",
+    )
+    return len(invocations)
 
 
 def write_symbol_index(records: list[SymbolRecord], summary: dict[str, Any]) -> None:
@@ -1007,16 +1277,23 @@ def main() -> int:
     node_filter = set(args.node) if args.node else None
     language_filter = set(args.language) if args.language else None
 
-    records, summary, new_cache = build_symbol_bundle(
+    records, summary, new_cache, roots_hashes, sidecar_by_language = build_symbol_bundle(
         bundle,
         node_filter=node_filter,
         language_filter=language_filter,
         force=args.force,
     )
 
+    unbound_count = 0
     if not args.dry_run:
         write_symbol_index(records, summary)
         save_cache(new_cache)
+        save_roots_hashes(roots_hashes)
+        unbound_count = write_unbound_but_referenced(
+            sidecar_by_language,
+            records,
+            set(summary.get("sidecar_authoritative", []) or []),
+        )
 
     print(f"Symbol index: {summary['total_symbols']} symbols")
     for lang in ("python", "typescript", "csharp"):
@@ -1029,6 +1306,8 @@ def main() -> int:
         )
     if summary.get("disambiguated_ids"):
         print(f"  Disambiguated ids: {summary['disambiguated_ids']}")
+    if unbound_count:
+        print(f"  Unbound-but-referenced invocations: {unbound_count}")
 
     nodes_with_symbols = sorted({r.node for r in records})
     telemetry_payload = {
