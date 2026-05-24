@@ -1,0 +1,95 @@
+{
+  "schema_version": "2.0",
+  "feature_id": "F0035",
+  "feature_slug": "session-continuity-and-token-refresh",
+  "run_id": "2026-05-24-c92b16b6",
+  "run_folder": "/mnt/c/Users/gajap/sandbox/nebula/nebula-insurance-crm/planning-mds/operations/evidence/F0035-session-continuity-and-token-refresh/2026-05-24-c92b16b6",
+  "evidence_root": "/mnt/c/Users/gajap/sandbox/nebula/nebula-insurance-crm/planning-mds/operations/evidence/F0035-session-continuity-and-token-refresh",
+  "status": "draft",
+  "created_at": "2026-05-24T01:10:50.035141-04:00",
+  "updated_at": "2026-05-24T01:10:50.035141-04:00",
+  "rerun_of": null,
+  "run_id_prior": null,
+  "mode": "clean",
+  "slice_order_source": "assembly-plan",
+  "feature_path": "/mnt/c/Users/gajap/sandbox/nebula/nebula-insurance-crm/planning-mds/features/F0035-session-continuity-and-token-refresh",
+  "archive_feature_path": "/mnt/c/Users/gajap/sandbox/nebula/nebula-insurance-crm/planning-mds/features/archive/F0035-session-continuity-and-token-refresh",
+  "feature_path_at_closeout": null,
+  "feature_state": null,
+  "scope": {
+    "frontend_in_scope": false,
+    "runtime_bearing": false,
+    "deployment_config_changed": false,
+    "security_sensitive_scope": false
+  },
+  "changed_paths": [],
+  "gate_results": {
+    "G0": {
+      "status": "pending",
+      "evidence": null
+    },
+    "G1": {
+      "status": "pending",
+      "evidence": null
+    },
+    "G2": {
+      "status": "pending",
+      "evidence": null
+    },
+    "G3": {
+      "status": "pending",
+      "evidence": null
+    },
+    "G4.5": {
+      "status": "pending",
+      "evidence": null
+    },
+    "G4.6": {
+      "status": "pending",
+      "evidence": null
+    },
+    "closeout": {
+      "status": "pending",
+      "evidence": null
+    }
+  },
+  "role_results": {
+    "architect": {
+      "required": true,
+      "status": "pending",
+      "evidence": null
+    },
+    "quality-engineer": {
+      "required": true,
+      "status": "pending",
+      "evidence": null
+    },
+    "code-reviewer": {
+      "required": true,
+      "status": "pending",
+      "evidence": null
+    },
+    "security-reviewer": {
+      "required": false,
+      "status": "omitted",
+      "evidence": null
+    },
+    "devops": {
+      "required": false,
+      "status": "omitted",
+      "evidence": null
+    },
+    "product-manager": {
+      "required": true,
+      "status": "pending",
+      "evidence": null
+    }
+  },
+  "files": {},
+  "omissions": [],
+  "scm": {
+    "diff_artifact": null,
+    "changed_files": []
+  },
+  "waivers": {}
+}
