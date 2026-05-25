@@ -1,8 +1,14 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import { emitAuthEvent } from '@/features/auth/authEvents'
 import { oidcUserManager } from '@/features/auth/oidcUserManager'
 import { useSessionTeardown } from '@/features/auth/useSessionTeardown'
-import { renewSessionForExpiredToken } from './sessionRenewal'
+import { persistFailureClassEvent } from './deferredTelemetryBuffer'
+import {
+  renewSessionForExpiredToken,
+  RenewalError,
+  type RenewalFailureCause,
+} from './sessionRenewal'
 import {
   buildSessionContinuityEvent,
   emitSessionContinuityEvent,
@@ -27,6 +33,7 @@ export interface IdleWarningController extends IdleWarningState {
 
 export function useIdleWarning(): IdleWarningController {
   const teardown = useSessionTeardown()
+  const location = useLocation()
   const now = performance.now()
   const sessionStartedAt = useRef(now)
   const rollingWindowStartedAt = useRef(now)
@@ -51,14 +58,39 @@ export function useIdleWarning(): IdleWarningController {
     [],
   )
 
+  const emitFailureTelemetry = useCallback(
+    async (
+      eventName: SessionContinuityEventName,
+      payload: Record<string, unknown>,
+    ) => {
+      const user = await oidcUserManager.getUser().catch(() => null)
+      const event = buildSessionContinuityEvent(user, eventName, payload)
+      if (event) {
+        persistFailureClassEvent(event)
+        emitSessionContinuityEvent(event)
+      }
+    },
+    [],
+  )
+
   const beginForcedReauth = useCallback(
-    (cause: 'idle_timeout' | 'rolling_window_exceeded' | 'hard_cap_reached' | 'silent_renewal_failed') => {
+    (
+      cause:
+        | 'idle_timeout'
+        | 'rolling_window_exceeded'
+        | 'hard_cap_reached'
+        | RenewalFailureCause,
+    ) => {
       if (forcedRedirectStarted.current || isPublicAuthRoute()) {
         return
       }
 
       forcedRedirectStarted.current = true
       setModalOpen(false)
+      void emitFailureTelemetry('forced-redirect', {
+        cause,
+        route_at_redirect: window.location.pathname,
+      }).catch(() => undefined)
       emitAuthEvent('forced_reauth', {
         cause,
         method: 'GET',
@@ -66,7 +98,7 @@ export function useIdleWarning(): IdleWarningController {
         returnTo: `${window.location.pathname}${window.location.search}`,
       })
     },
-    [],
+    [emitFailureTelemetry],
   )
 
   const openIdleModal = useCallback(() => {
@@ -87,8 +119,20 @@ export function useIdleWarning(): IdleWarningController {
       return
     }
 
-    lastActivityAt.current = performance.now()
+    const current = performance.now()
+    lastActivityAt.current = current
+    rollingWindowStartedAt.current = current
   }, [modalOpen])
+
+  useEffect(() => {
+    if (modalOpen || isPublicAuthRoute()) {
+      return
+    }
+
+    const current = performance.now()
+    lastActivityAt.current = current
+    rollingWindowStartedAt.current = current
+  }, [location.pathname, location.search, modalOpen])
 
   useEffect(() => {
     const events = ['mousedown', 'keydown', 'touchstart', 'input']
@@ -146,7 +190,7 @@ export function useIdleWarning(): IdleWarningController {
 
   const staySignedIn = useCallback(async () => {
     try {
-      await renewSessionForExpiredToken()
+      await renewSessionForExpiredToken({ bypassLoopGuard: true })
       await emitIdleTelemetry('idle-warning-accepted', {
         time_remaining_ms: Math.round(remainingMs),
       })
@@ -155,10 +199,12 @@ export function useIdleWarning(): IdleWarningController {
       rollingWindowStartedAt.current = performance.now()
       setRemainingMs(GRACE_PERIOD_MS)
       setModalOpen(false)
-    } catch {
-      beginForcedReauth('silent_renewal_failed')
+    } catch (error) {
+      const cause = error instanceof RenewalError ? error.cause : 'idp_unreachable'
+      void emitFailureTelemetry('silent-renewal-fail', { cause }).catch(() => undefined)
+      beginForcedReauth(cause)
     }
-  }, [beginForcedReauth, emitIdleTelemetry, remainingMs])
+  }, [beginForcedReauth, emitFailureTelemetry, emitIdleTelemetry, remainingMs])
 
   const signOut = useCallback(async () => {
     await emitIdleTelemetry('idle-warning-dismissed', {

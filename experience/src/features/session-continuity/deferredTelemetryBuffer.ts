@@ -6,6 +6,7 @@ import {
 
 export const DEFERRED_TELEMETRY_PREFIX = 'nebula.telemetry-defer.v1'
 export const DEFERRED_TELEMETRY_TTL_MS = 604_800_000
+export const DEFERRED_TELEMETRY_MAX_EVENTS_PER_USER = 100
 
 export function persistFailureClassEvent(
   event: SessionContinuityEvent,
@@ -15,10 +16,15 @@ export function persistFailureClassEvent(
     return
   }
 
-  storage.setItem(
-    buildDeferredKey(event.user_id, createEventId()),
-    JSON.stringify(event),
-  )
+  try {
+    evictOldestIfNeeded(storage, event.user_id)
+    storage.setItem(
+      buildDeferredKey(event.user_id, createEventId()),
+      JSON.stringify(event),
+    )
+  } catch {
+    // Telemetry durability is best-effort and must never alter auth flow.
+  }
 }
 
 export function removeDeferredEvent(userId: string, eventId: string): void {
@@ -83,6 +89,29 @@ function readEntriesForUser(storage: Storage, userId: string) {
   }
 
   return entries
+}
+
+function evictOldestIfNeeded(storage: Storage, userId: string): void {
+  const entries = readEntriesForUser(storage, userId)
+  if (entries.length < DEFERRED_TELEMETRY_MAX_EVENTS_PER_USER) {
+    return
+  }
+
+  const oldest = entries
+    .map((entry) => ({
+      ...entry,
+      timestamp: Date.parse(entry.event.timestamp),
+    }))
+    .sort((left, right) => left.timestamp - right.timestamp)[0]
+
+  if (oldest) {
+    storage.removeItem(oldest.key)
+    console.warn('Nebula.Session.Continuity.TelemetryDrop', {
+      dropped_count: 1,
+      event_name: oldest.event.event_name,
+      timestamp: oldest.event.timestamp,
+    })
+  }
 }
 
 function buildDeferredKey(userId: string, eventId: string): string {

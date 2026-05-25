@@ -19,6 +19,7 @@
 | 2026-05-24T22:04:36-04:00 | G4.7 | `python3 agents/scripts/validate_templates.py` | 0 | PASS | `commands.log` | Validator repaired; no unresolved template defect |
 | 2026-05-24T22:05:00-04:00 | closeout | `python3 agents/product-manager/scripts/patch-prior-manifest.py --product-root /mnt/c/Users/gajap/sandbox/nebula/nebula-insurance-crm --feature F0035 --new-run-id 2026-05-24-c92b16b6` | 0 | PASS | `commands.log` | No prior approved manifests existed |
 | 2026-05-24T22:05:00-04:00 | closeout | `python3 agents/product-manager/scripts/validate-feature-evidence.py --product-root /mnt/c/Users/gajap/sandbox/nebula/nebula-insurance-crm --feature F0035 --stage closeout` | 0 | PASS | `commands.log`; `latest-run.json`; `evidence-manifest.json` | Warning only for absolute cwd command-log entries |
+| 2026-05-25T13:27:00-04:00 | closeout | `python3 agents/product-manager/scripts/validate-feature-evidence.py --product-root /mnt/c/Users/gajap/sandbox/nebula/nebula-insurance-crm --feature F0035 --stage closeout --json-out planning-mds/operations/evidence/F0035-session-continuity-and-token-refresh/2026-05-24-c92b16b6/artifacts/feature-evidence-validation.json` | 0 | PASS | `artifact-trace.md`; `artifacts/feature-evidence-validation.json` | Absolute cwd warning cleared by `Run Environment` entries |
 
 ## Stage
 

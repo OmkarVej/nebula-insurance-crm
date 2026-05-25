@@ -7,7 +7,7 @@
  * Behaviour (§2 and §3 contract):
  *   - Loading session state:  render null (avoids flash of unprotected content)
  *   - No valid session:       redirect to /login (replace — no back-nav to protected route)
- *   - Expired session:        redirect to /login?reason=session_expired
+ *   - Expired session:        attempt silent renewal before forced reauth
  *   - Valid session:          render children
  *
  * Roles are not validated here — resource-level authorization is enforced by
@@ -16,10 +16,22 @@
 import { ReactNode, useEffect, useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { oidcUserManager } from './oidcUserManager';
+import { emitAuthEvent } from './authEvents';
+import {
+  RenewalError,
+  renewSessionForExpiredToken,
+} from '@/features/session-continuity/sessionRenewal';
+import { persistFailureClassEvent } from '@/features/session-continuity/deferredTelemetryBuffer';
+import {
+  buildSessionContinuityEvent,
+  emitSessionContinuityEvent,
+  type SessionContinuityEventName,
+  type SessionContinuityIdentity,
+} from '@/features/session-continuity/sessionTelemetry';
 
 const AUTH_MODE = import.meta.env.VITE_AUTH_MODE as string | undefined;
 
-type SessionState = 'loading' | 'authenticated' | 'unauthenticated' | 'expired';
+type SessionState = 'loading' | 'authenticated' | 'unauthenticated';
 
 interface Props {
   children: ReactNode;
@@ -35,16 +47,35 @@ export function ProtectedRoute({ children }: Props) {
       return;
     }
 
-    oidcUserManager.getUser().then((user) => {
+    oidcUserManager.getUser().then(async (user) => {
       if (!user) {
         setSessionState('unauthenticated');
       } else if (user.expired) {
-        setSessionState('expired');
+        try {
+          await renewSessionForExpiredToken();
+          setSessionState('authenticated');
+        } catch (error) {
+          const cause = error instanceof RenewalError
+            ? error.cause
+            : 'idp_unreachable';
+          recordFailureClassEvent(user, 'silent-renewal-fail', { cause });
+          recordFailureClassEvent(user, 'forced-redirect', {
+            cause,
+            route_at_redirect: location.pathname,
+          });
+          emitAuthEvent('forced_reauth', {
+            cause,
+            method: 'GET',
+            endpointRoute: location.pathname,
+            returnTo: `${location.pathname}${location.search}`,
+          });
+          setSessionState('loading');
+        }
       } else {
         setSessionState('authenticated');
       }
     });
-  }, [location.pathname]);
+  }, [location.pathname, location.search]);
 
   if (AUTH_MODE === 'dev' || sessionState === 'authenticated') {
     return <>{children}</>;
@@ -55,10 +86,20 @@ export function ProtectedRoute({ children }: Props) {
     return null;
   }
 
-  if (sessionState === 'expired') {
-    return <Navigate to="/login?reason=session_expired" replace />;
-  }
-
   // unauthenticated — redirect to /login, preserving intended destination in state
   return <Navigate to="/login" replace state={{ from: location }} />;
+}
+
+function recordFailureClassEvent(
+  user: SessionContinuityIdentity | null,
+  eventName: SessionContinuityEventName,
+  payload: Record<string, unknown>,
+): void {
+  const event = buildSessionContinuityEvent(user, eventName, payload);
+  if (!event) {
+    return;
+  }
+
+  persistFailureClassEvent(event);
+  emitSessionContinuityEvent(event);
 }

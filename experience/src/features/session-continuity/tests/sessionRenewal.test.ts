@@ -82,6 +82,17 @@ describe('renewSessionForExpiredToken', () => {
     expect(() => renewSessionForExpiredToken()).toThrow(RenewalError)
   })
 
+  it('allows explicit user-initiated renewal to bypass the loop guard', async () => {
+    mocks.signinSilent.mockResolvedValue(renewedUser)
+
+    await renewSessionForExpiredToken()
+
+    await expect(
+      renewSessionForExpiredToken({ bypassLoopGuard: true }),
+    ).resolves.toMatchObject({ accessToken: 'renewed-token' })
+    expect(mocks.signinSilent).toHaveBeenCalledTimes(2)
+  })
+
   it('maps invalid_grant renewal failures to refresh expiration', async () => {
     mocks.signinSilent.mockRejectedValue(new Error('invalid_grant'))
 

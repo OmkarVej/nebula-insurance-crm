@@ -79,8 +79,15 @@ public class TestAuthHandler(
     {
         Response.StatusCode = StatusCodes.Status401Unauthorized;
         Response.ContentType = "application/problem+json";
-        Response.Headers.WWWAuthenticate =
-            "Bearer error=\"invalid_token\", error_description=\"Authentication token is invalid or expired.\"";
+        Response.Headers.WWWAuthenticate = Mode switch
+        {
+            AuthMode.Expired =>
+                "Bearer error=\"invalid_token\", error_description=\"The access token expired.\"",
+            AuthMode.Revoked =>
+                "Bearer error=\"invalid_token\", error_description=\"session-revoked\"",
+            _ =>
+                "Bearer error=\"invalid_token\", error_description=\"Authentication token is invalid.\"",
+        };
         var traceId = System.Diagnostics.Activity.Current?.Id ?? Context.TraceIdentifier;
         var result = Mode switch
         {

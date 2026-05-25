@@ -23,6 +23,43 @@ describe('classifyAuthResponse', () => {
     })
   })
 
+  it.each([
+    [
+      'token expired',
+      'Bearer error="invalid_token", error_description="The access token expired."',
+      'https://nebula.local/problems/auth/token-expired',
+      'token_expired',
+      'auth_token_expired',
+    ],
+    [
+      'invalid token',
+      'Bearer error="invalid_token", error_description="Authentication token is invalid."',
+      'https://nebula.local/problems/auth/invalid-token',
+      'invalid_token',
+      'auth_token_invalid',
+    ],
+    [
+      'session revoked',
+      'Bearer error="invalid_token", error_description="session-revoked"',
+      'https://nebula.local/problems/auth/session-revoked',
+      'session_revoked',
+      'auth_session_revoked',
+    ],
+  ] as const)(
+    'does not mark matching %s challenge/body pairs as conflicts',
+    (_label, authenticateHeader, type, code, expectedKind) => {
+      const result = classifyAuthResponse(
+        response(401, { 'WWW-Authenticate': authenticateHeader }),
+        { type, code },
+        '/tasks',
+      )
+
+      expect(result.kind).toBe(expectedKind)
+      expect(result.conflict).toBe(false)
+      expect(result.wwwAuthenticateClass).toBe(expectedKind)
+    },
+  )
+
   it('marks conflicts when WWW-Authenticate disagrees with ProblemDetails', () => {
     const result = classifyAuthResponse(
       response(401, {

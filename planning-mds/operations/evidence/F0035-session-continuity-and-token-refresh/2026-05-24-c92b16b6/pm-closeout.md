@@ -60,14 +60,14 @@ None. No required role issued a `WITH RECOMMENDATIONS` verdict, and no waiver ac
 | --- | --- | --- |
 | Backend focused closeout tests | PASS | 8/8; `artifacts/test-results/backend-session-continuity-closeout.trx`. |
 | Frontend focused closeout tests | PASS | 58/58; `artifacts/test-results/frontend-session-continuity-closeout.xml`. |
-| `validate-trackers.py --feature F0035 --run-id 2026-05-24-c92b16b6` | PASS | Initial rerun found evidence-format defects; final rerun exited 0 with warnings only from evidence validator. |
+| `validate-trackers.py --feature F0035 --run-id 2026-05-24-c92b16b6` | PASS | Initial rerun found evidence-format defects; final rerun exited 0. Follow-up evidence validation on 2026-05-25 cleared the absolute-cwd warning. |
 | `generate-story-index.py` | PASS | 125 story files indexed after archive move. |
 | `validate.py --regenerate-symbols` | PASS | First run rebuilt symbols and reported stale coverage; after coverage regeneration, rerun exited 0. |
 | `validate.py --write-coverage-report` | PASS | KG coverage refreshed after mapping/code-index/archive path changes. |
 | `validate.py --check-symbols` | PASS | Warning only: low-confidence existing inferred F0028 edge. |
 | `validate.py --check-drift` | PASS | Warnings only: existing low-confidence F0028 edge and existing renewal/update policy pair warning. |
 | `validate_templates.py` | PASS | Validator path/uuid4 false-positive defects repaired in `nebula-agents`; final command exited 0. |
-| `validate-feature-evidence.py --stage closeout` | PASS | Exit 0 after manifest approval and `latest-run.json` publication; warning only for absolute cwd command-log entries. |
+| `validate-feature-evidence.py --stage closeout` | PASS | Exit 0 after manifest approval and `latest-run.json` publication; 2026-05-25 rerun reports no warnings after `Run Environment` justification. |
 
 ## Validator Defects
 

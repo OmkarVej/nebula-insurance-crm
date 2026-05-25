@@ -7,10 +7,14 @@ public sealed class SessionTelemetryValidationResult
 {
     public bool IsValid => Errors.Count == 0;
     public bool IsForbidden { get; set; }
+    public bool HasNonForbiddenErrors { get; private set; }
     public Dictionary<string, string[]> Errors { get; } = new();
 
-    public void Add(string path, string message)
+    public void Add(string path, string message, bool forbidden = false)
     {
+        if (!forbidden)
+            HasNonForbiddenErrors = true;
+
         if (Errors.TryGetValue(path, out var existing))
         {
             Errors[path] = [.. existing, message];
@@ -150,7 +154,10 @@ public sealed class SessionContinuityTelemetryService
         else if (item.UserId != currentUserId)
         {
             result.IsForbidden = true;
-            result.Add($"{prefix}.user_id", "Telemetry user_id must match the authenticated user.");
+            result.Add(
+                $"{prefix}.user_id",
+                "Telemetry user_id must match the authenticated user.",
+                forbidden: true);
         }
 
         if (string.IsNullOrWhiteSpace(item.SessionId))

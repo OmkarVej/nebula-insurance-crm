@@ -155,6 +155,28 @@ describe('AuthCallbackPage', () => {
     })
   })
 
+  it('preserves callback success when deferred telemetry drain fails', async () => {
+    mocks.signinRedirectCallback.mockResolvedValue({
+      state: { return_to: '/policies/pol-1?tab=activity' },
+      profile: {
+        sub: '11111111-1111-1111-1111-111111111111',
+        nebula_roles: ['Admin'],
+      },
+    })
+    mocks.drainDeferredEvents.mockRejectedValue(new Error('telemetry unavailable'))
+
+    render(<AuthCallbackPage />)
+
+    await waitFor(() => {
+      expect(mocks.navigate).toHaveBeenCalledWith('/policies/pol-1?tab=activity', {
+        replace: true,
+      })
+    })
+    expect(mocks.navigate).not.toHaveBeenCalledWith('/login?error=callback_failed', {
+      replace: true,
+    })
+  })
+
   it('rejects unsafe return_to values and falls back to the role landing route', async () => {
     mocks.signinRedirectCallback.mockResolvedValue({
       state: { return_to: 'https://evil.example/phish' },

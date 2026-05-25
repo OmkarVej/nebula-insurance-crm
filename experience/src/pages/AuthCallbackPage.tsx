@@ -80,7 +80,11 @@ export function AuthCallbackPage() {
 
         const userId = readSessionUserId(user);
         if (userId) {
-          await drainDeferredEvents(userId);
+          try {
+            await drainDeferredEvents(userId);
+          } catch {
+            // Telemetry drain is deliberately one-way; sign-in success wins.
+          }
           clearSnapshotsForOtherUsers(userId);
         }
 
