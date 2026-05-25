@@ -16,6 +16,10 @@ export interface RenewalResult {
   renewalDurationMs: number
 }
 
+export interface RenewalOptions {
+  bypassLoopGuard?: boolean
+}
+
 export class RenewalError extends Error {
   constructor(
     public cause: RenewalFailureCause,
@@ -32,13 +36,16 @@ let inFlightRenewal: Promise<RenewalResult> | null = null
 let inFlightRequestCount = 0
 let lastSuccessfulRenewalAt = 0
 
-export function renewSessionForExpiredToken(): Promise<RenewalResult> {
+export function renewSessionForExpiredToken(options: RenewalOptions = {}): Promise<RenewalResult> {
   if (inFlightRenewal) {
     inFlightRequestCount += 1
     return inFlightRenewal
   }
 
-  if (Date.now() - lastSuccessfulRenewalAt < RENEWAL_LOOP_WINDOW_MS) {
+  if (
+    !options.bypassLoopGuard &&
+    Date.now() - lastSuccessfulRenewalAt < RENEWAL_LOOP_WINDOW_MS
+  ) {
     throw new RenewalError(
       'renewal_loop_detected',
       'Token renewal was attempted too soon after a successful renewal.',

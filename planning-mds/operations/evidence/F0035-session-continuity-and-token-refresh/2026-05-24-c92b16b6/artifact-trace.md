@@ -13,6 +13,11 @@
 - planning-mds/schemas/session-continuity-event.schema.json
 - planning-mds/api/nebula-openapi.yaml
 
+## Run Environment
+
+- Absolute cwd: /mnt/c/Users/gajap/sandbox/nebula/nebula-agents - Framework orchestration and evidence-validator commands ran from the agent repository while targeting the product root.
+- Absolute cwd: /mnt/c/Users/gajap/sandbox/nebula/nebula-insurance-crm - Product validation, source-control inspection, and implementation commands ran from the product repository root.
+
 ## Artifacts Created Or Updated
 
 - planning-mds/features/F0035-session-continuity-and-token-refresh/feature-assembly-plan.md

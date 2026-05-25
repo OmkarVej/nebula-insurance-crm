@@ -1663,7 +1663,8 @@ node_bindings:
           - experience/src/features/auth/useAuthEventHandler.ts
           - experience/src/features/auth/useSessionTeardown.ts
         feature:
-          - experience/src/features/session-continuity/**
+          - experience/src/features/session-continuity/**/*.ts
+          - experience/src/features/session-continuity/**/*.tsx
         pages:
           - experience/src/pages/AuthCallbackPage.tsx
           - experience/src/pages/LoginPage.tsx
@@ -1674,7 +1675,8 @@ node_bindings:
           - experience/src/features/auth/tests/LoginPage.test.tsx
           - experience/src/features/auth/tests/useSessionTeardown.test.tsx
           - experience/src/pages/tests/AuthCallbackPage.test.tsx
-          - experience/src/features/session-continuity/tests/**
+          - experience/src/features/session-continuity/tests/**/*.ts
+          - experience/src/features/session-continuity/tests/**/*.tsx
 
   - id: endpoint:internal-telemetry-session-continuity
     paths:

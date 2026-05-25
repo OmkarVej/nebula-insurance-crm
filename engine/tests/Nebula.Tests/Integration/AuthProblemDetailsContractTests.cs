@@ -23,13 +23,14 @@ public class AuthProblemDetailsContractTests(CustomWebApplicationFactory factory
     }
 
     [Theory]
-    [InlineData(TestAuthHandler.AuthMode.Expired, "https://nebula.local/problems/auth/token-expired", "token_expired")]
-    [InlineData(TestAuthHandler.AuthMode.Invalid, "https://nebula.local/problems/auth/invalid-token", "invalid_token")]
-    [InlineData(TestAuthHandler.AuthMode.Revoked, "https://nebula.local/problems/auth/session-revoked", "session_revoked")]
+    [InlineData(TestAuthHandler.AuthMode.Expired, "https://nebula.local/problems/auth/token-expired", "token_expired", "expired")]
+    [InlineData(TestAuthHandler.AuthMode.Invalid, "https://nebula.local/problems/auth/invalid-token", "invalid_token", "invalid")]
+    [InlineData(TestAuthHandler.AuthMode.Revoked, "https://nebula.local/problems/auth/session-revoked", "session_revoked", "session-revoked")]
     public async Task ProtectedEndpoint_AuthChallenge_ReturnsAdr024ProblemDetails(
         TestAuthHandler.AuthMode mode,
         string expectedType,
-        string expectedCode)
+        string expectedCode,
+        string expectedAuthenticateDescription)
     {
         TestAuthHandler.Mode = mode;
 
@@ -39,6 +40,7 @@ public class AuthProblemDetailsContractTests(CustomWebApplicationFactory factory
 
         response.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
         response.Headers.WwwAuthenticate.ShouldContain(header => header.Scheme == "Bearer");
+        response.Headers.WwwAuthenticate.ToString().ShouldContain(expectedAuthenticateDescription);
         var problem = await response.Content.ReadFromJsonAsync<JsonElement>();
         problem.GetProperty("type").GetString().ShouldBe(expectedType);
         problem.GetProperty("code").GetString().ShouldBe(expectedCode);

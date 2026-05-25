@@ -75,6 +75,55 @@ public class SessionTelemetryEndpointTests(CustomWebApplicationFactory factory)
     }
 
     [Fact]
+    public async Task PostSessionContinuityTelemetry_UserMismatchWithSchemaErrors_Returns400ValidationProblem()
+    {
+        var currentUser = await ArrangeCurrentUserAsync();
+        var otherUser = Guid.NewGuid();
+        var body = new Dictionary<string, object?>
+        {
+            ["events"] = new[]
+            {
+                new Dictionary<string, object?>
+                {
+                    ["event_name"] = "forced-redirect",
+                    ["event_version"] = 1,
+                    ["timestamp"] = DateTimeOffset.UtcNow,
+                    ["user_id"] = otherUser,
+                    ["session_id"] = "session-test-001",
+                    ["payload"] = new Dictionary<string, object?>
+                    {
+                        ["cause"] = "idle_timeout",
+                        ["route_at_redirect"] = "/submissions",
+                    },
+                },
+                new Dictionary<string, object?>
+                {
+                    ["event_name"] = "forced-redirect",
+                    ["event_version"] = 1,
+                    ["timestamp"] = DateTimeOffset.UtcNow,
+                    ["user_id"] = currentUser,
+                    ["session_id"] = "session-test-001",
+                    ["payload"] = new Dictionary<string, object?>
+                    {
+                        ["cause"] = "idle_timeout",
+                        ["query"] = "?contains=pii",
+                    },
+                },
+            },
+        };
+
+        var response = await _client.PostAsJsonAsync(
+            "/internal/telemetry/session-continuity",
+            body);
+
+        response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
+        var problem = await response.Content.ReadFromJsonAsync<JsonElement>();
+        problem.GetProperty("code").GetString().ShouldBe("validation_error");
+        problem.GetProperty("errors").GetRawText().ShouldContain("query");
+        problem.GetProperty("errors").GetRawText().ShouldContain("user_id");
+    }
+
+    [Fact]
     public async Task PostSessionContinuityTelemetry_InvalidToken_Returns401AuthProblem()
     {
         TestAuthHandler.Mode = TestAuthHandler.AuthMode.Invalid;

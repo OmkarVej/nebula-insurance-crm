@@ -41,6 +41,9 @@ coverage:
     - id: feature:F0031
       path: planning-mds/features/F0031-data-import-deduplication-and-go-live-migration
       reason: Planned feature folder exists but ontology mapping backfill has not started.
+    - id: feature:F0036
+      path: planning-mds/features/F0036-dynamic-product-attribute-form-engine
+      reason: Phase A draft feature pending approval; ontology mapping backfill has not started.
 
 rules:
   - Mappings must reference canonical IDs declared in canonical-nodes.yaml.

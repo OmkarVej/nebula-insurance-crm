@@ -3,11 +3,11 @@ summary:
   canonical_nodes: 411
   features_mapped: 24
   stories_mapped: 109
-  features_excluded: 11
+  features_excluded: 12
   features_uncovered: 0
   code_bindings: 143
-  symbol_count: 2463
-  bound_symbol_count: 2463
+  symbol_count: 2517
+  bound_symbol_count: 2517
   decision_count: 0
   why_count: 0
 coverage:
@@ -70,6 +70,10 @@ coverage:
   - id: feature:F0031
     path: planning-mds/features/F0031-data-import-deduplication-and-go-live-migration
     reason: Planned feature folder exists but ontology mapping backfill has not started.
+  - id: feature:F0036
+    path: planning-mds/features/F0036-dynamic-product-attribute-form-engine
+    reason: Phase A draft feature pending approval; ontology mapping backfill has
+      not started.
   uncovered_feature_paths: []
   mapped_story_ids:
   - story:F0005-S0002
@@ -187,10 +191,10 @@ freshness:
       source_paths:
       - planning-mds/architecture/data-model.md
       source_count: 1
-      last_modified: '2026-05-09'
+      last_modified: '2026-05-24'
       source_hash: 5b9acd0c2f152271
       hotspot_rank: 16
-      hotspot_score: 0.08
+      hotspot_score: 0.12
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
       bus_factor_flag: true
@@ -201,7 +205,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-09'
       source_hash: 6731bbb1b473cdd3
-      hotspot_rank: 119
+      hotspot_rank: 121
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -221,7 +225,7 @@ freshness:
       last_modified: '2026-05-09'
       source_hash: 6731bbb1b473cdd3
       hotspot_rank: 4
-      hotspot_score: 0.62
+      hotspot_score: 0.61
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
       bus_factor_flag: true
@@ -236,7 +240,7 @@ freshness:
       - planning-mds/architecture/data-model.md
       - planning-mds/domain/glossary.md
       source_count: 2
-      last_modified: '2026-05-16'
+      last_modified: '2026-05-24'
       source_hash: 6731bbb1b473cdd3
       hotspot_rank: 1
       hotspot_score: 1.0
@@ -255,10 +259,10 @@ freshness:
       - planning-mds/domain/glossary.md
       - planning-mds/architecture/decisions/ADR-012-shared-document-storage-and-metadata-architecture.md
       source_count: 2
-      last_modified: '2026-05-16'
+      last_modified: '2026-05-24'
       source_hash: 269edf7e84d94999
       hotspot_rank: 3
-      hotspot_score: 0.65
+      hotspot_score: 0.67
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
       bus_factor_flag: true
@@ -270,8 +274,8 @@ freshness:
       source_count: 3
       last_modified: '2026-05-09'
       source_hash: a7120beb7abf7177
-      hotspot_rank: 6
-      hotspot_score: 0.45
+      hotspot_rank: 7
+      hotspot_score: 0.44
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
       bus_factor_flag: true
@@ -282,9 +286,9 @@ freshness:
       - planning-mds/architecture/decisions/ADR-018-policy-aggregate-versioning-and-reinstatement-window.md
       - planning-mds/architecture/decisions/ADR-020-lob-extensible-attribute-architecture.md
       source_count: 4
-      last_modified: '2026-05-16'
+      last_modified: '2026-05-24'
       source_hash: 4090175c8e1aa171
-      hotspot_rank: 7
+      hotspot_rank: 6
       hotspot_score: 0.45
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -327,7 +331,7 @@ freshness:
       source_count: 3
       last_modified: '2026-05-16'
       source_hash: a7120beb7abf7177
-      hotspot_rank: 9
+      hotspot_rank: 10
       hotspot_score: 0.25
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -368,7 +372,7 @@ freshness:
       source_count: 1
       last_modified: '2026-05-17'
       source_hash: 5b9acd0c2f152271
-      hotspot_rank: 10
+      hotspot_rank: 12
       hotspot_score: 0.23
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -379,7 +383,7 @@ freshness:
       source_count: 1
       last_modified: '2026-05-09'
       source_hash: 5b9acd0c2f152271
-      hotspot_rank: 67
+      hotspot_rank: 68
       hotspot_score: 0.02
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -409,9 +413,9 @@ freshness:
       - planning-mds/architecture/decisions/ADR-012-shared-document-storage-and-metadata-architecture.md
       - planning-mds/features/archive/F0020-document-management-and-acord-intake/F0020-S0012-document-templates-library.md
       source_count: 2
-      last_modified: '2026-05-08'
+      last_modified: '2026-05-24'
       source_hash: 0b240ddaa2c09f18
-      hotspot_rank: 77
+      hotspot_rank: 76
       hotspot_score: 0.02
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -519,7 +523,7 @@ freshness:
       - planning-mds/features/archive/F0020-document-management-and-acord-intake/PRD.md
       - planning-mds/architecture/decisions/ADR-012-shared-document-storage-and-metadata-architecture.md
       source_count: 2
-      last_modified: '2026-05-08'
+      last_modified: '2026-05-24'
       source_hash: bee2743bb5ce8454
       hotspot_rank: 11
       hotspot_score: 0.23
@@ -561,7 +565,7 @@ freshness:
       source_count: 4
       last_modified: '2026-05-24'
       source_hash: 4ca33d0b7ff158a6
-      hotspot_rank: 14
+      hotspot_rank: 15
       hotspot_score: 0.13
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -576,7 +580,7 @@ freshness:
       source_count: 5
       last_modified: '2026-05-24'
       source_hash: d1438a79a1323d3a
-      hotspot_rank: 80
+      hotspot_rank: 81
       hotspot_score: 0.02
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -591,7 +595,7 @@ freshness:
       source_count: 5
       last_modified: '2026-05-24'
       source_hash: bafa9c407c85fff0
-      hotspot_rank: 88
+      hotspot_rank: 91
       hotspot_score: 0.01
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -614,7 +618,7 @@ freshness:
       source_count: 3
       last_modified: '2026-05-06'
       source_hash: 27257b51601ae5a0
-      hotspot_rank: 81
+      hotspot_rank: 82
       hotspot_score: 0.02
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -627,7 +631,7 @@ freshness:
       last_modified: '2026-05-08'
       source_hash: 1c231ac5331ce309
       hotspot_rank: 2
-      hotspot_score: 1.0
+      hotspot_score: 0.99
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
       bus_factor_flag: true
@@ -680,7 +684,7 @@ freshness:
       source_count: 1
       last_modified: '2026-04-21'
       source_hash: 33cb96f38d7cd9f5
-      hotspot_rank: 8
+      hotspot_rank: 9
       hotspot_score: 0.33
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -705,7 +709,7 @@ freshness:
       source_count: 3
       last_modified: '2026-05-08'
       source_hash: 7ebbc707ad873ef7
-      hotspot_rank: 79
+      hotspot_rank: 80
       hotspot_score: 0.02
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -717,7 +721,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-17'
       source_hash: fd8bdfc6907edcb0
-      hotspot_rank: 13
+      hotspot_rank: 14
       hotspot_score: 0.13
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -848,7 +852,7 @@ freshness:
       source_count: 3
       last_modified: '2026-05-24'
       source_hash: c8487e5548d9fb7f
-      hotspot_rank: 12
+      hotspot_rank: 13
       hotspot_score: 0.15
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -873,7 +877,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: 4b96f7b24e7a66e9
-      hotspot_rank: 26
+      hotspot_rank: 27
       hotspot_score: 0.05
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -886,7 +890,7 @@ freshness:
       source_count: 3
       last_modified: '2026-05-09'
       source_hash: 152f7a7f92eab550
-      hotspot_rank: 101
+      hotspot_rank: 105
       hotspot_score: 0.01
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -904,8 +908,8 @@ freshness:
       source_count: 2
       last_modified: '2026-05-25'
       source_hash: 3a96dfa3bee12e88
-      hotspot_rank: 17
-      hotspot_score: 0.08
+      hotspot_rank: 8
+      hotspot_score: 0.41
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
       bus_factor_flag: true
@@ -976,7 +980,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: 9508cb80be65ddb7
-      hotspot_rank: 63
+      hotspot_rank: 64
       hotspot_score: 0.03
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -988,7 +992,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: 7ea95e8a0f9d976e
-      hotspot_rank: 82
+      hotspot_rank: 83
       hotspot_score: 0.01
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1000,7 +1004,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: 7ea95e8a0f9d976e
-      hotspot_rank: 98
+      hotspot_rank: 99
       hotspot_score: 0.01
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1012,7 +1016,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: 7ea95e8a0f9d976e
-      hotspot_rank: 87
+      hotspot_rank: 90
       hotspot_score: 0.01
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1024,7 +1028,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: 6cfed3e7d8173009
-      hotspot_rank: 84
+      hotspot_rank: 86
       hotspot_score: 0.01
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1036,7 +1040,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: 6cfed3e7d8173009
-      hotspot_rank: 83
+      hotspot_rank: 84
       hotspot_score: 0.01
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1048,7 +1052,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: 6cfed3e7d8173009
-      hotspot_rank: 86
+      hotspot_rank: 87
       hotspot_score: 0.01
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1060,7 +1064,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: de1450eede3a4647
-      hotspot_rank: 89
+      hotspot_rank: 92
       hotspot_score: 0.01
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1072,7 +1076,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: 6cfed3e7d8173009
-      hotspot_rank: 105
+      hotspot_rank: 110
       hotspot_score: 0.01
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1084,7 +1088,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: 6cfed3e7d8173009
-      hotspot_rank: 58
+      hotspot_rank: 59
       hotspot_score: 0.03
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1097,7 +1101,7 @@ freshness:
       source_count: 3
       last_modified: '2026-05-24'
       source_hash: b89ff17711a79972
-      hotspot_rank: 34
+      hotspot_rank: 35
       hotspot_score: 0.04
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1109,7 +1113,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: 18ac934c9e1d738a
-      hotspot_rank: 99
+      hotspot_rank: 103
       hotspot_score: 0.01
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1122,7 +1126,7 @@ freshness:
       source_count: 3
       last_modified: '2026-05-24'
       source_hash: b89ff17711a79972
-      hotspot_rank: 27
+      hotspot_rank: 28
       hotspot_score: 0.05
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1135,7 +1139,7 @@ freshness:
       source_count: 3
       last_modified: '2026-05-24'
       source_hash: 21d3d7ec3d66eb0a
-      hotspot_rank: 74
+      hotspot_rank: 75
       hotspot_score: 0.02
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1148,7 +1152,7 @@ freshness:
       source_count: 3
       last_modified: '2026-05-24'
       source_hash: b89ff17711a79972
-      hotspot_rank: 24
+      hotspot_rank: 25
       hotspot_score: 0.06
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1161,7 +1165,7 @@ freshness:
       source_count: 3
       last_modified: '2026-05-24'
       source_hash: b89ff17711a79972
-      hotspot_rank: 114
+      hotspot_rank: 116
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1173,7 +1177,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: 60ac0d52062239b8
-      hotspot_rank: 95
+      hotspot_rank: 96
       hotspot_score: 0.01
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1185,7 +1189,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: 60ac0d52062239b8
-      hotspot_rank: 94
+      hotspot_rank: 95
       hotspot_score: 0.01
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1198,7 +1202,7 @@ freshness:
       source_count: 3
       last_modified: '2026-05-24'
       source_hash: cb5746ea05126b97
-      hotspot_rank: 93
+      hotspot_rank: 94
       hotspot_score: 0.01
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1210,7 +1214,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: d060b70443e7bd05
-      hotspot_rank: 118
+      hotspot_rank: 120
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1222,7 +1226,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: 538e71224cf92518
-      hotspot_rank: 96
+      hotspot_rank: 97
       hotspot_score: 0.01
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1234,7 +1238,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: 538e71224cf92518
-      hotspot_rank: 107
+      hotspot_rank: 111
       hotspot_score: 0.01
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1246,7 +1250,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: d060b70443e7bd05
-      hotspot_rank: 117
+      hotspot_rank: 119
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1258,7 +1262,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: fbede0188cbc1b28
-      hotspot_rank: 75
+      hotspot_rank: 77
       hotspot_score: 0.02
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1270,7 +1274,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: 43fd8104558acba2
-      hotspot_rank: 29
+      hotspot_rank: 30
       hotspot_score: 0.05
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1282,7 +1286,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: 43fd8104558acba2
-      hotspot_rank: 54
+      hotspot_rank: 50
       hotspot_score: 0.03
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1295,7 +1299,7 @@ freshness:
       source_count: 3
       last_modified: '2026-05-24'
       source_hash: 35616fc33d9e33cb
-      hotspot_rank: 48
+      hotspot_rank: 43
       hotspot_score: 0.04
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1307,7 +1311,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: 43fd8104558acba2
-      hotspot_rank: 62
+      hotspot_rank: 63
       hotspot_score: 0.03
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1321,7 +1325,7 @@ freshness:
       source_count: 4
       last_modified: '2026-05-24'
       source_hash: 3ad9819194717588
-      hotspot_rank: 55
+      hotspot_rank: 56
       hotspot_score: 0.03
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1334,7 +1338,7 @@ freshness:
       source_count: 3
       last_modified: '2026-05-24'
       source_hash: d9b5e06673bd970a
-      hotspot_rank: 59
+      hotspot_rank: 60
       hotspot_score: 0.03
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1346,7 +1350,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: 43fd8104558acba2
-      hotspot_rank: 30
+      hotspot_rank: 31
       hotspot_score: 0.05
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1358,8 +1362,8 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: 43fd8104558acba2
-      hotspot_rank: 65
-      hotspot_score: 0.03
+      hotspot_rank: 66
+      hotspot_score: 0.02
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
       bus_factor_flag: true
@@ -1370,8 +1374,8 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: 43fd8104558acba2
-      hotspot_rank: 64
-      hotspot_score: 0.03
+      hotspot_rank: 65
+      hotspot_score: 0.02
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
       bus_factor_flag: true
@@ -1382,8 +1386,8 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: 43fd8104558acba2
-      hotspot_rank: 66
-      hotspot_score: 0.03
+      hotspot_rank: 67
+      hotspot_score: 0.02
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
       bus_factor_flag: true
@@ -1394,7 +1398,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: 43fd8104558acba2
-      hotspot_rank: 78
+      hotspot_rank: 79
       hotspot_score: 0.02
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1406,7 +1410,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: 43fd8104558acba2
-      hotspot_rank: 61
+      hotspot_rank: 62
       hotspot_score: 0.03
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1418,7 +1422,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: 43fd8104558acba2
-      hotspot_rank: 21
+      hotspot_rank: 22
       hotspot_score: 0.06
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1430,7 +1434,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: 43fd8104558acba2
-      hotspot_rank: 19
+      hotspot_rank: 20
       hotspot_score: 0.07
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1442,7 +1446,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: 43fd8104558acba2
-      hotspot_rank: 60
+      hotspot_rank: 61
       hotspot_score: 0.03
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1454,8 +1458,8 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: 43fd8104558acba2
-      hotspot_rank: 50
-      hotspot_score: 0.04
+      hotspot_rank: 51
+      hotspot_score: 0.03
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
       bus_factor_flag: true
@@ -1545,8 +1549,8 @@ freshness:
       source_count: 3
       last_modified: '2026-05-25'
       source_hash: b8aafa33e69a441b
-      hotspot_rank: 106
-      hotspot_score: 0.01
+      hotspot_rank: 54
+      hotspot_score: 0.03
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
       bus_factor_flag: true
@@ -1557,7 +1561,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: e22a4a283c07d5dd
-      hotspot_rank: 125
+      hotspot_rank: 124
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1569,7 +1573,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: d7f9fc15ddfd89bf
-      hotspot_rank: 115
+      hotspot_rank: 112
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1581,7 +1585,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: 0428413324ccc6f4
-      hotspot_rank: 123
+      hotspot_rank: 122
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1593,7 +1597,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: b60aa1d449bb3f0b
-      hotspot_rank: 124
+      hotspot_rank: 123
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1605,7 +1609,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: 13d7b81978dc1562
-      hotspot_rank: 92
+      hotspot_rank: 89
       hotspot_score: 0.01
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1617,7 +1621,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: 5660b2363da2be4d
-      hotspot_rank: 91
+      hotspot_rank: 88
       hotspot_score: 0.01
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1641,7 +1645,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: 4f2b3738ba254945
-      hotspot_rank: 126
+      hotspot_rank: 125
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1653,7 +1657,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: 090d44ee19569b31
-      hotspot_rank: 121
+      hotspot_rank: 118
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1665,7 +1669,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: 39e04199d2faa362
-      hotspot_rank: 116
+      hotspot_rank: 115
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1677,7 +1681,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-24'
       source_hash: a6360f3eb0824505
-      hotspot_rank: 134
+      hotspot_rank: 131
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1689,8 +1693,8 @@ freshness:
       source_count: 2
       last_modified: '2026-05-25'
       source_hash: 17fd66aa4ff8a2ca
-      hotspot_rank: 35
-      hotspot_score: 0.04
+      hotspot_rank: 19
+      hotspot_score: 0.07
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
       bus_factor_flag: true
@@ -1701,7 +1705,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-09'
       source_hash: cebd008ef89b9866
-      hotspot_rank: 102
+      hotspot_rank: 106
       hotspot_score: 0.01
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1713,7 +1717,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-09'
       source_hash: cebd008ef89b9866
-      hotspot_rank: 103
+      hotspot_rank: 107
       hotspot_score: 0.01
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1725,7 +1729,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-09'
       source_hash: cebd008ef89b9866
-      hotspot_rank: 113
+      hotspot_rank: 114
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1737,7 +1741,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-09'
       source_hash: fe6684a7affe3ec4
-      hotspot_rank: 108
+      hotspot_rank: 113
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1749,7 +1753,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-08'
       source_hash: 306b3d3e464cf8d0
-      hotspot_rank: 97
+      hotspot_rank: 98
       hotspot_score: 0.01
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1785,7 +1789,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-08'
       source_hash: e49d7299e8bffa90
-      hotspot_rank: 90
+      hotspot_rank: 93
       hotspot_score: 0.01
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1858,10 +1862,10 @@ freshness:
       - planning-mds/architecture/decisions/ADR-Authentication-Strategy.md
       - planning-mds/features/archive/F0005-idp-migration/F0005-S0002-claims-normalization-backend.md
       source_count: 2
-      last_modified: '2026-05-08'
+      last_modified: '2026-05-24'
       source_hash: fac680ce39e1b345
       hotspot_rank: 109
-      hotspot_score: 0.0
+      hotspot_score: 0.01
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
       bus_factor_flag: true
@@ -1870,9 +1874,9 @@ freshness:
       - planning-mds/architecture/decisions/ADR-Authentication-Strategy.md
       - planning-mds/features/archive/F0005-idp-migration/F0005-S0002-claims-normalization-backend.md
       source_count: 2
-      last_modified: '2026-05-08'
+      last_modified: '2026-05-24'
       source_hash: fac680ce39e1b345
-      hotspot_rank: 120
+      hotspot_rank: 117
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1882,10 +1886,10 @@ freshness:
       - planning-mds/features/archive/F0005-idp-migration/F0005-S0003-frontend-oidc-flow.md
       - planning-mds/features/archive/F0015-frontend-quality-gates-and-test-infrastructure/GETTING-STARTED.md
       source_count: 2
-      last_modified: '2026-04-21'
+      last_modified: '2026-05-24'
       source_hash: 94fb139fc6d84780
-      hotspot_rank: 110
-      hotspot_score: 0.0
+      hotspot_rank: 100
+      hotspot_score: 0.01
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
       bus_factor_flag: true
@@ -1894,10 +1898,10 @@ freshness:
       - planning-mds/features/archive/F0005-idp-migration/F0005-S0003-frontend-oidc-flow.md
       - planning-mds/features/archive/F0015-frontend-quality-gates-and-test-infrastructure/GETTING-STARTED.md
       source_count: 2
-      last_modified: '2026-04-21'
+      last_modified: '2026-05-24'
       source_hash: 94fb139fc6d84780
-      hotspot_rank: 111
-      hotspot_score: 0.0
+      hotspot_rank: 101
+      hotspot_score: 0.01
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
       bus_factor_flag: true
@@ -1906,10 +1910,10 @@ freshness:
       - planning-mds/features/archive/F0005-idp-migration/F0005-S0003-frontend-oidc-flow.md
       - planning-mds/features/archive/F0015-frontend-quality-gates-and-test-infrastructure/GETTING-STARTED.md
       source_count: 2
-      last_modified: '2026-04-21'
+      last_modified: '2026-05-24'
       source_hash: 94fb139fc6d84780
-      hotspot_rank: 112
-      hotspot_score: 0.0
+      hotspot_rank: 102
+      hotspot_score: 0.01
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
       bus_factor_flag: true
@@ -1920,7 +1924,7 @@ freshness:
       source_count: 2
       last_modified: '2026-04-23'
       source_hash: 6ae203e185d84b12
-      hotspot_rank: 76
+      hotspot_rank: 78
       hotspot_score: 0.02
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1931,7 +1935,7 @@ freshness:
       source_count: 1
       last_modified: '2026-05-17'
       source_hash: 82473df2cd5d3a36
-      hotspot_rank: 104
+      hotspot_rank: 108
       hotspot_score: 0.01
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -1947,9 +1951,9 @@ freshness:
       - planning-mds/architecture/decisions/ADR-012-shared-document-storage-and-metadata-architecture.md
       - planning-mds/schemas/document-metadata-schema-registry.schema.json
       source_count: 2
-      last_modified: '2026-05-08'
+      last_modified: '2026-05-24'
       source_hash: 5645afaa98376b62
-      hotspot_rank: 15
+      hotspot_rank: 17
       hotspot_score: 0.1
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -2009,7 +2013,7 @@ freshness:
       source_count: 1
       last_modified: '2026-04-21'
       source_hash: c1d6259e878e8a55
-      hotspot_rank: 132
+      hotspot_rank: 133
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -2031,7 +2035,7 @@ freshness:
       source_count: 1
       last_modified: '2026-04-21'
       source_hash: 1b1875066fb10af1
-      hotspot_rank: 131
+      hotspot_rank: 132
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -2064,7 +2068,7 @@ freshness:
       source_count: 1
       last_modified: '2026-04-21'
       source_hash: e6f01f1d3ea687f5
-      hotspot_rank: 133
+      hotspot_rank: 134
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -2075,7 +2079,7 @@ freshness:
       source_count: 1
       last_modified: '2026-05-08'
       source_hash: feabbd2e770f21ae
-      hotspot_rank: 122
+      hotspot_rank: 126
       hotspot_score: 0.0
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -2087,7 +2091,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-09'
       source_hash: f25d7d3d4503df00
-      hotspot_rank: 70
+      hotspot_rank: 71
       hotspot_score: 0.02
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -2099,7 +2103,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-09'
       source_hash: f25d7d3d4503df00
-      hotspot_rank: 69
+      hotspot_rank: 70
       hotspot_score: 0.02
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -2111,7 +2115,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-09'
       source_hash: f25d7d3d4503df00
-      hotspot_rank: 73
+      hotspot_rank: 74
       hotspot_score: 0.02
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -2123,7 +2127,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-09'
       source_hash: f25d7d3d4503df00
-      hotspot_rank: 72
+      hotspot_rank: 73
       hotspot_score: 0.02
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -2135,7 +2139,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-09'
       source_hash: f25d7d3d4503df00
-      hotspot_rank: 71
+      hotspot_rank: 72
       hotspot_score: 0.02
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -2147,7 +2151,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-09'
       source_hash: f25d7d3d4503df00
-      hotspot_rank: 68
+      hotspot_rank: 69
       hotspot_score: 0.02
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -2171,7 +2175,7 @@ freshness:
       source_count: 1
       last_modified: '2026-05-09'
       source_hash: 83cfdae8e3fdae27
-      hotspot_rank: 100
+      hotspot_rank: 104
       hotspot_score: 0.01
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -2213,7 +2217,7 @@ freshness:
       source_count: 3
       last_modified: '2026-05-09'
       source_hash: c05b30f07ce259be
-      hotspot_rank: 43
+      hotspot_rank: 44
       hotspot_score: 0.04
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -2238,7 +2242,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-16'
       source_hash: f25d7d3d4503df00
-      hotspot_rank: 23
+      hotspot_rank: 24
       hotspot_score: 0.06
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -2250,7 +2254,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-16'
       source_hash: f25d7d3d4503df00
-      hotspot_rank: 20
+      hotspot_rank: 21
       hotspot_score: 0.06
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -2262,7 +2266,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-16'
       source_hash: f25d7d3d4503df00
-      hotspot_rank: 22
+      hotspot_rank: 23
       hotspot_score: 0.06
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -2274,7 +2278,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-09'
       source_hash: f25d7d3d4503df00
-      hotspot_rank: 28
+      hotspot_rank: 29
       hotspot_score: 0.05
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -2287,7 +2291,7 @@ freshness:
       source_count: 3
       last_modified: '2026-05-09'
       source_hash: c05b30f07ce259be
-      hotspot_rank: 25
+      hotspot_rank: 26
       hotspot_score: 0.05
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -2300,7 +2304,7 @@ freshness:
       source_count: 3
       last_modified: '2026-05-17'
       source_hash: c05b30f07ce259be
-      hotspot_rank: 31
+      hotspot_rank: 32
       hotspot_score: 0.05
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -2312,8 +2316,8 @@ freshness:
       source_count: 2
       last_modified: '2026-05-17'
       source_hash: f25d7d3d4503df00
-      hotspot_rank: 51
-      hotspot_score: 0.04
+      hotspot_rank: 52
+      hotspot_score: 0.03
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
       bus_factor_flag: true
@@ -2324,8 +2328,8 @@ freshness:
       source_count: 2
       last_modified: '2026-05-17'
       source_hash: f25d7d3d4503df00
-      hotspot_rank: 52
-      hotspot_score: 0.04
+      hotspot_rank: 53
+      hotspot_score: 0.03
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
       bus_factor_flag: true
@@ -2336,7 +2340,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-17'
       source_hash: f25d7d3d4503df00
-      hotspot_rank: 57
+      hotspot_rank: 58
       hotspot_score: 0.03
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -2348,7 +2352,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-09'
       source_hash: f25d7d3d4503df00
-      hotspot_rank: 56
+      hotspot_rank: 57
       hotspot_score: 0.03
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -2361,7 +2365,7 @@ freshness:
       source_count: 3
       last_modified: '2026-05-17'
       source_hash: c05b30f07ce259be
-      hotspot_rank: 32
+      hotspot_rank: 33
       hotspot_score: 0.05
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -2374,7 +2378,7 @@ freshness:
       source_count: 3
       last_modified: '2026-05-16'
       source_hash: b3826d071ad6dad1
-      hotspot_rank: 33
+      hotspot_rank: 34
       hotspot_score: 0.04
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -2386,7 +2390,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-16'
       source_hash: f25d7d3d4503df00
-      hotspot_rank: 44
+      hotspot_rank: 45
       hotspot_score: 0.04
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -2398,7 +2402,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-16'
       source_hash: f25d7d3d4503df00
-      hotspot_rank: 47
+      hotspot_rank: 48
       hotspot_score: 0.04
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -2447,7 +2451,7 @@ freshness:
       source_count: 3
       last_modified: '2026-05-16'
       source_hash: 58d52894d7e9656e
-      hotspot_rank: 45
+      hotspot_rank: 46
       hotspot_score: 0.04
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -2459,7 +2463,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-09'
       source_hash: f25d7d3d4503df00
-      hotspot_rank: 53
+      hotspot_rank: 55
       hotspot_score: 0.03
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -2471,7 +2475,7 @@ freshness:
       source_count: 2
       last_modified: '2026-05-16'
       source_hash: f25d7d3d4503df00
-      hotspot_rank: 46
+      hotspot_rank: 47
       hotspot_score: 0.04
       primary_owner: gajapathi.kannan@live.com
       primary_owner_pct: 100
@@ -4691,7 +4695,7 @@ freshness:
       - experience/src/services/api.test.ts
       source_count: 49
       last_modified: '2026-05-25'
-      source_hash: 497702496f8c1ad2
+      source_hash: 521bee53c03aa57f
     entity:document-template:
       source_paths:
       - engine/src/Nebula.Application/DTOs/DocumentDtos.cs
@@ -4706,7 +4710,7 @@ freshness:
       - experience/src/mocks/documents.ts
       source_count: 10
       last_modified: '2026-05-25'
-      source_hash: 31986edbdb075cda
+      source_hash: 8046d43e19f13d92
     workflow:document-ingest:
       source_paths:
       - engine/src/Nebula.Application/Interfaces/IQuarantineScanner.cs
@@ -4747,7 +4751,7 @@ freshness:
       - experience/src/mocks/documents.ts
       source_count: 21
       last_modified: '2026-05-25'
-      source_hash: f079ae7b0426c789
+      source_hash: 2215d6392d169a91
     capability:document-management:
       source_paths:
       - engine/src/Nebula.Application/DTOs/DocumentDtos.cs
@@ -4783,7 +4787,7 @@ freshness:
       - experience/src/services/api.ts
       source_count: 31
       last_modified: '2026-05-25'
-      source_hash: 940f64177db308bd
+      source_hash: a05d924811c909ad
     entity:broker:
       source_paths:
       - engine/src/Nebula.Domain/Entities/Broker.cs
@@ -4916,7 +4920,7 @@ freshness:
       - experience/src/pages/tests/AuthCallbackPage.test.tsx
       source_count: 22
       last_modified: '2026-05-25'
-      source_hash: 8ed3e93398d5f1d8
+      source_hash: 0a60e55b17acd9e5
     entity:activity-timeline-event:
       source_paths:
       - engine/src/Nebula.Domain/Entities/ActivityTimelineEvent.cs
@@ -6060,7 +6064,7 @@ freshness:
       - experience/src/features/auth/useSessionTeardown.ts
       source_count: 15
       last_modified: '2026-05-25'
-      source_hash: c5f22bcf6b6dd40c
+      source_hash: 2e86a26aee03768e
     event:broker-created:
       source_paths:
       - engine/src/Nebula.Application/Services/BrokerService.cs
@@ -6164,25 +6168,26 @@ freshness:
       - experience/src/features/auth/oidcUserManager.ts
       - experience/src/features/auth/useAuthEventHandler.ts
       - experience/src/features/auth/useSessionTeardown.ts
-      - experience/src/features/session-continuity/IdleWarningModal.tsx
-      - experience/src/features/session-continuity/SessionContinuityProvider.tsx
       - experience/src/features/session-continuity/authErrorClassifier.ts
       - experience/src/features/session-continuity/deferredTelemetryBuffer.ts
-      - experience/src/features/session-continuity/dirtyFormRegistry.tsx
       - experience/src/features/session-continuity/dirtyFormRegistryContext.ts
       - experience/src/features/session-continuity/index.ts
       - experience/src/features/session-continuity/sessionRenewal.ts
       - experience/src/features/session-continuity/sessionRestore.ts
       - experience/src/features/session-continuity/sessionTelemetry.ts
-      - experience/src/features/session-continuity/tests/IdleWarningModal.a11y.test.tsx
-      - experience/src/features/session-continuity/tests/IdleWarningModal.test.tsx
       - experience/src/features/session-continuity/tests/authErrorClassifier.test.ts
       - experience/src/features/session-continuity/tests/sessionRenewal.test.ts
       - experience/src/features/session-continuity/tests/sessionRestore.test.ts
       - experience/src/features/session-continuity/tests/sessionTelemetry.test.ts
-      - experience/src/features/session-continuity/tests/useIdleWarning.test.tsx
       - experience/src/features/session-continuity/useDirtyFormRegistry.ts
       - experience/src/features/session-continuity/useIdleWarning.ts
+      - experience/src/features/session-continuity/IdleWarningModal.tsx
+      - experience/src/features/session-continuity/SessionContinuityProvider.tsx
+      - experience/src/features/session-continuity/dirtyFormRegistry.tsx
+      - experience/src/features/session-continuity/tests/IdleWarningModal.a11y.test.tsx
+      - experience/src/features/session-continuity/tests/IdleWarningModal.test.tsx
+      - experience/src/features/session-continuity/tests/sessionContinuity.smoke.test.tsx
+      - experience/src/features/session-continuity/tests/useIdleWarning.test.tsx
       - experience/src/pages/AuthCallbackPage.tsx
       - experience/src/pages/LoginPage.tsx
       - experience/src/App.tsx
@@ -6190,9 +6195,9 @@ freshness:
       - experience/src/features/auth/tests/LoginPage.test.tsx
       - experience/src/features/auth/tests/useSessionTeardown.test.tsx
       - experience/src/pages/tests/AuthCallbackPage.test.tsx
-      source_count: 48
+      source_count: 49
       last_modified: '2026-05-25'
-      source_hash: 43bb15df7ec4fcb8
+      source_hash: 55eb65d3bcd7bf56
     endpoint:internal-telemetry-session-continuity:
       source_paths:
       - planning-mds/api/nebula-api.yaml
@@ -6207,7 +6212,7 @@ freshness:
       - experience/src/features/session-continuity/tests/sessionTelemetry.test.ts
       source_count: 10
       last_modified: '2026-05-25'
-      source_hash: 3eb3f3784dd4588b
+      source_hash: 0cfc2729b572cc62
     config_key:authentication-authority:
       source_paths:
       - planning-mds/architecture/decisions/ADR-Authentication-Strategy.md
@@ -6215,16 +6220,16 @@ freshness:
       - engine/src/Nebula.Api/Program.cs
       - engine/src/Nebula.Api/Endpoints/AuthEndpoints.cs
       source_count: 4
-      last_modified: '2026-05-24'
-      source_hash: 3912ce8e132b70fa
+      last_modified: '2026-05-25'
+      source_hash: 87dbe1e3817a5da8
     config_key:authentication-audience:
       source_paths:
       - planning-mds/architecture/decisions/ADR-Authentication-Strategy.md
       - planning-mds/features/archive/F0005-idp-migration/F0005-S0002-claims-normalization-backend.md
       - engine/src/Nebula.Api/Program.cs
       source_count: 3
-      last_modified: '2026-05-24'
-      source_hash: e902e5db462b0708
+      last_modified: '2026-05-25'
+      source_hash: c5e70ce516cda75c
     config_key:oidc-authority:
       source_paths:
       - planning-mds/features/archive/F0005-idp-migration/F0005-S0003-frontend-oidc-flow.md
@@ -6878,11 +6883,11 @@ freshness:
       last_modified: '2026-05-09'
       source_hash: 2cf4072bea595516
 symbols:
-  symbol_count: 2463
-  bound_symbol_count: 2463
+  symbol_count: 2517
+  bound_symbol_count: 2517
   by_language:
-    csharp: 2156
-    typescript: 307
+    csharp: 2158
+    typescript: 359
 decisions:
   decision_count: 0
   why_count: 0

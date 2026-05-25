@@ -29,7 +29,7 @@ public static class SessionTelemetryEndpoints
         var validation = await telemetry.ValidateAsync(request, currentUser.UserId, ct);
         if (!validation.IsValid)
         {
-            return validation.IsForbidden
+            return validation.IsForbidden && !validation.HasNonForbiddenErrors
                 ? ProblemDetailsHelper.AuthorizationForbidden(TraceId(httpContext))
                 : ProblemDetailsHelper.TelemetryValidationError(validation.Errors);
         }

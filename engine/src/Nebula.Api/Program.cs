@@ -105,8 +105,15 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
                 context.Response.StatusCode = StatusCodes.Status401Unauthorized;
                 context.Response.ContentType = "application/problem+json";
-                context.Response.Headers.WWWAuthenticate =
-                    "Bearer error=\"invalid_token\", error_description=\"Authentication token is invalid or expired.\"";
+                context.Response.Headers.WWWAuthenticate = context.AuthenticateFailure switch
+                {
+                    SecurityTokenExpiredException =>
+                        "Bearer error=\"invalid_token\", error_description=\"The access token expired.\"",
+                    { Message: var message } when message.Contains("revoked", StringComparison.OrdinalIgnoreCase) =>
+                        "Bearer error=\"invalid_token\", error_description=\"session-revoked\"",
+                    _ =>
+                        "Bearer error=\"invalid_token\", error_description=\"Authentication token is invalid.\"",
+                };
                 await problem.ExecuteAsync(context.HttpContext);
             },
             OnForbidden = async context =>

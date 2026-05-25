@@ -1,10 +1,11 @@
 import { act, renderHook } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
+import { MemoryRouter, useNavigate } from 'react-router-dom'
 import type { ReactNode } from 'react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import {
   GRACE_PERIOD_MS,
   IDLE_THRESHOLD_MS,
+  ROLLING_ACTIVITY_WINDOW_MS,
   useIdleWarning,
 } from '../useIdleWarning'
 
@@ -22,7 +23,9 @@ const mocks = vi.hoisted(() => ({
     session_id: user.profile.sid,
     payload,
   })),
+  clearDeferredEventsForUser: vi.fn(),
   emitSessionContinuityEvent: vi.fn(),
+  persistFailureClassEvent: vi.fn(),
 }))
 
 vi.mock('@/features/auth/authEvents', () => ({
@@ -44,6 +47,11 @@ vi.mock('../sessionRenewal', () => ({
 vi.mock('../sessionTelemetry', () => ({
   buildSessionContinuityEvent: mocks.buildSessionContinuityEvent,
   emitSessionContinuityEvent: mocks.emitSessionContinuityEvent,
+}))
+
+vi.mock('../deferredTelemetryBuffer', () => ({
+  clearDeferredEventsForUser: mocks.clearDeferredEventsForUser,
+  persistFailureClassEvent: mocks.persistFailureClassEvent,
 }))
 
 function wrapper({ children }: { children: ReactNode }) {
@@ -109,7 +117,9 @@ describe('useIdleWarning', () => {
       await result.current.staySignedIn()
     })
 
-    expect(mocks.renewSessionForExpiredToken).toHaveBeenCalledTimes(1)
+    expect(mocks.renewSessionForExpiredToken).toHaveBeenCalledWith({
+      bypassLoopGuard: true,
+    })
     expect(result.current.modalOpen).toBe(false)
     expect(mocks.emitSessionContinuityEvent).toHaveBeenCalledWith(
       expect.objectContaining({ event_name: 'idle-warning-accepted' }),
@@ -130,9 +140,47 @@ describe('useIdleWarning', () => {
     })
 
     expect(result.current.modalOpen).toBe(false)
+    expect(mocks.persistFailureClassEvent).toHaveBeenCalledWith(
+      expect.objectContaining({
+        event_name: 'forced-redirect',
+        payload: expect.objectContaining({ cause: 'idle_timeout' }),
+      }),
+    )
     expect(mocks.emitAuthEvent).toHaveBeenCalledWith(
       'forced_reauth',
       expect.objectContaining({ cause: 'idle_timeout' }),
+    )
+  })
+
+  it('resets the rolling activity window on route changes', async () => {
+    const { result } = renderHook(
+      () => ({
+        controller: useIdleWarning(),
+        navigate: useNavigate(),
+      }),
+      { wrapper },
+    )
+    const stepMs = IDLE_THRESHOLD_MS - 1_000
+    let elapsedMs = 0
+    let routeIndex = 1
+
+    while (elapsedMs < ROLLING_ACTIVITY_WINDOW_MS + 2_000) {
+      await act(async () => {
+        vi.advanceTimersByTime(stepMs)
+        await Promise.resolve()
+      })
+      elapsedMs += stepMs
+      routeIndex += 1
+      await act(async () => {
+        result.current.navigate(`/policies/pol-${routeIndex}`)
+        await Promise.resolve()
+      })
+    }
+
+    expect(result.current.controller.modalOpen).toBe(false)
+    expect(mocks.emitAuthEvent).not.toHaveBeenCalledWith(
+      'forced_reauth',
+      expect.objectContaining({ cause: 'rolling_window_exceeded' }),
     )
   })
 

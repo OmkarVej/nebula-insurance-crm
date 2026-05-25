@@ -4,7 +4,7 @@
  * Covers:
  *   1. Authenticated user (non-expired) → renders children
  *   2. No session (user is null) → redirects to /login
- *   3. Expired session → redirects to /login?reason=session_expired
+ *   3. Expired session → attempts silent renewal before forced reauth
  *   4. Loading state → renders null (no flash of protected content)
  *   5. VITE_AUTH_MODE=dev → always renders children (guard is no-op)
  *
@@ -21,8 +21,33 @@ import { ProtectedRoute } from '../ProtectedRoute';
 // Mock oidcUserManager
 // ---------------------------------------------------------------------------
 
-const { mockGetUser } = vi.hoisted(() => ({
+const {
+  mockBuildSessionContinuityEvent,
+  mockEmitAuthEvent,
+  mockEmitSessionContinuityEvent,
+  mockGetUser,
+  mockPersistFailureClassEvent,
+  mockRenewSessionForExpiredToken,
+} = vi.hoisted(() => ({
+  mockBuildSessionContinuityEvent: vi.fn((user, eventName, payload) => {
+    if (!user?.profile?.sub || !user?.profile?.sid) {
+      return null;
+    }
+
+    return {
+      event_name: eventName,
+      event_version: 1,
+      timestamp: '2026-05-24T12:00:00.000Z',
+      user_id: user.profile.sub,
+      session_id: user.profile.sid,
+      payload,
+    };
+  }),
+  mockEmitAuthEvent: vi.fn(),
+  mockEmitSessionContinuityEvent: vi.fn(),
   mockGetUser: vi.fn(),
+  mockPersistFailureClassEvent: vi.fn(),
+  mockRenewSessionForExpiredToken: vi.fn(),
 }));
 
 vi.mock('../oidcUserManager', () => ({
@@ -37,11 +62,28 @@ vi.mock('../oidcUserManager', () => ({
   },
 }));
 
-// Mock import.meta.env for OIDC mode
-vi.mock('../ProtectedRoute', async (importOriginal) => {
-  const original = await importOriginal<typeof import('../ProtectedRoute')>();
-  return original;
-});
+vi.mock('../authEvents', () => ({
+  emitAuthEvent: mockEmitAuthEvent,
+}));
+
+vi.mock('@/features/session-continuity/sessionRenewal', () => ({
+  RenewalError: class RenewalError extends Error {
+    constructor(public cause: string, message?: string) {
+      super(message ?? cause);
+      this.name = 'RenewalError';
+    }
+  },
+  renewSessionForExpiredToken: mockRenewSessionForExpiredToken,
+}));
+
+vi.mock('@/features/session-continuity/deferredTelemetryBuffer', () => ({
+  persistFailureClassEvent: mockPersistFailureClassEvent,
+}));
+
+vi.mock('@/features/session-continuity/sessionTelemetry', () => ({
+  buildSessionContinuityEvent: mockBuildSessionContinuityEvent,
+  emitSessionContinuityEvent: mockEmitSessionContinuityEvent,
+}));
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -65,6 +107,25 @@ function renderWithRouter(ui: ReactNode, initialPath = '/protected') {
 describe('ProtectedRoute', () => {
   beforeEach(() => {
     vi.resetAllMocks();
+    mockBuildSessionContinuityEvent.mockImplementation((user, eventName, payload) => {
+      if (!user?.profile?.sub || !user?.profile?.sid) {
+        return null;
+      }
+
+      return {
+        event_name: eventName,
+        event_version: 1,
+        timestamp: '2026-05-24T12:00:00.000Z',
+        user_id: user.profile.sub,
+        session_id: user.profile.sid,
+        payload,
+      };
+    });
+    mockRenewSessionForExpiredToken.mockResolvedValue({
+      accessToken: 'renewed-token',
+      coalescedRequestCount: 1,
+      renewalDurationMs: 1,
+    });
   });
 
   it('renders children when session is valid and non-expired', async () => {
@@ -96,7 +157,7 @@ describe('ProtectedRoute', () => {
     });
   });
 
-  it('redirects to /login?reason=session_expired when session is expired', async () => {
+  it('renews expired sessions before rendering protected content', async () => {
     mockGetUser.mockResolvedValue({ expired: true, access_token: 'old-token' });
 
     renderWithRouter(
@@ -105,9 +166,56 @@ describe('ProtectedRoute', () => {
       </ProtectedRoute>,
     );
 
-    // Expired session must redirect (to /login route in our test router)
+    await waitFor(() => {
+      expect(mockRenewSessionForExpiredToken).toHaveBeenCalledTimes(1);
+      expect(screen.queryByTestId('protected-content')).not.toBeNull();
+    });
+  });
+
+  it('emits forced reauth when expired-session renewal fails', async () => {
+    mockGetUser.mockResolvedValue({
+      expired: true,
+      access_token: 'old-token',
+      profile: {
+        sub: '11111111-1111-1111-1111-111111111111',
+        sid: 'session-1',
+      },
+    });
+    mockRenewSessionForExpiredToken.mockRejectedValue(new Error('network unavailable'));
+
+    renderWithRouter(
+      <ProtectedRoute>
+        <div data-testid="protected-content">Secret</div>
+      </ProtectedRoute>,
+      '/protected?tab=activity',
+    );
+
     await waitFor(() => {
       expect(screen.queryByTestId('protected-content')).toBeNull();
+      expect(mockEmitAuthEvent).toHaveBeenCalledWith(
+        'forced_reauth',
+        expect.objectContaining({
+          cause: 'idp_unreachable',
+          endpointRoute: '/protected',
+          method: 'GET',
+          returnTo: '/protected?tab=activity',
+        }),
+      );
+      expect(mockPersistFailureClassEvent).toHaveBeenCalledWith(
+        expect.objectContaining({
+          event_name: 'silent-renewal-fail',
+          payload: { cause: 'idp_unreachable' },
+        }),
+      );
+      expect(mockPersistFailureClassEvent).toHaveBeenCalledWith(
+        expect.objectContaining({
+          event_name: 'forced-redirect',
+          payload: expect.objectContaining({
+            cause: 'idp_unreachable',
+            route_at_redirect: '/protected',
+          }),
+        }),
+      );
     });
   });
 

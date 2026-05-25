@@ -10,14 +10,6 @@
   "features_skipped_retired_abandoned": 0,
   "features_skipped_retired_superseded": 0,
   "errors": [],
-  "warnings": [
-    {
-      "rule_id": "commands_log_absolute_cwd_warns",
-      "message": "commands.log contains an absolute cwd without Run Environment justification",
-      "feature": "F0035",
-      "run_id": "2026-05-24-c92b16b6",
-      "path": "/mnt/c/Users/gajap/sandbox/nebula/nebula-insurance-crm/planning-mds/operations/evidence/F0035-session-continuity-and-token-refresh/2026-05-24-c92b16b6/commands.log"
-    }
-  ],
+  "warnings": [],
   "info": []
 }

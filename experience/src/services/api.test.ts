@@ -61,6 +61,15 @@ const activeUser = {
   },
 }
 
+const expiredUser = {
+  access_token: 'expired-token',
+  expired: true,
+  profile: {
+    sub: '11111111-1111-1111-1111-111111111111',
+    sid: 'session-1',
+  },
+}
+
 const renewedUser = {
   access_token: 'renewed-token',
   expired: false,
@@ -144,6 +153,41 @@ describe('api session continuity handling', () => {
         event_name: 'silent-renewal-success',
         payload: expect.objectContaining({ coalesced_request_count: 1 }),
       }),
+    )
+  })
+
+  it('renews locally expired GET requests before dispatching the request', async () => {
+    authMocks.getUser
+      .mockResolvedValueOnce(expiredUser)
+      .mockResolvedValue(renewedUser)
+    const fetchMock = vi.fn().mockResolvedValue(jsonResponse({ ok: true }, 200))
+    vi.stubGlobal('fetch', fetchMock)
+
+    await expect(api.get('/tasks/task-123?include=assignee')).resolves.toEqual({ ok: true })
+
+    expect(authMocks.signinSilent).toHaveBeenCalledTimes(1)
+    expect(fetchMock).toHaveBeenCalledTimes(1)
+    const [, init] = fetchMock.mock.calls[0]
+    expect((init?.headers as Headers).get('Authorization')).toBe('Bearer renewed-token')
+    expect(authMocks.emitAuthEvent).not.toHaveBeenCalledWith('session_expired')
+  })
+
+  it('renews locally expired mutations but does not dispatch them automatically', async () => {
+    authMocks.getUser
+      .mockResolvedValueOnce(expiredUser)
+      .mockResolvedValue(renewedUser)
+    const fetchMock = vi.fn().mockResolvedValue(jsonResponse({ ok: true }, 200))
+    vi.stubGlobal('fetch', fetchMock)
+
+    await expect(api.post('/tasks/task-123', { name: 'Updated' })).rejects.toBeInstanceOf(
+      MutationRetryRequiredError,
+    )
+
+    expect(authMocks.signinSilent).toHaveBeenCalledTimes(1)
+    expect(fetchMock).not.toHaveBeenCalled()
+    expect(authMocks.emitAuthEvent).toHaveBeenCalledWith(
+      'mutation_retry_required',
+      { endpointRoute: '/tasks/task-123', method: 'POST' },
     )
   })
 
@@ -239,6 +283,34 @@ describe('api session continuity handling', () => {
           response_status: 401,
         }),
       }),
+    )
+  })
+
+  it('preserves renewal failure causes in forced reauth telemetry', async () => {
+    authMocks.signinSilent.mockRejectedValue(new Error('invalid_grant'))
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue(tokenExpiredResponse()),
+    )
+
+    const outcome = await pendingOutcome(api.get('/tasks/task-123'))
+
+    expect(outcome).toBe('pending')
+    expect(telemetryMocks.persistFailureClassEvent).toHaveBeenCalledWith(
+      expect.objectContaining({
+        event_name: 'silent-renewal-fail',
+        payload: { cause: 'refresh_expired' },
+      }),
+    )
+    expect(telemetryMocks.persistFailureClassEvent).toHaveBeenCalledWith(
+      expect.objectContaining({
+        event_name: 'forced-redirect',
+        payload: expect.objectContaining({ cause: 'refresh_expired' }),
+      }),
+    )
+    expect(authMocks.emitAuthEvent).toHaveBeenCalledWith(
+      'forced_reauth',
+      expect.objectContaining({ cause: 'refresh_expired' }),
     )
   })
 

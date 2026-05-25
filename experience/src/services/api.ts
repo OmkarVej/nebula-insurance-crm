@@ -10,6 +10,7 @@ import { persistFailureClassEvent } from '@/features/session-continuity/deferred
 import {
   renewSessionForExpiredToken,
   RenewalError,
+  type RenewalFailureCause,
 } from '@/features/session-continuity/sessionRenewal'
 import {
   buildSessionContinuityEvent,
@@ -58,11 +59,38 @@ export class MutationRetryRequiredError extends ApiError {
 
 const AUTH_MODE = import.meta.env.VITE_AUTH_MODE as string | undefined
 
-async function resolveToken(): Promise<AccessTokenResolution> {
+async function resolveToken(
+  method: string,
+  endpointRoute: string,
+): Promise<AccessTokenResolution> {
   if (AUTH_MODE !== 'dev') {
     const user = await oidcUserManager.getUser()
     if (user?.access_token && !user.expired) {
       return { token: user.access_token, user }
+    }
+
+    if (user?.access_token && user.expired) {
+      try {
+        const renewal = await renewSessionForExpiredToken()
+        if (!isReadMethod(method)) {
+          emitAuthEvent('mutation_retry_required', { endpointRoute, method })
+          throw new MutationRetryRequiredError(endpointRoute, method)
+        }
+
+        return {
+          token: renewal.accessToken,
+          user: (await oidcUserManager.getUser().catch(() => null)) ?? user,
+        }
+      } catch (error) {
+        if (error instanceof MutationRetryRequiredError) {
+          throw error
+        }
+
+        const cause = renewalFailureCause(error)
+        recordFailureClassEvent(user, 'silent-renewal-fail', { cause })
+        beginForcedReauth(cause, method, endpointRoute, user)
+        return new Promise<AccessTokenResolution>(() => {})
+      }
     }
 
     emitAuthEvent('session_expired')
@@ -99,9 +127,9 @@ async function fetchBlob(path: string, options?: RequestInit): Promise<Blob> {
 }
 
 async function requestApi(path: string, options?: RequestInit, jsonContent = true): Promise<Response> {
-  const auth = await resolveToken()
   const method = resolveMethod(options)
   const endpointRoute = endpointRouteFromPath(path)
+  const auth = await resolveToken(method, endpointRoute)
   const response = await sendRequest(path, options, jsonContent, auth.token)
 
   if (response.ok) {
@@ -231,15 +259,13 @@ async function handleExpiredToken(
       throw error
     }
 
-    const cause = error instanceof RenewalError
-      ? error.cause
-      : 'idp_unreachable'
+    const cause = renewalFailureCause(error)
 
     recordFailureClassEvent(context.auth.user, 'silent-renewal-fail', {
       cause,
     })
     beginForcedReauth(
-      'silent_renewal_failed',
+      cause,
       method,
       endpointRoute,
       context.auth.user,
@@ -249,7 +275,11 @@ async function handleExpiredToken(
 }
 
 function beginForcedReauth(
-  cause: 'auth_token_invalid' | 'auth_session_revoked' | 'auth_unknown' | 'silent_renewal_failed',
+  cause:
+    | 'auth_token_invalid'
+    | 'auth_session_revoked'
+    | 'auth_unknown'
+    | RenewalFailureCause,
   method: string,
   endpointRoute: string,
   user: SessionContinuityIdentity | null,
@@ -264,6 +294,10 @@ function beginForcedReauth(
     endpointRoute,
     returnTo: currentRouteWithQuery(),
   })
+}
+
+function renewalFailureCause(error: unknown): RenewalFailureCause {
+  return error instanceof RenewalError ? error.cause : 'idp_unreachable'
 }
 
 function recordClassificationTelemetry(
